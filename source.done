@@ -1,0 +1,12 @@
+import "system.done";
+
+fun sum(x : int, y : int) : int {
+   return x + y;
+}
+
+fun main() : int {
+   var x : int = 10;
+   var y : int = 20;
+   var sum : int = sum(x, y);
+   return 0;
+}

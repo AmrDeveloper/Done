@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Software/LowLevel/DoneLang/DoneLexer.cpp
+include/DoneLexer.h
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+string
+-
+vector
+-
+unordered_map
+-
+Token.h
+D:/Software/LowLevel/DoneLang/include/Token.h
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+string
+-
+vector
+-
+
+D:/Software/LowLevel/DoneLang/include/Token.h
+string
+-
+TokenType.h
+D:/Software/LowLevel/DoneLang/include/TokenType.h
+
+D:/Software/LowLevel/DoneLang/include/TokenType.h
+

@@ -1,0 +1,39 @@
+#ifndef DONELANG_TOKENTYPE_H
+#define DONELANG_TOKENTYPE_H
+
+enum TokenType {
+    LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
+
+    BANG, BANG_EQUAL,
+    EQUAL, EQUAL_EQUAL,
+    GREATER, GREATER_EQUAL,
+    LESS, LESS_EQUAL,
+
+    DOT, COMMA, COLON, COLON_EQUAL,
+    COLON_COLON, SEMICOLON, ADDRESS,
+
+    //Special assignments
+    PLUS_EQUAL, MINUS_EQUAL, STAR_EQUAL, SLASH_EQUAL, STAR_STAR_EQUAL,
+
+    //Keywords
+    FUN, VAR, RETURN, IDENTIFIER, IMPORT,
+    IF, ELSE, ELSE_IF, FOR, DO, WHILE,
+
+    //Math Operations
+    MINUS, PLUS, SLASH, STAR,
+
+    //Values
+    TRUE, FALSE, NIL, VOID,
+
+    //Data Types
+    NUMBER, STRUCT, ENUM, BOOL, SHORT,
+    INT, DOUBLE, FLOAT, CHAT, STRING,
+
+    //Memory Management
+    NEW, FREE,
+
+    //End of File
+    END_OF_FILE
+};
+
+#endif
