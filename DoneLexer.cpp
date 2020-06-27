@@ -1,13 +1,13 @@
 #include "include/DoneLexer.h"
 
+#include <iostream>
+
 DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
 : errorHandler(aErrorHandler){
     line = 1;
     start = 0;
     current = 0;
     source = aSource;
-
-    reservedKeywords["import"]    = TokenType::IMPORT;
 
     reservedKeywords["if"]        = TokenType::IF;
     reservedKeywords["else"]      = TokenType::ELSE;
@@ -33,7 +33,7 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["double"]    = TokenType::DOUBLE;
     reservedKeywords["float"]     = TokenType::FLOAT;
 
-    reservedKeywords["ENUM"]      = TokenType::ENUM;
+    reservedKeywords["enum"]      = TokenType::ENUM;
     reservedKeywords["struct"]    = TokenType::STRUCT;
 
     reservedKeywords["new"]       = TokenType::NEW;
@@ -109,13 +109,10 @@ void DoneLexer::scanAndAddToken() {
         case '/':
             if (matchAndAdvance('/')) {
                 while (getCurrentChar() != '\n' && !isAtEnd())
-                    (void)advanceAndGetChar();
+                    advanceAndGetChar();
             } else {
                 addToken(TokenType::SLASH);
             }
-            break;
-        case '"':
-            scanString();
             break;
         case ' ':
         case '\r':
@@ -124,6 +121,12 @@ void DoneLexer::scanAndAddToken() {
             break;
         case '\n':
             ++line;
+            break;
+        case '"':
+            scanString();
+            break;
+        case '@' :
+            scanPreprocessorLabel();
             break;
         default: {
             if (isDigit(c)) {
@@ -135,6 +138,43 @@ void DoneLexer::scanAndAddToken() {
                 reportLexerError(errorMessage);
                 break;
             }
+        }
+    }
+}
+
+void DoneLexer::scanPreprocessorLabel() {
+    while (isAlphaNumeric(getCurrentChar())) advanceAndGetChar();
+    const size_t identifierLength = current - start;
+    const std::string label  = source.substr(start, identifierLength);
+
+    current += identifierLength;
+    start += identifierLength;
+
+    if(label == "@LOAD") {
+        while (getCurrentChar() != '\n' && !isAtEnd()) {
+            advanceAndGetChar();
+        }
+        const size_t stringSize = current - start;
+        const std::string stringLiteral = source.substr(start + 1, stringSize - 1);
+
+        currentFile = stringLiteral;
+        dependencyFilesStack.push(currentFile);
+
+        return;
+    }
+
+    if(label == "@IGNORE") {
+        line = line + 1;
+        return;
+    }
+
+    if (label == "@END") {
+        int filesSize = dependencyFilesStack.size();
+
+        if (filesSize >= 2) {
+            dependencyFilesStack.pop();
+            currentFile = dependencyFilesStack.top();
+            line = 1;
         }
     }
 }
@@ -198,7 +238,7 @@ void DoneLexer::addToken(TokenType tokenType) {
 
 void DoneLexer::reportLexerError(std::string errorMessage) {
     std::string errorPosition = std::to_string(getCurrentChar());
-    Error error(line, start, current, std::move(errorMessage), errorPosition);
+    Error error(currentFile, line, start, current, std::move(errorMessage), errorPosition);
     errorHandler.addError(error);
 }
 

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj"
   "CMakeFiles/DoneLang.dir/DoneParser.cpp.obj"
   "CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj"
+  "CMakeFiles/DoneLang.dir/Preprocessor.cpp.obj"
   "CMakeFiles/DoneLang.dir/Token.cpp.obj"
   "CMakeFiles/DoneLang.dir/main.cpp.obj"
   "DoneLang.exe"

@@ -15,12 +15,16 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../DoneParser.cpp
 CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj: ../ErrorHandler.cpp
 CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj: ../include/ErrorHandler.h
 
+CMakeFiles/DoneLang.dir/Preprocessor.cpp.obj: ../Preprocessor.cpp
+CMakeFiles/DoneLang.dir/Preprocessor.cpp.obj: ../include/Preprocessor.h
+
 CMakeFiles/DoneLang.dir/Token.cpp.obj: ../Token.cpp
 CMakeFiles/DoneLang.dir/Token.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/Token.cpp.obj: ../include/TokenType.h
 
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/DoneLexer.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/ErrorHandler.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Preprocessor.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/TokenType.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../main.cpp

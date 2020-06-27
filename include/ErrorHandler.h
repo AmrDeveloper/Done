@@ -7,10 +7,11 @@
 
 class Error {
 public:
-   Error(int line, int start, int end, std::string message, std::string position);
+   Error(std::string file, int line, int start, int end, std::string message, std::string position);
    int line;
    int start;
    int end;
+   std::string fileName;
    std::string message;
    std::string position;
    void printInfo() const;

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <stack>
 #include <unordered_map>
 
 #include "Token.h"
@@ -19,7 +20,9 @@ private:
     int start;
     int current;
     std::string source;
+    std::string currentFile;
     std::vector<Token> tokens;
+    std::stack<std::string> dependencyFilesStack;
     std::unordered_map<std::string, TokenType> reservedKeywords;
     ErrorHandler& errorHandler;
 
@@ -28,6 +31,7 @@ private:
     void scanString();
     void scanNumber();
     void scanIdentifier();
+    void scanPreprocessorLabel();
     void addToken(TokenType tokenType);
     void addToken(TokenType tokenType, const std::string& value);
     bool matchAndAdvance(char c);

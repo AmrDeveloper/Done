@@ -1,8 +1,9 @@
 #include "include/ErrorHandler.h"
 #include <iostream>
 
-Error::Error(int aLine, int aStart, int aEnd,
+Error::Error(std::string aFile, int aLine, int aStart, int aEnd,
         std::string aMessage, std::string aPosition) {
+    fileName = std::move(aFile);
     line = aLine;
     start = aStart;
     end = aEnd;
@@ -20,7 +21,7 @@ std::string Error::generateReport() const {
                            ":" + std::to_string(start) +
                            ":" + std::to_string(end) + "]";
     std::string messageInfo = position + " -> " + message;
-    return lineInfo.append(messageInfo);
+    return fileName + "\t" + lineInfo.append(messageInfo);
 }
 
 ErrorHandler::ErrorHandler() {

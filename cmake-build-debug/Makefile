@@ -230,6 +230,33 @@ ErrorHandler.cpp.s:
 	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/ErrorHandler.cpp.s
 .PHONY : ErrorHandler.cpp.s
 
+Preprocessor.obj: Preprocessor.cpp.obj
+
+.PHONY : Preprocessor.obj
+
+# target to build an object file
+Preprocessor.cpp.obj:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/Preprocessor.cpp.obj
+.PHONY : Preprocessor.cpp.obj
+
+Preprocessor.i: Preprocessor.cpp.i
+
+.PHONY : Preprocessor.i
+
+# target to preprocess a source file
+Preprocessor.cpp.i:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/Preprocessor.cpp.i
+.PHONY : Preprocessor.cpp.i
+
+Preprocessor.s: Preprocessor.cpp.s
+
+.PHONY : Preprocessor.s
+
+# target to generate assembly for a file
+Preprocessor.cpp.s:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/Preprocessor.cpp.s
+.PHONY : Preprocessor.cpp.s
+
 Token.obj: Token.cpp.obj
 
 .PHONY : Token.obj
@@ -305,6 +332,9 @@ help:
 	@echo ... ErrorHandler.obj
 	@echo ... ErrorHandler.i
 	@echo ... ErrorHandler.s
+	@echo ... Preprocessor.obj
+	@echo ... Preprocessor.i
+	@echo ... Preprocessor.s
 	@echo ... Token.obj
 	@echo ... Token.i
 	@echo ... Token.s
