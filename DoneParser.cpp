@@ -102,9 +102,9 @@ Statement *DoneParser::parseFuncDeclaration() {
         pointPreviousToken();
         Token paramName = consume(IDENTIFIER, "Expect function name");
         consume(COLON, "Expect : after param name");
-        std::cout << getCurrentToken().lexeme;
+        bool isPointer = matchType(STAR);
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName));
+        params.push_back(Parameter(paramName, typeName, isPointer));
     }
 
     while (matchType(COMMA)) {
@@ -112,8 +112,9 @@ Statement *DoneParser::parseFuncDeclaration() {
         consume(COMMA, "Expect , after next param name");
         Token paramName = consume(IDENTIFIER, "Expect function name");
         consume(COLON, "Expect : after param name");
+        bool isPointer = matchType(STAR);
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName));
+        params.push_back(Parameter(paramName, typeName, isPointer));
     }
 
     consume(RIGHT_PAREN, "Expect : ) after function name");

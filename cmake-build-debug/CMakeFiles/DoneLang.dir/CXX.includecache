@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+D:/Software/LowLevel/DoneLang/CodeGenerator.cpp
+include/CodeGenerator.h
+D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
+
 D:/Software/LowLevel/DoneLang/DoneParser.cpp
 include/DoneParser.h
 D:/Software/LowLevel/DoneLang/include/DoneParser.h

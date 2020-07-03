@@ -59,7 +59,11 @@ void CodeGenerator::visit(FunctionStatement *functionStatement) {
     int paramCounter = 0;
     for(auto param : functionStatement->parameters) {
         paramCounter++;
-        cout<<param.type.lexeme<<" "<<param.name.lexeme;
+        if(param.isPointer) {
+            cout<<param.type.lexeme<<" *"<<param.name.lexeme;
+        }else {
+            cout<<param.type.lexeme<<" "<<param.name.lexeme;
+        }
         if(paramSize != paramCounter) {
             cout<<", ";
         }
