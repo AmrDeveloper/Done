@@ -122,6 +122,33 @@ DoneLang/fast:
 	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/build
 .PHONY : DoneLang/fast
 
+CodeGenerator.obj: CodeGenerator.cpp.obj
+
+.PHONY : CodeGenerator.obj
+
+# target to build an object file
+CodeGenerator.cpp.obj:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
+.PHONY : CodeGenerator.cpp.obj
+
+CodeGenerator.i: CodeGenerator.cpp.i
+
+.PHONY : CodeGenerator.i
+
+# target to preprocess a source file
+CodeGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/CodeGenerator.cpp.i
+.PHONY : CodeGenerator.cpp.i
+
+CodeGenerator.s: CodeGenerator.cpp.s
+
+.PHONY : CodeGenerator.s
+
+# target to generate assembly for a file
+CodeGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/CodeGenerator.cpp.s
+.PHONY : CodeGenerator.cpp.s
+
 CodeWriter.obj: CodeWriter.cpp.obj
 
 .PHONY : CodeWriter.obj
@@ -320,6 +347,9 @@ help:
 	@echo ... DoneLang
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... CodeGenerator.obj
+	@echo ... CodeGenerator.i
+	@echo ... CodeGenerator.s
 	@echo ... CodeWriter.obj
 	@echo ... CodeWriter.i
 	@echo ... CodeWriter.s

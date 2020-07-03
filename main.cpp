@@ -1,11 +1,10 @@
-#include <iostream>
 #include <sstream>
 #include <fstream>
 
 #include "include/DoneLexer.h"
+#include "include/DoneParser.h"
 #include "include/Preprocessor.h"
-
-#define ENABLE_DEBUG_MODE
+#include "include/CodeGenerator.h"
 
 static void compile(const std::string& source, ErrorHandler& errorHandler) {
     DoneLexer doneLexer(source, errorHandler);
@@ -23,24 +22,29 @@ static void compile(const std::string& source, ErrorHandler& errorHandler) {
         errorHandler.report();
         exit(EXIT_FAILURE);
     }
-}
 
-static void compileFile(const std::string& path, ErrorHandler& errorHandler) {
-    std::ifstream file(path);
-    std::ostringstream stream;
-    stream << file.rdbuf();
-    file.close();
-    compile(stream.str(), errorHandler);
+    DoneParser doneParser(tokens, errorHandler);
+    std::vector<Statement*> statements = doneParser.parseSourceCode();
+
+    if(errorHandler.hasError) {
+        errorHandler.report();
+        exit(EXIT_FAILURE);
+    }
+
+    CodeGenerator codeGenerator(errorHandler);
+    codeGenerator.generateCode(statements);
 }
 
 int main() {
-    std::string projectPath = "../";
-    std::string mainFile = "source.done";
+    std::string projectPath = "../examples/";
+    std::string mainFile = "Enume.done";
+
     Preprocessor preprocessor(mainFile, projectPath);
     preprocessor.runProcessor();
     std::string preProcessedCode = preprocessor.getGeneratedCode();
 
     ErrorHandler errorHandler;
     compile(preProcessedCode, errorHandler);
+
     return 0;
 }

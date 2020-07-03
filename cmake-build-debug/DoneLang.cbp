@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/Software/LowLevel/DoneLang/CodeGenerator.cpp">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/CodeWriter.cpp">
 			<Option target="DoneLang"/>
 		</Unit>
@@ -100,6 +103,15 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/Token.cpp">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/AssignExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/BlockStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/CodeGenerator.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/CodeWriter.h">
 			<Option target="DoneLang"/>
 		</Unit>
@@ -109,10 +121,43 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/DoneParser.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/EnumStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/ErrorHandler.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/Expression.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ExpressionStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ExpressionVisitor.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/FunctionStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/IfStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/LiteralExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/Parameter.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/Preprocessor.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/Statement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/StatementVisitor.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/StructStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/Token.h">
@@ -121,7 +166,7 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/TokenType.h">
 			<Option target="DoneLang"/>
 		</Unit>
-		<Unit filename="D:/Software/LowLevel/DoneLang/include/Visitor.h">
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/VarStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/main.cpp">

@@ -1,5 +1,0 @@
-
-#ifndef DONELANG_VISITOR_H
-#define DONELANG_VISITOR_H
-
-#endif

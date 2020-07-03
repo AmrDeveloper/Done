@@ -12,8 +12,8 @@ void Preprocessor::runProcessor() {
     while(!sourceDepthStack.empty()) {
         currentFile = popNewSourceFile();
 
-        bool isVisited = insertUniqueFile(currentFile);
-        if(isVisited == TRUE) continue;
+        bool isUnique = insertUniqueFile(currentFile);
+        if(isUnique == FALSE) continue;
         parserFileDependency(currentFile);
     }
 }
@@ -37,6 +37,8 @@ void Preprocessor::parserFileDependency(const std::string &filePath) {
             }
         }
         file.close();
+    }else{
+        //TODO : file is not exists should add error by error handler
     }
     generateEndLabel();
 }
@@ -50,9 +52,7 @@ void Preprocessor::scanImportKeyword(std::string &library) {
 
     bool isVisited = insertUniqueFile(libraryPath);
     // Make sure one file can't import other file twice
-    if(isVisited == TRUE) {
-        return;
-    }
+    if(isVisited == FALSE) return;
 
     sourceDepthStack.push(libraryPath);
     currentFile = libraryPath;

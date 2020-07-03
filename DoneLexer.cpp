@@ -25,6 +25,7 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["true"]      = TokenType::TRUE;
     reservedKeywords["false"]     = TokenType::FALSE;
 
+    /*
     reservedKeywords["void"]      = TokenType::VOID;
     reservedKeywords["bool"]      = TokenType::BOOL;
     reservedKeywords["char"]      = TokenType::CHAT;
@@ -32,6 +33,7 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["int"]       = TokenType::INT;
     reservedKeywords["double"]    = TokenType::DOUBLE;
     reservedKeywords["float"]     = TokenType::FLOAT;
+     */
 
     reservedKeywords["enum"]      = TokenType::ENUM;
     reservedKeywords["struct"]    = TokenType::STRUCT;

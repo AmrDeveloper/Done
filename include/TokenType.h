@@ -27,7 +27,7 @@ enum TokenType {
 
     //Data Types
     NUMBER, STRUCT, ENUM, BOOL, SHORT,
-    INT, DOUBLE, FLOAT, CHAT, STRING,
+    INT, DOUBLE, FLOAT, CHAR, STRING,
 
     //Memory Management
     NEW, FREE,
