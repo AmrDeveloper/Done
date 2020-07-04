@@ -45,6 +45,8 @@ private:
     Expression* parseCallExpression();
     Expression* parseFunctionCallExpression(Expression* callee);
     Expression* parseOrExpression();
+    Expression* parseXorExpression();
+    Expression* parseAndExpression();
 
     bool matchType(TokenType types);
     bool checkType(TokenType type);

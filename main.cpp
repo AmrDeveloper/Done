@@ -1,6 +1,3 @@
-#include <sstream>
-#include <fstream>
-
 #include "include/DoneLexer.h"
 #include "include/DoneParser.h"
 #include "include/Preprocessor.h"
@@ -46,5 +43,5 @@ int main() {
     ErrorHandler errorHandler;
     compile(preProcessedCode, errorHandler);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

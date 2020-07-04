@@ -16,7 +16,7 @@ enum TokenType {
     PLUS_EQUAL, MINUS_EQUAL, STAR_EQUAL, SLASH_EQUAL, STAR_STAR_EQUAL,
 
     //Logical Expressions
-    OR, AND,
+    OR, AND, XOR,
 
     //Keywords
     FUN, VAR, RETURN, IDENTIFIER, IMPORT,

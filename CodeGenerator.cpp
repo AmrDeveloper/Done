@@ -13,7 +13,7 @@ void CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
 }
 
 void CodeGenerator::visit(EnumStatement* enumStatement) {
-    cout<<"enum "<<enumStatement->name.lexeme<<"{";
+    cout<<"typedef enum {";
     int fieldsSize = enumStatement->fields.size();
     for(int i = 0 ; i < fieldsSize ; i++) {
         Token token = enumStatement->fields[i];
@@ -22,7 +22,7 @@ void CodeGenerator::visit(EnumStatement* enumStatement) {
             cout<<",";
         }
     }
-    cout<<"};\n"<<endl;
+    cout<<"}"<<enumStatement->name.lexeme<<";\n"<<endl;
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
@@ -40,7 +40,7 @@ void CodeGenerator::visit(VarStatement *varStatement) {
 }
 
 void CodeGenerator::visit(StructStatement *structStatement) {
-    cout<<"struct "<< structStatement->name.lexeme<<"{\n";
+    cout<<"typedef struct{\n";
     for(Parameter field : structStatement->fields) {
         cout<<field.type.lexeme;
         if(field.isPointer) {
@@ -48,7 +48,7 @@ void CodeGenerator::visit(StructStatement *structStatement) {
         }
         cout<<" "<<field.name.lexeme<<";\n";
     }
-    cout<<"};\n";
+    cout<<"}"<<structStatement->name.lexeme<<";\n";
     //TODO: Generate Struct new function
     //TODO: Generate Struct Free Function
 }
@@ -140,6 +140,15 @@ void CodeGenerator::visit(LogicalExpression *groupExpression) {
     switch(opt.tokenType) {
         case OR : {
             cout<<" || ";
+            break;
+        }
+        case XOR: {
+            cout<<" ^ ";
+            break;
+        }
+        case AND : {
+            cout<<" && ";
+            break;
         }
     }
     groupExpression->right->accept(this);

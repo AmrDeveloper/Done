@@ -27,6 +27,7 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
 
     reservedKeywords["or"]        = TokenType::OR;
     reservedKeywords["and"]       = TokenType::AND;
+    reservedKeywords["xor"]       = TokenType::XOR;
 
     reservedKeywords["enum"]      = TokenType::ENUM;
     reservedKeywords["struct"]    = TokenType::STRUCT;

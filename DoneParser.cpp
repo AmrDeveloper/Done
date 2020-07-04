@@ -181,8 +181,28 @@ Expression *DoneParser::parseAssignExpression() {
 }
 
 Expression *DoneParser::parseOrExpression() {
-    Expression* expression = parseCallExpression();
+    Expression* expression = parseXorExpression();
     if(matchType(OR)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseXorExpression();
+        return new LogicalExpression(expression, right, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseXorExpression() {
+    Expression* expression = parseAndExpression();
+    if(matchType(XOR)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseAndExpression();
+        return new LogicalExpression(expression, right, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseAndExpression() {
+    Expression* expression = parseCallExpression();
+    if(matchType(AND)) {
         Token opt = getPreviousToken();
         Expression* right = parseCallExpression();
         return new LogicalExpression(expression, right, opt);
@@ -198,6 +218,7 @@ Expression *DoneParser::parseCallExpression() {
         }
         else if(matchType(DOT)) {
             //TODO : parse Get Expression
+            std::cout<<"DOT";
             break;
         }
         else{
