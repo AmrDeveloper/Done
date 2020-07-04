@@ -12,6 +12,7 @@
 #include "include/AssignExpression.h"
 #include "include/CallExpression.h"
 #include "include/VariableExpression.h"
+#include "include/GroupExpression.h"
 
 #include <iostream>
 
@@ -196,7 +197,7 @@ Expression *DoneParser::parseCallExpression() {
     return expression;
 }
 
-Expression* DoneParser::parseFunctionCallExpression(Expression* callee) {
+Expression *DoneParser::parseFunctionCallExpression(Expression* callee) {
      std::vector<Expression*> arguments;
      if(!checkType(RIGHT_PAREN)) {
          do{
@@ -219,7 +220,11 @@ Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(STRING)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(CHAR)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(IDENTIFIER)) return new VariableExpression(getPreviousToken());
-
+    if (matchType(LEFT_PAREN)) {
+        Expression* expr = parseExpression();
+        consume(RIGHT_PAREN, "Expect ')' after expression.");
+        return new GroupExpression(expr);
+    }
     return nullptr;
 }
 

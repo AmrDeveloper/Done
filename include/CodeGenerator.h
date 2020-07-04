@@ -21,6 +21,7 @@
 #include "AssignExpression.h"
 #include "CallExpression.h"
 #include "VariableExpression.h"
+#include "GroupExpression.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
@@ -52,6 +53,8 @@ public:
     void visit(CallExpression *callExpression) override;
 
     void visit(VariableExpression *varExpression) override;
+
+    void visit(GroupExpression *groupExpression) override;
 
 private:
     ErrorHandler &errorHandler;

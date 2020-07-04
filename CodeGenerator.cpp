@@ -128,4 +128,6 @@ void CodeGenerator::visit(VariableExpression *varExpression) {
     cout<<varExpression->name.lexeme;
 }
 
-
+void CodeGenerator::visit(GroupExpression *groupExpression) {
+    groupExpression->expression->accept(this);
+}
