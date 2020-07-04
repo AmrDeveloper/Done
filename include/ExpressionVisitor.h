@@ -7,6 +7,7 @@ class LiteralExpression;
 class CallExpression;
 class VariableExpression;
 class GroupExpression;
+class LogicalExpression;
 
 class ExpressionVisitor {
 public:
@@ -15,6 +16,7 @@ public:
     virtual void visit(CallExpression * call) {};
     virtual void visit(VariableExpression * var) {};
     virtual void visit(GroupExpression * group) {};
+    virtual void visit(LogicalExpression * logical) {};
 };
 
 #endif

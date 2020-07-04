@@ -15,6 +15,9 @@ enum TokenType {
     //Special assignments
     PLUS_EQUAL, MINUS_EQUAL, STAR_EQUAL, SLASH_EQUAL, STAR_STAR_EQUAL,
 
+    //Logical Expressions
+    OR, AND,
+
     //Keywords
     FUN, VAR, RETURN, IDENTIFIER, IMPORT,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,

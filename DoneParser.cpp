@@ -13,6 +13,7 @@
 #include "include/CallExpression.h"
 #include "include/VariableExpression.h"
 #include "include/GroupExpression.h"
+#include "include/LogicalExpression.h"
 
 #include <iostream>
 
@@ -168,7 +169,6 @@ Expression *DoneParser::parseExpression() {
 }
 
 Expression *DoneParser::parseAssignExpression() {
-
     if(getNextToken().tokenType == EQUAL || checkType(ADDRESS)) {
         bool isPointer = matchType(ADDRESS);
         Token name = consume(IDENTIFIER, "Expect variable name");
@@ -177,7 +177,17 @@ Expression *DoneParser::parseAssignExpression() {
         consume(SEMICOLON, "Expect ; after Assign Expression");
         return new AssignExpression(name, value, isPointer);
     }
-    return parseCallExpression();
+    return parseOrExpression();
+}
+
+Expression *DoneParser::parseOrExpression() {
+    Expression* expression = parseCallExpression();
+    if(matchType(OR)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseCallExpression();
+        return new LogicalExpression(expression, right, opt);
+    }
+    return expression;
 }
 
 Expression *DoneParser::parseCallExpression() {

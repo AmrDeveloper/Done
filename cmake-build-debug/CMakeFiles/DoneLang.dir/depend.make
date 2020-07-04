@@ -13,8 +13,10 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Expression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/ExpressionStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/ExpressionVisitor.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/FunctionStatement.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/IfStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/LiteralExpression.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Parameter.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Statement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/StatementVisitor.h
@@ -43,8 +45,10 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Expression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ExpressionStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ExpressionVisitor.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/FunctionStatement.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/IfStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/LiteralExpression.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Parameter.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Statement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/StatementVisitor.h
@@ -77,8 +81,10 @@ CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Expression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/ExpressionStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/ExpressionVisitor.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/FunctionStatement.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/IfStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/LiteralExpression.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Parameter.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Preprocessor.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Statement.h

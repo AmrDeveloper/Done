@@ -131,3 +131,14 @@ void CodeGenerator::visit(VariableExpression *varExpression) {
 void CodeGenerator::visit(GroupExpression *groupExpression) {
     groupExpression->expression->accept(this);
 }
+
+void CodeGenerator::visit(LogicalExpression *groupExpression) {
+    groupExpression->left->accept(this);
+    Token opt = groupExpression->opt;
+    switch(opt.tokenType) {
+        case OR : {
+            cout<<" || ";
+        }
+    }
+    groupExpression->right->accept(this);
+}
