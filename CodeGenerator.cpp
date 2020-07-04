@@ -160,3 +160,11 @@ void CodeGenerator::visit(GetExpression *getExpression) {
     cout<<"."<<getExpression->name.lexeme;
 
 }
+
+void CodeGenerator::visit(TernaryExpression *ternaryExpression) {
+    ternaryExpression->condition->accept(this);
+    cout<<"?";
+    ternaryExpression->truthExpr->accept(this);
+    cout<<":";
+    ternaryExpression->falseExpr->accept(this);
+}

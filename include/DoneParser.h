@@ -47,6 +47,8 @@ private:
     Expression* parseOrExpression();
     Expression* parseXorExpression();
     Expression* parseAndExpression();
+    Expression* parseTernaryExpression();
+    Expression* parseElvisExpression();
 
     bool matchType(TokenType types);
     bool checkType(TokenType type);

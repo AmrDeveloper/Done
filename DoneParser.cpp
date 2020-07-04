@@ -15,6 +15,7 @@
 #include "include/GroupExpression.h"
 #include "include/LogicalExpression.h"
 #include "include/GetExpression.h"
+#include "include/TernaryExpression.h"
 
 #include <iostream>
 
@@ -179,7 +180,27 @@ Expression *DoneParser::parseAssignExpression() {
         consume(SEMICOLON, "Expect ; after Assign Expression");
         return new AssignExpression(name, value, isPointer);
     }
-    return parseOrExpression();
+    return parseTernaryExpression();
+}
+
+Expression *DoneParser::parseTernaryExpression() {
+    Expression* expression = parseElvisExpression();
+    if(matchType(TERNARY)) {
+        Expression* truthExpr = parseExpression();
+        consume(COLON, "Expect : after first Expression");
+        Expression* falseExpr = parseExpression();
+        return new TernaryExpression(expression, truthExpr, falseExpr);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseElvisExpression() {
+    Expression* expression = parseOrExpression();
+    if(matchType(ELVIS)) {
+        Expression* falseExpr = parseExpression();
+        return new TernaryExpression(expression, expression, falseExpr);
+    }
+    return expression;
 }
 
 Expression *DoneParser::parseOrExpression() {
@@ -315,3 +336,4 @@ void DoneParser::reportParserError(const std::string& message) {
 bool DoneParser::isAtEnd() {
     return getCurrentToken().tokenType == END_OF_FILE;
 }
+

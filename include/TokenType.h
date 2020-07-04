@@ -21,6 +21,7 @@ enum TokenType {
     //Keywords
     FUN, VAR, RETURN, IDENTIFIER, IMPORT,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,
+    TERNARY, ELVIS,
 
     //Math Operations
     MINUS, PLUS, SLASH, STAR,

@@ -23,6 +23,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
  D:/Software/LowLevel/DoneLang/include/Statement.h
  D:/Software/LowLevel/DoneLang/include/StatementVisitor.h
  D:/Software/LowLevel/DoneLang/include/StructStatement.h
+ D:/Software/LowLevel/DoneLang/include/TernaryExpression.h
  D:/Software/LowLevel/DoneLang/include/Token.h
  D:/Software/LowLevel/DoneLang/include/TokenType.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h
@@ -56,6 +57,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj
  D:/Software/LowLevel/DoneLang/include/Statement.h
  D:/Software/LowLevel/DoneLang/include/StatementVisitor.h
  D:/Software/LowLevel/DoneLang/include/StructStatement.h
+ D:/Software/LowLevel/DoneLang/include/TernaryExpression.h
  D:/Software/LowLevel/DoneLang/include/Token.h
  D:/Software/LowLevel/DoneLang/include/TokenType.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h
@@ -94,6 +96,7 @@ CMakeFiles/DoneLang.dir/main.cpp.obj
  D:/Software/LowLevel/DoneLang/include/Statement.h
  D:/Software/LowLevel/DoneLang/include/StatementVisitor.h
  D:/Software/LowLevel/DoneLang/include/StructStatement.h
+ D:/Software/LowLevel/DoneLang/include/TernaryExpression.h
  D:/Software/LowLevel/DoneLang/include/Token.h
  D:/Software/LowLevel/DoneLang/include/TokenType.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h

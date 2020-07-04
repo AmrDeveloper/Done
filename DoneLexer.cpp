@@ -90,6 +90,10 @@ void DoneLexer::scanAndAddToken() {
         case '&':
             addToken(TokenType::ADDRESS);
             break;
+        case '?':
+            addToken(matchAndAdvance(':') ? TokenType::ELVIS
+                                          : TokenType::TERNARY);
+            break;
         case '=':
             addToken(matchAndAdvance('=') ? TokenType::EQUAL_EQUAL
                                           : TokenType::EQUAL);

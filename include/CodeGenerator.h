@@ -24,6 +24,7 @@
 #include "GroupExpression.h"
 #include "LogicalExpression.h"
 #include "GetExpression.h"
+#include "TernaryExpression.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
@@ -61,6 +62,8 @@ public:
     void visit(LogicalExpression *logicalExpression) override;
 
     void visit(GetExpression *getExpression) override;
+
+    void visit(TernaryExpression *ternaryExpression) override;
 private:
     ErrorHandler &errorHandler;
 };
