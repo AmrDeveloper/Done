@@ -133,12 +133,17 @@ Statement *DoneParser::parseFuncDeclaration() {
     std::vector<Statement *> body;
     Expression *returnValue = nullptr;
     while (!matchType(RIGHT_BRACE)) {
-        if (returnType.lexeme != "void" && matchType(RETURN)) {
+        if (returnType.tokenType != VOID && matchType(RETURN)) {
             returnValue = parseExpression();
             consume(SEMICOLON, "Expect ; after return name");
             break;
         }
-        body.push_back(parseStatement());
+        else if(matchType(VAR)) {
+            body.push_back(parseVarDeclaration());
+        }
+        else{
+            body.push_back(parseStatement());
+        }
     }
     consume(RIGHT_BRACE, "Expect } after return name");
     return new FunctionStatement(name, returnType, params, body, returnValue);
@@ -162,6 +167,7 @@ Expression *DoneParser::parseExpression() {
 }
 
 Expression *DoneParser::parseAssignExpression() {
+
     if(getNextToken().tokenType == EQUAL || checkType(ADDRESS)) {
         bool isPointer = matchType(ADDRESS);
         Token name = consume(IDENTIFIER, "Expect variable name");
