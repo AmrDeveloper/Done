@@ -6,9 +6,12 @@
 #include "include/ExpressionStatement.h"
 #include "include/FunctionStatement.h"
 #include "include/IfStatement.h"
+#include "include/Parameter.h"
 
 #include "include/LiteralExpression.h"
 #include "include/AssignExpression.h"
+#include "include/CallExpression.h"
+#include "include/VariableExpression.h"
 
 #include <iostream>
 
@@ -80,11 +83,16 @@ Statement *DoneParser::parseEnumerationDeclaration() {
 Statement *DoneParser::parseStructDeclaration() {
     Token name = consume(IDENTIFIER, "Expect struct name");
     consume(LEFT_BRACE, "Expect : { after struct name");
-    std::vector<Statement *> fields;
-    while (!matchType(RIGHT_BRACE)) {
-        consume(VAR, "Expect var keyword");
-        fields.push_back(parseVarDeclaration());
+    std::vector<Parameter> fields;
+    while (matchType(VAR)) {
+        Token varName = consume(IDENTIFIER, "Expect struct var name");
+        consume(COLON, "Expect struct name");
+        bool isPointer = false;
+        Token varType = consume(IDENTIFIER, "Expect struct var type");
+        consume(SEMICOLON, "Expect ; after var declaration");
+        fields.push_back(Parameter(varName, varType, isPointer));
     }
+    consume(RIGHT_BRACE, "Expect : } after struct name");
     return new StructStatement(name, fields);
 }
 
@@ -154,16 +162,58 @@ Expression *DoneParser::parseExpression() {
 }
 
 Expression *DoneParser::parseAssignExpression() {
-    return parsePrimaryExpression();
+    if(getNextToken().tokenType == EQUAL || checkType(ADDRESS)) {
+        bool isPointer = matchType(ADDRESS);
+        Token name = consume(IDENTIFIER, "Expect variable name");
+        consume(EQUAL, "Expect equal");
+        Expression* value = parsePrimaryExpression();
+        consume(SEMICOLON, "Expect ; after Assign Expression");
+        return new AssignExpression(name, value, isPointer);
+    }
+    return parseCallExpression();
+}
+
+Expression *DoneParser::parseCallExpression() {
+    Expression* expression = parsePrimaryExpression();
+    while(true) {
+        if(matchType(LEFT_PAREN)) {
+            expression = parseFunctionCallExpression(expression);
+        }
+        else if(matchType(DOT)) {
+            //TODO : parse Get Expression
+            break;
+        }
+        else{
+            break;
+        }
+    }
+    return expression;
+}
+
+Expression* DoneParser::parseFunctionCallExpression(Expression* callee) {
+     std::vector<Expression*> arguments;
+     if(!checkType(RIGHT_PAREN)) {
+         do{
+             if(arguments.size() >= MAX_NUM_OF_ARGUMENTS) {
+                 reportParserError("Number of arguments must be less than or equal 127");
+             }
+             arguments.push_back(parseExpression());
+         }while (matchType(COMMA));
+     }
+     consume(RIGHT_PAREN, "Expect ) after function call");
+     consume(SEMICOLON, "Expect ; after Assign Expression");
+     return new CallExpression(callee, arguments);
 }
 
 Expression *DoneParser::parsePrimaryExpression() {
-    if (matchType(TRUE)) return new LiteralExpression("true");
-    if (matchType(FALSE)) return new LiteralExpression("false");
+    if (matchType(TRUE)) return new LiteralExpression("1");
+    if (matchType(FALSE)) return new LiteralExpression("0");
     if (matchType(NIL)) return new LiteralExpression("null");
     if (matchType(NUMBER)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(STRING)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(CHAR)) return new LiteralExpression(getPreviousToken().literal);
+    if (matchType(IDENTIFIER)) return new VariableExpression(getPreviousToken());
+
     return nullptr;
 }
 
@@ -211,10 +261,10 @@ void DoneParser::pointPreviousToken() {
 
 Token DoneParser::consume(TokenType type, const char *message) {
     if(checkType(type)) return advance();
-    reportLexerError(message);
+    reportParserError(message);
 }
 
-void DoneParser::reportLexerError(const std::string& message) {
+void DoneParser::reportParserError(const std::string& message) {
    std::cout<<message;
    exit(EXIT_FAILURE);
 }

@@ -224,7 +224,7 @@ void DoneLexer::scanString() {
     }
     advanceAndGetChar();
     const size_t stringSize = current - start;
-    const std::string stringLiteral = source.substr(start + 1, stringSize - 2);
+    const std::string stringLiteral = source.substr(start, stringSize);
     addToken(TokenType::STRING, stringLiteral);
 }
 

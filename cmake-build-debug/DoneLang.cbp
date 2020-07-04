@@ -109,6 +109,9 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/BlockStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/CallExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/CodeGenerator.h">
 			<Option target="DoneLang"/>
 		</Unit>
@@ -167,6 +170,9 @@
 			<Option target="DoneLang"/>
 		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/VarStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/VariableExpression.h">
 			<Option target="DoneLang"/>
 		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/main.cpp">

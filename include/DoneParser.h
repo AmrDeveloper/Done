@@ -9,6 +9,8 @@
 #include "Expression.h"
 #include "ErrorHandler.h"
 
+#define MAX_NUM_OF_ARGUMENTS 127
+
 class DoneParser {
 public:
     DoneParser(std::vector<Token> tokens, ErrorHandler &errorHandler);
@@ -40,6 +42,8 @@ private:
     //Expression parseNewExpression();
     //Expression parseFreeExpression();
     Expression* parsePrimaryExpression();
+    Expression* parseCallExpression();
+    Expression* parseFunctionCallExpression(Expression* callee);
 
     bool matchType(TokenType types);
     bool checkType(TokenType type);
@@ -50,7 +54,7 @@ private:
     Token getNextToken();
     Token getPreviousToken();
     Token consume(TokenType type, const char *message);
-    void reportLexerError(const std::string& message);
+    void reportParserError(const std::string& message);
     bool isAtEnd();
 };
 #endif

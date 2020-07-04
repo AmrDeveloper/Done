@@ -41,10 +41,16 @@ void CodeGenerator::visit(VarStatement *varStatement) {
 
 void CodeGenerator::visit(StructStatement *structStatement) {
     cout<<"struct "<< structStatement->name.lexeme<<"{\n";
-    for(auto field : structStatement->fields) {
-        field->accept(this);
+    for(Parameter field : structStatement->fields) {
+        cout<<field.type.lexeme;
+        if(field.isPointer) {
+            cout << "*";
+        }
+        cout<<" "<<field.name.lexeme<<";\n";
     }
     cout<<"};\n";
+    //TODO: Generate Struct new function
+    //TODO: Generate Struct Free Function
 }
 
 void CodeGenerator::visit(BlockStatement *blockStatement) {
@@ -92,15 +98,34 @@ void CodeGenerator::visit(IfStatement *ifStatement) {
     cout<<"}\n";
 }
 
-void CodeGenerator::visit(ExpressionStatement *expressionStatement) {
-    expressionStatement->expression->accept(this);
+void CodeGenerator::visit(AssignExpression *assign) {
+    if(assign->isPointer) {
+        cout<<"&";
+    }
+    cout<<assign->name.lexeme<<"=";
+    assign->value->accept(this);
+    cout<<";\n";
 }
 
-void CodeGenerator::visit(AssignExpression *assign) {
-    ExpressionVisitor::visit(assign);
+void CodeGenerator::visit(ExpressionStatement *expressionStatement) {
+    expressionStatement->expression->accept(this);
 }
 
 void CodeGenerator::visit(LiteralExpression *literal) {
     cout<<literal->value;
 }
+
+void CodeGenerator::visit(CallExpression *callExpression) {
+    callExpression->callee->accept(this);
+    cout<<"(";
+    for(auto arg : callExpression->arguments) {
+        arg->accept(this);
+    }
+    cout<<");\n";
+}
+
+void CodeGenerator::visit(VariableExpression *varExpression) {
+    cout<<varExpression->name.lexeme;
+}
+
 

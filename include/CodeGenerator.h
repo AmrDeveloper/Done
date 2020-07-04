@@ -10,12 +10,17 @@
 #include "VarStatement.h"
 #include "StatementVisitor.h"
 #include "ExpressionVisitor.h"
-#include "LiteralExpression.h"
+
 #include "StructStatement.h"
 #include "ExpressionStatement.h"
 #include "BlockStatement.h"
 #include "FunctionStatement.h"
 #include "IfStatement.h"
+
+#include "LiteralExpression.h"
+#include "AssignExpression.h"
+#include "CallExpression.h"
+#include "VariableExpression.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
@@ -36,13 +41,17 @@ public:
 
     void visit(BlockStatement *blockStatement) override;
 
-    void visit(FunctionStatement *blockStatement) override;
+    void visit(FunctionStatement *funStatement) override;
 
-    void visit(IfStatement *blockStatement) override;
+    void visit(IfStatement *ifStatement) override;
 
-    void visit(AssignExpression *enumStatement) override;
+    void visit(AssignExpression *assignExpression) override;
 
-    void visit(LiteralExpression *enumStatement) override;
+    void visit(LiteralExpression *literalExpression) override;
+
+    void visit(CallExpression *callExpression) override;
+
+    void visit(VariableExpression *varExpression) override;
 
 private:
     ErrorHandler &errorHandler;

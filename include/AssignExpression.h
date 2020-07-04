@@ -9,7 +9,9 @@ class AssignExpression : public Expression{
 public:
     Token name;
     Expression* value;
-    AssignExpression(Token token, Expression* val) : name(std::move(token)), value(val){}
+    bool isPointer;
+    AssignExpression(Token token, Expression* val, bool pointer)
+                   : name(std::move(token)), value(val), isPointer(pointer){}
     void accept(ExpressionVisitor *visitor) {
         visitor->visit(this);
     }
