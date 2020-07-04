@@ -129,7 +129,9 @@ void CodeGenerator::visit(VariableExpression *varExpression) {
 }
 
 void CodeGenerator::visit(GroupExpression *groupExpression) {
+    cout<<"(";
     groupExpression->expression->accept(this);
+    cout<<")";
 }
 
 void CodeGenerator::visit(LogicalExpression *groupExpression) {
