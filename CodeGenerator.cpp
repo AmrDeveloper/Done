@@ -153,3 +153,10 @@ void CodeGenerator::visit(LogicalExpression *groupExpression) {
     }
     groupExpression->right->accept(this);
 }
+
+void CodeGenerator::visit(GetExpression *getExpression) {
+    getExpression->object->accept(this);
+
+    cout<<"."<<getExpression->name.lexeme;
+
+}

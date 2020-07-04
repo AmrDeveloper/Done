@@ -23,6 +23,7 @@
 #include "VariableExpression.h"
 #include "GroupExpression.h"
 #include "LogicalExpression.h"
+#include "GetExpression.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
@@ -59,6 +60,7 @@ public:
 
     void visit(LogicalExpression *logicalExpression) override;
 
+    void visit(GetExpression *getExpression) override;
 private:
     ErrorHandler &errorHandler;
 };

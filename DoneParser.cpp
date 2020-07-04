@@ -14,6 +14,7 @@
 #include "include/VariableExpression.h"
 #include "include/GroupExpression.h"
 #include "include/LogicalExpression.h"
+#include "include/GetExpression.h"
 
 #include <iostream>
 
@@ -169,11 +170,12 @@ Expression *DoneParser::parseExpression() {
 }
 
 Expression *DoneParser::parseAssignExpression() {
+    //TODO : must fix it to support SetExp
     if(getNextToken().tokenType == EQUAL || checkType(ADDRESS)) {
         bool isPointer = matchType(ADDRESS);
         Token name = consume(IDENTIFIER, "Expect variable name");
         consume(EQUAL, "Expect equal");
-        Expression* value = parsePrimaryExpression();
+        Expression* value = parseAssignExpression();
         consume(SEMICOLON, "Expect ; after Assign Expression");
         return new AssignExpression(name, value, isPointer);
     }
@@ -217,9 +219,8 @@ Expression *DoneParser::parseCallExpression() {
             expression = parseFunctionCallExpression(expression);
         }
         else if(matchType(DOT)) {
-            //TODO : parse Get Expression
-            std::cout<<"DOT";
-            break;
+            Token name = consume(IDENTIFIER, "Expect property name after '.'.");
+            expression = new GetExpression(name, expression);
         }
         else{
             break;
