@@ -26,9 +26,9 @@ void CodeGenerator::visit(EnumStatement* enumStatement) {
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
+    cout<<varStatement->type.lexeme<<" ";
     MemoryType type = varStatement->memoryType;
     generateMemoryType(type);
-    cout<<varStatement->type.lexeme<<" ";
     cout<<varStatement->name.lexeme;
     if(varStatement->isInitialized) {
         cout<<"=";
@@ -107,9 +107,9 @@ void CodeGenerator::visit(WhileStatement *whileStatement) {
 }
 
 void CodeGenerator::visit(ArrayStatement *arrayStatement) {
+    cout<<arrayStatement->type.lexeme<<" ";
     MemoryType type = arrayStatement->memoryType;
     generateMemoryType(type);
-    cout<<arrayStatement->type.lexeme<<" ";
     cout<<arrayStatement->name.lexeme;
     cout<<"[";
     arrayStatement->size->accept(this);
