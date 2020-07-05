@@ -118,8 +118,14 @@ void CodeGenerator::visit(LiteralExpression *literal) {
 void CodeGenerator::visit(CallExpression *callExpression) {
     callExpression->callee->accept(this);
     cout<<"(";
+    int argsSize = callExpression->arguments.size();
+    int argsCounter = 1;
     for(auto arg : callExpression->arguments) {
         arg->accept(this);
+        if(argsCounter != argsSize) {
+            cout<<",";
+        }
+        argsCounter++;
     }
     cout<<");\n";
 }
