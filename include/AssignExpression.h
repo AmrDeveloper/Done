@@ -7,11 +7,11 @@
 
 class AssignExpression : public Expression{
 public:
-    Token name;
+    Expression* name;
     Expression* value;
-    bool isPointer;
-    AssignExpression(Token token, Expression* val, bool pointer)
-                   : name(std::move(token)), value(val), isPointer(pointer){}
+    MemoryType type;
+    AssignExpression(Expression* name, Expression* val, MemoryType type)
+                   : name(name), value(val), type(type){}
     void accept(ExpressionVisitor *visitor) {
         visitor->visit(this);
     }

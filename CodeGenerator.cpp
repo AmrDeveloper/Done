@@ -26,12 +26,10 @@ void CodeGenerator::visit(EnumStatement* enumStatement) {
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
-    if(varStatement->isPointer) {
-        cout<<varStatement->type.lexeme<<"* "<<varStatement->name.lexeme;
-    }else{
-        cout<<varStatement->type.lexeme<<" "<<varStatement->name.lexeme;
-    }
-
+    MemoryType type = varStatement->memoryType;
+    generateMemoryType(type);
+    cout<<varStatement->type.lexeme<<" ";
+    cout<<varStatement->name.lexeme;
     if(varStatement->isInitialized) {
         cout<<"=";
         varStatement->value->accept(this);
@@ -108,11 +106,25 @@ void CodeGenerator::visit(WhileStatement *whileStatement) {
     cout<<"}\n";
 }
 
-void CodeGenerator::visit(AssignExpression *assign) {
-    if(assign->isPointer) {
-        cout<<"&";
+void CodeGenerator::visit(ArrayStatement *arrayStatement) {
+    MemoryType type = arrayStatement->memoryType;
+    generateMemoryType(type);
+    cout<<arrayStatement->type.lexeme<<" ";
+    cout<<arrayStatement->name.lexeme;
+    cout<<"[";
+    arrayStatement->size->accept(this);
+    cout<<"]";
+    if(arrayStatement->isInitialized) {
+        cout<<"=";
+        arrayStatement->value->accept(this);
     }
-    cout<<assign->name.lexeme<<"=";
+    cout<<";\n";
+}
+
+void CodeGenerator::visit(AssignExpression *assign) {
+    generateMemoryType(assign->type);
+    assign->name->accept(this);
+    cout<<"=";
     assign->value->accept(this);
     cout<<";\n";
 }
@@ -253,4 +265,42 @@ void CodeGenerator::visit(UnaryExpression *unaryExpression) {
     }
     unaryExpression->expression->accept(this);
 }
+
+void CodeGenerator::visit(ArrayExpression *arrayExpression) {
+    arrayExpression->variable->accept(this);
+    cout<<"[";
+    arrayExpression->index->accept(this);
+    cout<<"]";
+}
+
+
+void CodeGenerator::visit(ArrayValuesExpression *arrayExpression) {
+    cout<<"{";
+    int valuesSize = arrayExpression->values.size();
+    int valuesCounter = 1;
+    for(auto val : arrayExpression->values) {
+        val->accept(this);
+        if(valuesCounter != valuesSize) {
+            cout<<",";
+        }
+        valuesCounter++;
+    }
+    cout<<"}";
+}
+
+void CodeGenerator::generateMemoryType(MemoryType type) {
+    if(type == SINGLE_POINTER) {
+        cout<<"*";
+    }
+    else if(type == DOUBLE_POINTER) {
+        cout<<"**";
+    }
+    else if(type == ADDRESS_POINTER) {
+        cout<<"&";
+    }
+}
+
+
+
+
 

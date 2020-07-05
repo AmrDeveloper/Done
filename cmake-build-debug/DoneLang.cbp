@@ -103,6 +103,15 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/Token.cpp">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ArrayExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ArrayStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ArrayValuesExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/AssignExpression.h">
 			<Option target="DoneLang"/>
 		</Unit>

@@ -4,6 +4,13 @@
 
 #include "ExpressionVisitor.h"
 
+enum MemoryType {
+   SINGLE_POINTER,
+   DOUBLE_POINTER,
+   ADDRESS_POINTER,
+   NONE
+};
+
 class Expression {
 
 public:

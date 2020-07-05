@@ -28,6 +28,7 @@ private:
 
     char advanceAndGetChar();
     void scanAndAddToken();
+    void scanOneCharacter();
     void scanString();
     void scanNumber();
     void scanIdentifier();

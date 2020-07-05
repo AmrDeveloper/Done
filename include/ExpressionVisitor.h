@@ -12,6 +12,8 @@ class GetExpression;
 class TernaryExpression;
 class BinaryExpression;
 class UnaryExpression;
+class ArrayExpression;
+class ArrayValuesExpression;
 
 class ExpressionVisitor {
 public:
@@ -25,6 +27,8 @@ public:
     virtual void visit(TernaryExpression * ternary) {};
     virtual void visit(BinaryExpression * ternary) {};
     virtual void visit(UnaryExpression * unary) {};
+    virtual void visit(ArrayExpression * array) {};
+    virtual void visit(ArrayValuesExpression * arrayVals) {};
 };
 
 #endif

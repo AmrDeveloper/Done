@@ -53,6 +53,7 @@ private:
     Expression* parseAdditionExpression();
     Expression* parseMultiplicationExpression();
     Expression* parseUnaryExpression();
+    Expression* parseArrayValuesExpression();
 
     bool matchType(TokenType types);
     bool checkType(TokenType type);
@@ -62,6 +63,7 @@ private:
     void  pointPreviousToken();
     Token getNextToken();
     Token getPreviousToken();
+    MemoryType parseMemoryType();
     Token consume(TokenType type, const char *message);
     void reportParserError(const std::string& message);
     bool isAtEnd();

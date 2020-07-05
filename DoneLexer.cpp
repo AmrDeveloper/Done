@@ -67,6 +67,12 @@ void DoneLexer::scanAndAddToken() {
         case '}':
             addToken(TokenType::RIGHT_BRACE);
             break;
+        case '[':
+            addToken(TokenType::ARRAY_LEFT_BRACKET);
+            break;
+        case ']':
+            addToken(TokenType::ARRAY_RIGHT_BRACKET);
+            break;
         case ',':
             addToken(TokenType::COMMA);
             break;
@@ -89,10 +95,14 @@ void DoneLexer::scanAndAddToken() {
             addToken(TokenType::SEMICOLON);
             break;
         case '*':
-            addToken(TokenType::STAR);
+            addToken(matchAndAdvance('*') ? TokenType::STAR_STAR
+                                          : TokenType::STAR);
             break;
         case '&':
             addToken(TokenType::ADDRESS);
+            break;
+        case '%':
+            addToken(TokenType::PERCENT);
             break;
         case '?':
             addToken(matchAndAdvance(':') ? TokenType::ELVIS
@@ -129,6 +139,9 @@ void DoneLexer::scanAndAddToken() {
             break;
         case '\n':
             ++line;
+            break;
+         case '\'':
+             scanOneCharacter();
             break;
         case '"':
             scanString();
@@ -167,7 +180,6 @@ void DoneLexer::scanPreprocessorLabel() {
 
         currentFile = stringLiteral;
         dependencyFilesStack.push(currentFile);
-
         return;
     }
 
@@ -183,6 +195,8 @@ void DoneLexer::scanPreprocessorLabel() {
             dependencyFilesStack.pop();
             currentFile = dependencyFilesStack.top();
             line = 1;
+            //TODO : create two variables to handle error start and end
+            //TODO : errorStar, errorEnd to improve ErrorHandler
         }
     }
 }
@@ -217,6 +231,28 @@ void DoneLexer::scanNumber() {
     addToken(TokenType::NUMBER, numberLiteral);
 }
 
+void DoneLexer::scanOneCharacter() {
+    while (getCurrentChar() != '\'' && !isAtEnd()) {
+        advanceAndGetChar();
+    }
+    if (isAtEnd()) {
+        std::string errorMessage = "Unterminated string.";
+        reportLexerError(errorMessage);
+        return;
+    }
+    advanceAndGetChar();
+    const size_t stringSize = current - start;
+    const std::string stringLiteral = source.substr(start, stringSize);
+
+    if(stringLiteral.size() != 3){
+        std::string errorMessage = "Character size must be one digit.";
+        reportLexerError(errorMessage);
+        return;
+    }
+
+    addToken(TokenType::CHAR, stringLiteral);
+}
+
 void DoneLexer::scanString() {
     while (getCurrentChar() != '"' && !isAtEnd()) {
         if (getCurrentChar() == '\n')
@@ -228,6 +264,7 @@ void DoneLexer::scanString() {
         reportLexerError(errorMessage);
         return;
     }
+
     advanceAndGetChar();
     const size_t stringSize = current - start;
     const std::string stringLiteral = source.substr(start, stringSize);

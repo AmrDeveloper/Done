@@ -7,6 +7,7 @@
 #include "include/FunctionStatement.h"
 #include "include/IfStatement.h"
 #include "include/WhileStatement.h"
+#include "include/ArrayStatement.h"
 #include "include/Parameter.h"
 
 #include "include/LiteralExpression.h"
@@ -19,6 +20,8 @@
 #include "include/TernaryExpression.h"
 #include "include/BinaryExpression.h"
 #include "include/UnaryExpression.h"
+#include "include/ArrayExpression.h"
+#include "include/ArrayValuesExpression.h"
 
 #include <iostream>
 
@@ -55,16 +58,32 @@ Statement *DoneParser::parseDeclaration() {
 Statement *DoneParser::parseVarDeclaration() {
     Token name = consume(IDENTIFIER, "Expect var name");
     consume(COLON, "Expect : after var name");
-    bool isPointer = matchType(STAR);
+    MemoryType memoryType = parseMemoryType();
     Token type = consume(IDENTIFIER, "Expect Type type");
+    bool isInitialized = false;
+    bool isArrayStatement = false;
+    Expression *arraySize = nullptr;
+    if(matchType(ARRAY_LEFT_BRACKET)) {
+        isArrayStatement = true;
+        arraySize = parseExpression();
+        consume(ARRAY_RIGHT_BRACKET, "Expect ] after array size");
+        if(matchType(ARRAY_LEFT_BRACKET)) {
+            //TODO: 2D array ^_^
+        }
+    }
+    Expression *value = nullptr;
     if (matchType(EQUAL)) {
-        Expression *value = parseExpression();
+        value = parseExpression();
+        isInitialized = true;
         consume(SEMICOLON, "Expect ; after init type");
-        return new VarStatement(name, type, isPointer, true, value);
     } else {
         consume(SEMICOLON, "Expect ; after Declare type");
-        return new VarStatement(name, type, isPointer, false, nullptr);
     }
+
+    if(isArrayStatement) {
+        return new ArrayStatement(name, type, arraySize, memoryType, isInitialized, value);
+    }
+    return new VarStatement(name, type, memoryType, isInitialized, value);
 }
 
 Statement *DoneParser::parseEnumerationDeclaration() {
@@ -187,16 +206,14 @@ Expression *DoneParser::parseExpression() {
 }
 
 Expression *DoneParser::parseAssignExpression() {
-    //TODO : must fix it to support SetExp
-    if(getNextToken().tokenType == EQUAL || checkType(ADDRESS)) {
-        bool isPointer = matchType(ADDRESS);
-        Token name = consume(IDENTIFIER, "Expect variable name");
-        consume(EQUAL, "Expect equal");
+    MemoryType type = parseMemoryType();
+    Expression* expression = parseTernaryExpression();
+    if(matchType(EQUAL)) {
         Expression* value = parseAssignExpression();
         consume(SEMICOLON, "Expect ; after Assign Expression");
-        return new AssignExpression(name, value, isPointer);
+        return new AssignExpression(expression, value, type);
     }
-    return parseTernaryExpression();
+    return expression;
 }
 
 Expression *DoneParser::parseTernaryExpression() {
@@ -333,6 +350,16 @@ Expression *DoneParser::parseFunctionCallExpression(Expression* callee) {
      return new CallExpression(callee, arguments);
 }
 
+Expression *DoneParser::parseArrayValuesExpression() {
+    std::vector<Expression *> values;
+    if (!matchType(RIGHT_BRACE)) {
+        do{values.push_back(parseExpression());}
+        while (matchType(COMMA));
+    }
+    consume(RIGHT_BRACE, "Expect } in the end of the array");
+    return new ArrayValuesExpression(values);
+}
+
 Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(TRUE)) return new LiteralExpression("1");
     if (matchType(FALSE)) return new LiteralExpression("0");
@@ -342,14 +369,34 @@ Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(CHAR)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(CONTINUE)) return new LiteralExpression("continue");
     if (matchType(BREAK)) return new LiteralExpression("break");
-    if (matchType(IDENTIFIER)) return new VariableExpression(getPreviousToken());
+    if (matchType(IDENTIFIER)) {
+        if(getCurrentToken().tokenType == ARRAY_LEFT_BRACKET) {
+            auto* variable = new VariableExpression(getPreviousToken());
+            consume(ARRAY_LEFT_BRACKET, "Expect [ after array position");
+            Expression* index = parseExpression();
+            consume(ARRAY_RIGHT_BRACKET, "Expect ] after array position");
+            return new ArrayExpression(variable, index);
+        }
+        return new VariableExpression(getPreviousToken());
+    }
     if (matchType(LEFT_PAREN)) {
         Expression* expr = parseExpression();
         consume(RIGHT_PAREN, "Expect ')' after expression.");
         return new GroupExpression(expr);
     }
+    if (matchType(LEFT_BRACE)) {
+        return parseArrayValuesExpression();
+    }
     std::cout<<"Invalid Token "<<getCurrentToken().lexeme;
     return nullptr;
+}
+
+MemoryType DoneParser::parseMemoryType() {
+    MemoryType type = NONE;
+    if (matchType(STAR)) type = SINGLE_POINTER;
+    else if (matchType(STAR_STAR)) type = DOUBLE_POINTER;
+    else if (matchType(ADDRESS)) type = ADDRESS_POINTER;
+    return type;
 }
 
 bool DoneParser::matchType(TokenType types) {

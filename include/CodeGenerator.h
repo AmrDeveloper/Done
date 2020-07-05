@@ -17,6 +17,7 @@
 #include "FunctionStatement.h"
 #include "IfStatement.h"
 #include "WhileStatement.h"
+#include "ArrayStatement.h"
 
 #include "LiteralExpression.h"
 #include "AssignExpression.h"
@@ -28,6 +29,8 @@
 #include "TernaryExpression.h"
 #include "BinaryExpression.h"
 #include "UnaryExpression.h"
+#include "ArrayExpression.h"
+#include "ArrayValuesExpression.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
@@ -54,6 +57,8 @@ public:
 
     void visit(WhileStatement *whileStatement) override;
 
+    void visit(ArrayStatement *arrayStatement) override;
+
     void visit(AssignExpression *assignExpression) override;
 
     void visit(LiteralExpression *literalExpression) override;
@@ -73,6 +78,12 @@ public:
     void visit(BinaryExpression *binaryExpression) override;
 
     void visit(UnaryExpression *unaryExpression) override;
+
+    void visit(ArrayExpression* arrayExpression) override;
+
+    void visit(ArrayValuesExpression* arrayExpression) override;
+
+    void generateMemoryType(MemoryType type);
 private:
     ErrorHandler &errorHandler;
 };
