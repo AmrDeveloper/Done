@@ -21,13 +21,14 @@ enum TokenType {
     //Keywords
     FUN, VAR, RETURN, IDENTIFIER, IMPORT,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,
-    TERNARY, ELVIS,
+    TERNARY, ELVIS, CONTINUE, BREAK,
 
     //Math Operations
     MINUS, PLUS, SLASH, STAR,
 
     //Unary Operations
     PLUS_PLUS, MINUS_MINUS,
+
 
     //Values
     TRUE, FALSE, NIL, VOID,

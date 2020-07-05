@@ -16,6 +16,8 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["for"]       = TokenType::FOR;
     reservedKeywords["do"]        = TokenType::DO;
     reservedKeywords["while"]     = TokenType::WHILE;
+    reservedKeywords["continue"]  = TokenType::CONTINUE;
+    reservedKeywords["break"]     = TokenType::BREAK;
 
     reservedKeywords["var"]       = TokenType::VAR;
     reservedKeywords["fun"]       = TokenType::FUN;

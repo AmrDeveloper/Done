@@ -326,6 +326,8 @@ Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(NUMBER)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(STRING)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(CHAR)) return new LiteralExpression(getPreviousToken().literal);
+    if (matchType(CONTINUE)) return new LiteralExpression("continue");
+    if (matchType(BREAK)) return new LiteralExpression("break");
     if (matchType(IDENTIFIER)) return new VariableExpression(getPreviousToken());
     if (matchType(LEFT_PAREN)) {
         Expression* expr = parseExpression();
