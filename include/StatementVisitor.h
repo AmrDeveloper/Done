@@ -8,6 +8,7 @@ class ExpressionStatement;
 class BlockStatement;
 class FunctionStatement;
 class IfStatement;
+class WhileStatement;
 
 class StatementVisitor{
 public:
@@ -24,6 +25,8 @@ public:
     virtual void visit(ExpressionStatement *statement) {};
 
     virtual void visit(IfStatement *statement) {};
+
+    virtual void visit(WhileStatement *statement) {};
 };
 
 #endif

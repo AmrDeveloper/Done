@@ -29,11 +29,10 @@ private:
     Statement* parseExpressionStatement();
     Statement* parseFuncDeclaration();
     Statement* parseIfStatement();
-
+    Statement* parseWhileStatement();
     /*
     Statement* parseBlockStatement();
     Statement* parseForStatement();
-    Statement* parseWhileStatement();
     Statement* parseDoWhileStatement();
     */
 

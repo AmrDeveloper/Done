@@ -98,6 +98,16 @@ void CodeGenerator::visit(IfStatement *ifStatement) {
     cout<<"}\n";
 }
 
+void CodeGenerator::visit(WhileStatement *whileStatement) {
+    cout<<"while(";
+    whileStatement->condition->accept(this);
+    cout<<"){\n";
+    for(auto statement : whileStatement->body) {
+        statement->accept(this);
+    }
+    cout<<"}\n";
+}
+
 void CodeGenerator::visit(AssignExpression *assign) {
     if(assign->isPointer) {
         cout<<"&";
@@ -243,3 +253,4 @@ void CodeGenerator::visit(UnaryExpression *unaryExpression) {
     }
     unaryExpression->expression->accept(this);
 }
+

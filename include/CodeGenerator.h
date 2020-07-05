@@ -16,6 +16,7 @@
 #include "BlockStatement.h"
 #include "FunctionStatement.h"
 #include "IfStatement.h"
+#include "WhileStatement.h"
 
 #include "LiteralExpression.h"
 #include "AssignExpression.h"
@@ -50,6 +51,8 @@ public:
     void visit(FunctionStatement *funStatement) override;
 
     void visit(IfStatement *ifStatement) override;
+
+    void visit(WhileStatement *whileStatement) override;
 
     void visit(AssignExpression *assignExpression) override;
 

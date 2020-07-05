@@ -6,6 +6,7 @@
 #include "include/ExpressionStatement.h"
 #include "include/FunctionStatement.h"
 #include "include/IfStatement.h"
+#include "include/WhileStatement.h"
 #include "include/Parameter.h"
 
 #include "include/LiteralExpression.h"
@@ -38,7 +39,7 @@ Statement *DoneParser::parseStatement() {
     if (matchType(IF)) return parseIfStatement();
     //if(matchType(FOR)) return parseForStatement();
     //if(matchType(DO)) return parseDoWhileStatement();
-    //if(matchType(WHILE)) return parseWhileStatement();
+    if(matchType(WHILE)) return parseWhileStatement();
     //if(matchType(LEFT_BRACE)) return parseBlockStatement();
     return parseExpressionStatement();
 }
@@ -166,6 +167,19 @@ Statement *DoneParser::parseIfStatement() {
         body.push_back(parseDeclaration());
     }
     return new IfStatement(condition, body);
+}
+
+Statement *DoneParser::parseWhileStatement() {
+    consume(LEFT_PAREN, "Expect : ( after while keyword");
+    Expression *condition = parseExpression();
+    consume(RIGHT_PAREN, "Expect : ) after while condition");
+    consume(LEFT_BRACE, "Expect : { after to start while body");
+
+    std::vector<Statement *> body;
+    while (!matchType(RIGHT_BRACE)) {
+        body.push_back(parseDeclaration());
+    }
+    return new WhileStatement(condition, body);
 }
 
 Expression *DoneParser::parseExpression() {

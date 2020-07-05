@@ -29,6 +29,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/TokenType.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/VariableExpression.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/WhileStatement.h
 
 CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj: ../CodeWriter.cpp
 CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj: ../include/CodeWriter.h
@@ -65,6 +66,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/TokenType.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/VariableExpression.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/WhileStatement.h
 
 CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj: ../ErrorHandler.cpp
 CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj: ../include/ErrorHandler.h
@@ -106,5 +108,6 @@ CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/TokenType.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/VariableExpression.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/WhileStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../main.cpp
 

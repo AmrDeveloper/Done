@@ -30,6 +30,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
  D:/Software/LowLevel/DoneLang/include/UnaryExpression.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h
  D:/Software/LowLevel/DoneLang/include/VariableExpression.h
+ D:/Software/LowLevel/DoneLang/include/WhileStatement.h
 CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj
  D:/Software/LowLevel/DoneLang/CodeWriter.cpp
  D:/Software/LowLevel/DoneLang/include/CodeWriter.h
@@ -66,6 +67,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj
  D:/Software/LowLevel/DoneLang/include/UnaryExpression.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h
  D:/Software/LowLevel/DoneLang/include/VariableExpression.h
+ D:/Software/LowLevel/DoneLang/include/WhileStatement.h
 CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj
  D:/Software/LowLevel/DoneLang/ErrorHandler.cpp
  D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
@@ -107,4 +109,5 @@ CMakeFiles/DoneLang.dir/main.cpp.obj
  D:/Software/LowLevel/DoneLang/include/UnaryExpression.h
  D:/Software/LowLevel/DoneLang/include/VarStatement.h
  D:/Software/LowLevel/DoneLang/include/VariableExpression.h
+ D:/Software/LowLevel/DoneLang/include/WhileStatement.h
  D:/Software/LowLevel/DoneLang/main.cpp
