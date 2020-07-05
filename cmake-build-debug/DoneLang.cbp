@@ -106,6 +106,9 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/AssignExpression.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/BinaryExpression.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/BlockStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>

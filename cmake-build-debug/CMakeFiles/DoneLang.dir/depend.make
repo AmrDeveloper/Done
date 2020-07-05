@@ -3,6 +3,7 @@
 
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../CodeGenerator.cpp
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/AssignExpression.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/BinaryExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/BlockStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/CodeGenerator.h
@@ -39,6 +40,7 @@ CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj: ../include/TokenType.h
 
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../DoneParser.cpp
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/AssignExpression.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/BinaryExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/DoneParser.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/EnumStatement.h
@@ -73,6 +75,7 @@ CMakeFiles/DoneLang.dir/Token.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/Token.cpp.obj: ../include/TokenType.h
 
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/AssignExpression.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/BinaryExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/BlockStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/CodeGenerator.h

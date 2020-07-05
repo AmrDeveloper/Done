@@ -16,6 +16,7 @@
 #include "include/LogicalExpression.h"
 #include "include/GetExpression.h"
 #include "include/TernaryExpression.h"
+#include "include/BinaryExpression.h"
 
 #include <iostream>
 
@@ -154,10 +155,10 @@ Statement *DoneParser::parseFuncDeclaration() {
 }
 
 Statement *DoneParser::parseIfStatement() {
-    consume(LEFT_PAREN, "Expect : ( after function name");
+    consume(LEFT_PAREN, "Expect : ( after if keyword");
     Expression *condition = parseExpression();
-    consume(RIGHT_PAREN, "Expect : ) after function name");
-    consume(LEFT_BRACE, "Expect : { after function name");
+    consume(RIGHT_PAREN, "Expect : ) after if condition");
+    consume(LEFT_BRACE, "Expect : { after to start if body");
 
     std::vector<Statement *> body;
     while (!matchType(RIGHT_BRACE)) {
@@ -224,11 +225,51 @@ Expression *DoneParser::parseXorExpression() {
 }
 
 Expression *DoneParser::parseAndExpression() {
-    Expression* expression = parseCallExpression();
+    Expression* expression = parseEqualityExpression();
     if(matchType(AND)) {
         Token opt = getPreviousToken();
-        Expression* right = parseCallExpression();
+        Expression* right = parseEqualityExpression();
         return new LogicalExpression(expression, right, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseEqualityExpression() {
+    Expression* expression = parseComparisonExpression();
+    while (matchType(EQUAL_EQUAL) || matchType(BANG_EQUAL)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseComparisonExpression();
+        expression = new BinaryExpression(right, expression, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseComparisonExpression() {
+    Expression* expression = parseAdditionExpression();
+    while (matchType(GREATER) || matchType(GREATER_EQUAL)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseAdditionExpression();
+        expression = new BinaryExpression(right, expression, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseAdditionExpression() {
+    Expression* expression = parseMultiplicationExpression();
+    while (matchType(PLUS) || matchType(MINUS)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseMultiplicationExpression();
+        expression = new BinaryExpression(right, expression, opt);
+    }
+    return expression;
+}
+
+Expression *DoneParser::parseMultiplicationExpression() {
+    Expression* expression = parseCallExpression();
+    while (matchType(STAR) || matchType(SLASH)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseCallExpression();
+        expression = new BinaryExpression(right, expression, opt);
     }
     return expression;
 }
@@ -278,6 +319,7 @@ Expression *DoneParser::parsePrimaryExpression() {
         consume(RIGHT_PAREN, "Expect ')' after expression.");
         return new GroupExpression(expr);
     }
+    std::cout<<"Invalid Token "<<getCurrentToken().lexeme;
     return nullptr;
 }
 

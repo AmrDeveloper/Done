@@ -22,7 +22,7 @@ void CodeGenerator::visit(EnumStatement* enumStatement) {
             cout<<",";
         }
     }
-    cout<<"}"<<enumStatement->name.lexeme<<";\n"<<endl;
+    cout<<"}"<<enumStatement->name.lexeme<<";"<<endl;
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
@@ -167,4 +167,52 @@ void CodeGenerator::visit(TernaryExpression *ternaryExpression) {
     ternaryExpression->truthExpr->accept(this);
     cout<<":";
     ternaryExpression->falseExpr->accept(this);
+}
+
+void CodeGenerator::visit(BinaryExpression *binaryExpression) {
+    TokenType optType = binaryExpression->opt.tokenType;
+    binaryExpression->left->accept(this);
+    switch (optType) {
+        case EQUAL_EQUAL: {
+            cout<<"==";
+            break;
+        }
+        case BANG_EQUAL: {
+            cout<<"!=";
+            break;
+        }
+        case GREATER: {
+            cout<<">";
+            break;
+        }
+        case GREATER_EQUAL: {
+            cout<<">=";
+            break;
+        }
+        case LESS: {
+            cout<<"<";
+            break;
+        }
+        case LESS_EQUAL: {
+            cout<<"<=";
+            break;
+        }
+        case PLUS: {
+            cout<<"+";
+            break;
+        }
+        case MINUS: {
+            cout<<"-";
+            break;
+        }
+        case STAR: {
+            cout<<"*";
+            break;
+        }
+        case SLASH: {
+            cout<<"/";
+            break;
+        }
+    }
+    binaryExpression->right->accept(this);
 }

@@ -106,6 +106,10 @@ void DoneLexer::scanAndAddToken() {
             addToken(matchAndAdvance('=') ? TokenType::GREATER_EQUAL
                                           : TokenType::GREATER);
             break;
+        case '!':
+            addToken(matchAndAdvance('=') ? TokenType::BANG_EQUAL
+                                          : TokenType::BANG);
+            break;
         case '/':
             if (matchAndAdvance('/')) {
                 while (getCurrentChar() != '\n' && !isAtEnd())

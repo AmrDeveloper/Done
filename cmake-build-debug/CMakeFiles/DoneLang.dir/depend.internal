@@ -4,6 +4,7 @@
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
  D:/Software/LowLevel/DoneLang/CodeGenerator.cpp
  D:/Software/LowLevel/DoneLang/include/AssignExpression.h
+ D:/Software/LowLevel/DoneLang/include/BinaryExpression.h
  D:/Software/LowLevel/DoneLang/include/BlockStatement.h
  D:/Software/LowLevel/DoneLang/include/CallExpression.h
  D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
@@ -40,6 +41,7 @@ CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj
  D:/Software/LowLevel/DoneLang/DoneParser.cpp
  D:/Software/LowLevel/DoneLang/include/AssignExpression.h
+ D:/Software/LowLevel/DoneLang/include/BinaryExpression.h
  D:/Software/LowLevel/DoneLang/include/CallExpression.h
  D:/Software/LowLevel/DoneLang/include/DoneParser.h
  D:/Software/LowLevel/DoneLang/include/EnumStatement.h
@@ -74,6 +76,7 @@ CMakeFiles/DoneLang.dir/Token.cpp.obj
  D:/Software/LowLevel/DoneLang/include/TokenType.h
 CMakeFiles/DoneLang.dir/main.cpp.obj
  D:/Software/LowLevel/DoneLang/include/AssignExpression.h
+ D:/Software/LowLevel/DoneLang/include/BinaryExpression.h
  D:/Software/LowLevel/DoneLang/include/BlockStatement.h
  D:/Software/LowLevel/DoneLang/include/CallExpression.h
  D:/Software/LowLevel/DoneLang/include/CodeGenerator.h

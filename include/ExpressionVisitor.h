@@ -10,6 +10,7 @@ class GroupExpression;
 class LogicalExpression;
 class GetExpression;
 class TernaryExpression;
+class BinaryExpression;
 
 class ExpressionVisitor {
 public:
@@ -21,6 +22,7 @@ public:
     virtual void visit(LogicalExpression * logical) {};
     virtual void visit(GetExpression * get) {};
     virtual void visit(TernaryExpression * ternary) {};
+    virtual void visit(BinaryExpression * ternary) {};
 };
 
 #endif
