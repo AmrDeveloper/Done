@@ -76,10 +76,12 @@ void DoneLexer::scanAndAddToken() {
             addToken(TokenType::DOT);
             break;
         case '-':
-            addToken(TokenType::MINUS);
+            addToken(matchAndAdvance('-') ? TokenType::MINUS_MINUS
+                                          : TokenType::MINUS);
             break;
         case '+':
-            addToken(TokenType::PLUS);
+            addToken(matchAndAdvance('+') ? TokenType::PLUS_PLUS
+                                          : TokenType::PLUS);
             break;
         case ';':
             addToken(TokenType::SEMICOLON);

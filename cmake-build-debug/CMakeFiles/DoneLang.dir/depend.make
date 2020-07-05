@@ -26,6 +26,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/StructStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/TernaryExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/TokenType.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/VariableExpression.h
 
@@ -61,6 +62,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/StructStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/TernaryExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/TokenType.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/VariableExpression.h
 
@@ -101,6 +103,7 @@ CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/StructStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/TernaryExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Token.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/TokenType.h
+CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/UnaryExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/VarStatement.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/VariableExpression.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../main.cpp

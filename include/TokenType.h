@@ -26,6 +26,9 @@ enum TokenType {
     //Math Operations
     MINUS, PLUS, SLASH, STAR,
 
+    //Unary Operations
+    PLUS_PLUS, MINUS_MINUS,
+
     //Values
     TRUE, FALSE, NIL, VOID,
 

@@ -156,9 +156,7 @@ void CodeGenerator::visit(LogicalExpression *groupExpression) {
 
 void CodeGenerator::visit(GetExpression *getExpression) {
     getExpression->object->accept(this);
-
     cout<<"."<<getExpression->name.lexeme;
-
 }
 
 void CodeGenerator::visit(TernaryExpression *ternaryExpression) {
@@ -215,4 +213,27 @@ void CodeGenerator::visit(BinaryExpression *binaryExpression) {
         }
     }
     binaryExpression->right->accept(this);
+}
+
+void CodeGenerator::visit(UnaryExpression *unaryExpression) {
+    TokenType optType = unaryExpression->opt.tokenType;
+    switch(optType) {
+        case BANG : {
+            cout<<"!";
+            break;
+        }
+        case MINUS : {
+            cout<<"-";
+            break;
+        }
+        case PLUS_PLUS : {
+            cout<<"++";
+            break;
+        }
+        case MINUS_MINUS: {
+            cout<<"--";
+            break;
+        }
+    }
+    unaryExpression->expression->accept(this);
 }

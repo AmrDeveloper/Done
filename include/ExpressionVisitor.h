@@ -11,6 +11,7 @@ class LogicalExpression;
 class GetExpression;
 class TernaryExpression;
 class BinaryExpression;
+class UnaryExpression;
 
 class ExpressionVisitor {
 public:
@@ -23,6 +24,7 @@ public:
     virtual void visit(GetExpression * get) {};
     virtual void visit(TernaryExpression * ternary) {};
     virtual void visit(BinaryExpression * ternary) {};
+    virtual void visit(UnaryExpression * unary) {};
 };
 
 #endif

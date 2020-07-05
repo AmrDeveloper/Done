@@ -17,6 +17,7 @@
 #include "include/GetExpression.h"
 #include "include/TernaryExpression.h"
 #include "include/BinaryExpression.h"
+#include "include/UnaryExpression.h"
 
 #include <iostream>
 
@@ -265,13 +266,25 @@ Expression *DoneParser::parseAdditionExpression() {
 }
 
 Expression *DoneParser::parseMultiplicationExpression() {
-    Expression* expression = parseCallExpression();
+    Expression* expression = parseUnaryExpression();
     while (matchType(STAR) || matchType(SLASH)) {
         Token opt = getPreviousToken();
-        Expression* right = parseCallExpression();
+        Expression* right = parseUnaryExpression();
         expression = new BinaryExpression(right, expression, opt);
     }
     return expression;
+}
+
+Expression *DoneParser::parseUnaryExpression() {
+    if (matchType(BANG)
+    || matchType(MINUS)
+    || matchType(PLUS_PLUS)
+    || matchType(MINUS_MINUS)) {
+        Token opt = getPreviousToken();
+        Expression* right = parseUnaryExpression();
+        return new UnaryExpression(opt, right);
+    }
+    return parseCallExpression();
 }
 
 Expression *DoneParser::parseCallExpression() {
@@ -378,4 +391,3 @@ void DoneParser::reportParserError(const std::string& message) {
 bool DoneParser::isAtEnd() {
     return getCurrentToken().tokenType == END_OF_FILE;
 }
-

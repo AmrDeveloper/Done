@@ -53,6 +53,7 @@ private:
     Expression* parseComparisonExpression();
     Expression* parseAdditionExpression();
     Expression* parseMultiplicationExpression();
+    Expression* parseUnaryExpression();
 
     bool matchType(TokenType types);
     bool checkType(TokenType type);
