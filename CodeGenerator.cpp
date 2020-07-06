@@ -20,6 +20,7 @@ void CodeGenerator::generateCode(const vector<Statement *> &statements,
 }
 
 void CodeGenerator::visit(const std::set<std::string>& libs) {
+    //codeWriter.appendLine("#include\"../lib/basic.h\"");
     for(auto library : libs) {
         codeWriter.appendLine("#include<" + library + ">");
         //TODO : need to support 3D party Libraries and Done Libraries
@@ -55,9 +56,7 @@ void CodeGenerator::visit(StructStatement *structStatement) {
     codeWriter.appendLine("typedef struct{");
     for(Parameter field : structStatement->fields) {
         codeWriter.append(field.type.lexeme);
-        if(field.isPointer) {
-            codeWriter.append("*");
-        }
+        generateMemoryType(field.memoryType);
         codeWriter.appendLine(" " + field.name.lexeme + ";");
     }
     codeWriter.appendLine("}" + structStatement->name.lexeme + ";");
@@ -77,11 +76,8 @@ void CodeGenerator::visit(FunctionStatement *functionStatement) {
     int paramCounter = 0;
     for(auto param : functionStatement->parameters) {
         paramCounter++;
-        if(param.isPointer) {
-            codeWriter.append(param.type.lexeme + " *" + param.name.lexeme);
-        }else {
-            codeWriter.append(param.type.lexeme + " " + param.name.lexeme);
-        }
+        MemoryType memoryType = param.memoryType;
+        generateMemoryType(memoryType);
         if(paramSize != paramCounter) {
             codeWriter.append(", ");
         }
@@ -170,6 +166,8 @@ void CodeGenerator::visit(CallExpression *callExpression) {
 }
 
 void CodeGenerator::visit(VariableExpression *varExpression) {
+    MemoryType memoryType = varExpression->memoryType;
+    generateMemoryType(memoryType);
     codeWriter.append(varExpression->name.lexeme);
 }
 

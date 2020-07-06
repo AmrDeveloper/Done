@@ -10,9 +10,9 @@ class Parameter {
 public:
     Token name;
     Token type;
-    bool isPointer;
-    Parameter(Token n, Token t, bool pointer)
-             : name(std::move(n)), type(std::move(t)), isPointer(pointer){}
+    MemoryType memoryType;
+    Parameter(Token n, Token t, MemoryType pointer)
+             : name(std::move(n)), type(std::move(t)), memoryType(pointer){}
 };
 
 #endif

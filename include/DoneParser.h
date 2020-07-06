@@ -63,7 +63,10 @@ private:
     void  pointPreviousToken();
     Token getNextToken();
     Token getPreviousToken();
+    Token getNextTokenBy(int offset);
+    Token getPreviousTokenBy(int offset);
     MemoryType parseMemoryType();
+    MemoryType parseMemoryType(Token token);
     Token consume(TokenType type, const char *message);
     void reportParserError(const std::string& message);
     bool isAtEnd();

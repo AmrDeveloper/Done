@@ -123,6 +123,5 @@ CMakeFiles/DoneLang.dir/Token.cpp.obj: ../include/TokenType.h
 
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/DoneCompiler.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/ErrorHandler.h
-CMakeFiles/DoneLang.dir/main.cpp.obj: ../include/Preprocessor.h
 CMakeFiles/DoneLang.dir/main.cpp.obj: ../main.cpp
 

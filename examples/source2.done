@@ -1,5 +1,8 @@
-import "source2.done"
+include "stdio.h"
 
-fun bolo() : void {
-
+fun main () : int {
+    var x : int;
+    scanf("%d", &x);
+    printf("%d\n", x);
+    return 0;
 }

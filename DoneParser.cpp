@@ -75,6 +75,7 @@ Statement *DoneParser::parseVarDeclaration() {
     }
     Expression *value = nullptr;
     if (matchType(EQUAL)) {
+
         value = parseExpression();
         isInitialized = true;
         consume(SEMICOLON, "Expect ; after init type");
@@ -115,10 +116,10 @@ Statement *DoneParser::parseStructDeclaration() {
     while (matchType(VAR)) {
         Token varName = consume(IDENTIFIER, "Expect struct var name");
         consume(COLON, "Expect struct name");
-        bool isPointer = false;
+        MemoryType memoryType = NONE;
         Token varType = consume(IDENTIFIER, "Expect struct var type");
         consume(SEMICOLON, "Expect ; after var declaration");
-        fields.push_back(Parameter(varName, varType, isPointer));
+        fields.push_back(Parameter(varName, varType, memoryType));
     }
     consume(RIGHT_BRACE, "Expect : } after struct name");
     return new StructStatement(name, fields);
@@ -138,9 +139,9 @@ Statement *DoneParser::parseFuncDeclaration() {
         pointPreviousToken();
         Token paramName = consume(IDENTIFIER, "Expect function name");
         consume(COLON, "Expect : after param name");
-        bool isPointer = matchType(STAR);
+        MemoryType memoryType = parseMemoryType();
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName, isPointer));
+        params.push_back(Parameter(paramName, typeName, memoryType));
     }
 
     while (matchType(COMMA)) {
@@ -148,9 +149,9 @@ Statement *DoneParser::parseFuncDeclaration() {
         consume(COMMA, "Expect , after next param name");
         Token paramName = consume(IDENTIFIER, "Expect function name");
         consume(COLON, "Expect : after param name");
-        bool isPointer = matchType(STAR);
+        MemoryType memoryType = parseMemoryType();
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName, isPointer));
+        params.push_back(Parameter(paramName, typeName, memoryType));
     }
 
     consume(RIGHT_PAREN, "Expect : ) after function name");
@@ -375,14 +376,19 @@ Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(CONTINUE)) return new LiteralExpression("continue");
     if (matchType(BREAK)) return new LiteralExpression("break");
     if (matchType(IDENTIFIER)) {
+        MemoryType memoryType = NONE;
+        if(currentTokenIndex - 2 >= 0) {
+            memoryType = parseMemoryType(tokens[currentTokenIndex - 2]);
+        }
         if(getCurrentToken().tokenType == ARRAY_LEFT_BRACKET) {
-            auto* variable = new VariableExpression(getPreviousToken());
+            auto* variable = new VariableExpression(getPreviousToken(), memoryType);
             consume(ARRAY_LEFT_BRACKET, "Expect [ after array position");
             Expression* index = parseExpression();
             consume(ARRAY_RIGHT_BRACKET, "Expect ] after array position");
             return new ArrayExpression(variable, index);
         }
-        return new VariableExpression(getPreviousToken());
+
+        return new VariableExpression(getPreviousToken(), memoryType);
     }
     if (matchType(LEFT_PAREN)) {
         Expression* expr = parseExpression();
@@ -402,6 +408,13 @@ MemoryType DoneParser::parseMemoryType() {
     else if (matchType(STAR_STAR)) type = DOUBLE_POINTER;
     else if (matchType(ADDRESS)) type = ADDRESS_POINTER;
     return type;
+}
+
+MemoryType DoneParser::parseMemoryType(Token token) {
+    if (token.tokenType == STAR) return SINGLE_POINTER;
+    if (token.tokenType == STAR_STAR) return DOUBLE_POINTER;
+    if (token.tokenType == ADDRESS) return ADDRESS_POINTER;
+    return NONE;
 }
 
 bool DoneParser::matchType(TokenType types) {
@@ -458,4 +471,12 @@ void DoneParser::reportParserError(const std::string& message) {
 
 bool DoneParser::isAtEnd() {
     return getCurrentToken().tokenType == END_OF_FILE;
+}
+
+Token DoneParser::getNextTokenBy(int offset) {
+    return tokens[currentTokenIndex + offset];
+}
+
+Token DoneParser::getPreviousTokenBy(int offset) {
+    return tokens[currentTokenIndex - offset];
 }

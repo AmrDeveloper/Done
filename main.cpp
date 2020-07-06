@@ -1,7 +1,7 @@
 #include "include/DoneCompiler.h"
 
 int main() {
-    std::string mainFile = "Enume.done";
+    std::string mainFile = "Source2.done";
     std::string projectPath = "../examples/";
 
     DoneCompiler doneCompiler;

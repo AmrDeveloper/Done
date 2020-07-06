@@ -10,7 +10,8 @@
 class VariableExpression : public Expression{
 public:
     Token name;
-    VariableExpression(Token name) : name(std::move(name)) {}
+    MemoryType memoryType;
+    VariableExpression(Token name, MemoryType memoryType) : name(std::move(name)), memoryType(memoryType) {}
     void accept(ExpressionVisitor *visitor) {
         visitor->visit(this);
     }
