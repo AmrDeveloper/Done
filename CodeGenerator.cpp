@@ -20,11 +20,16 @@ void CodeGenerator::generateCode(const vector<Statement *> &statements,
 }
 
 void CodeGenerator::visit(const std::set<std::string>& libs) {
-    //codeWriter.appendLine("#include\"../lib/basic.h\"");
     for(auto library : libs) {
         codeWriter.appendLine("#include<" + library + ">");
         //TODO : need to support 3D party Libraries and Done Libraries
     }
+
+    if(libs.find("stdbool") == libs.end()) {
+        codeWriter.appendLine("#include<stdbool>");
+    }
+
+    codeWriter.appendLine("#define string char*");
 }
 
 void CodeGenerator::visit(EnumStatement* enumStatement) {
