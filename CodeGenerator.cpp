@@ -4,6 +4,7 @@ using namespace std;
 
 CodeGenerator::CodeGenerator(ErrorHandler &errorHandler)
         : errorHandler(errorHandler){
+
 }
 
 void CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
@@ -12,52 +13,54 @@ void CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
     }
 }
 
-void CodeGenerator::generateCode(const vector<Statement *> &statements, std::set<std::string> libs) {
-    visit(std::move(libs));
+void CodeGenerator::generateCode(const vector<Statement *> &statements,
+                                 const std::set<std::string>& libs) {
+    visit(libs);
     generateCode(statements);
 }
 
-void CodeGenerator::visit(std::set<std::string> libs) {
-    for(auto lib : libs) {
-        cout<<lib<<endl;
+void CodeGenerator::visit(const std::set<std::string>& libs) {
+    for(auto library : libs) {
+        codeWriter.appendLine("#include<" + library + ">");
+        //TODO : need to support 3D party Libraries and Done Libraries
     }
 }
 
 void CodeGenerator::visit(EnumStatement* enumStatement) {
-    cout<<"typedef enum {";
+    codeWriter.append("typedef enum {");
     int fieldsSize = enumStatement->fields.size();
     for(int i = 0 ; i < fieldsSize ; i++) {
         Token token = enumStatement->fields[i];
-        cout<<token.lexeme;
+        codeWriter.append(token.lexeme);
         if(i != fieldsSize - 1) {
-            cout<<",";
+            codeWriter.append(",");
         }
     }
-    cout<<"}"<<enumStatement->name.lexeme<<";"<<endl;
+    codeWriter.appendLine("}" + enumStatement->name.lexeme + ";");
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
-    cout<<varStatement->type.lexeme<<" ";
+    codeWriter.append(varStatement->type.lexeme + " ");
     MemoryType type = varStatement->memoryType;
     generateMemoryType(type);
-    cout<<varStatement->name.lexeme;
+    codeWriter.append(varStatement->name.lexeme);
     if(varStatement->isInitialized) {
-        cout<<"=";
+        codeWriter.append("=");
         varStatement->value->accept(this);
     }
-    cout<<";\n";
+    codeWriter.appendLine(";");
 }
 
 void CodeGenerator::visit(StructStatement *structStatement) {
-    cout<<"typedef struct{\n";
+    codeWriter.appendLine("typedef struct{");
     for(Parameter field : structStatement->fields) {
-        cout<<field.type.lexeme;
+        codeWriter.append(field.type.lexeme);
         if(field.isPointer) {
-            cout << "*";
+            codeWriter.append("*");
         }
-        cout<<" "<<field.name.lexeme<<";\n";
+        codeWriter.appendLine(" " + field.name.lexeme + ";");
     }
-    cout<<"}"<<structStatement->name.lexeme<<";\n";
+    codeWriter.appendLine("}" + structStatement->name.lexeme + ";");
     //TODO: Generate Struct new function
     //TODO: Generate Struct Free Function
 }
@@ -69,75 +72,76 @@ void CodeGenerator::visit(BlockStatement *blockStatement) {
 }
 
 void CodeGenerator::visit(FunctionStatement *functionStatement) {
-    cout<<functionStatement->returnType.lexeme<<" " <<functionStatement->name.lexeme<<" (";
+    codeWriter.append(functionStatement->returnType.lexeme + " "  + functionStatement->name.lexeme + " (");
     int paramSize = functionStatement->parameters.size();
     int paramCounter = 0;
     for(auto param : functionStatement->parameters) {
         paramCounter++;
         if(param.isPointer) {
-            cout<<param.type.lexeme<<" *"<<param.name.lexeme;
+            codeWriter.append(param.type.lexeme + " *" + param.name.lexeme);
         }else {
-            cout<<param.type.lexeme<<" "<<param.name.lexeme;
+            codeWriter.append(param.type.lexeme + " " + param.name.lexeme);
         }
         if(paramSize != paramCounter) {
-            cout<<", ";
+            codeWriter.append(", ");
         }
     }
-    cout<<") {\n";
+
+    codeWriter.appendLine(") {");
 
     for(auto statement : functionStatement->body) {
         statement->accept(this);
     }
 
     if(functionStatement->returnType.lexeme != "void") {
-        cout<<"return ";
+        codeWriter.append("return ");
         functionStatement->returnValue->accept(this);
-        cout<<";\n";
+        codeWriter.appendLine(";");
     }
-    cout<<"}\n";
+    codeWriter.appendLine("}");
 }
 
 void CodeGenerator::visit(IfStatement *ifStatement) {
-    cout<<"if(";
+    codeWriter.append("if(");
     ifStatement->condition->accept(this);
-    cout<<"){\n";
+    codeWriter.appendLine("){");
     for(auto statement : ifStatement->body) {
         statement->accept(this);
     }
-    cout<<"}\n";
+    codeWriter.appendLine("}");
 }
 
 void CodeGenerator::visit(WhileStatement *whileStatement) {
-    cout<<"while(";
+    codeWriter.append("while(");
     whileStatement->condition->accept(this);
-    cout<<"){\n";
+    codeWriter.appendLine("){");
     for(auto statement : whileStatement->body) {
         statement->accept(this);
     }
-    cout<<"}\n";
+    codeWriter.appendLine("}");
 }
 
 void CodeGenerator::visit(ArrayStatement *arrayStatement) {
-    cout<<arrayStatement->type.lexeme<<" ";
+    codeWriter.append(arrayStatement->type.lexeme + " ");
     MemoryType type = arrayStatement->memoryType;
     generateMemoryType(type);
-    cout<<arrayStatement->name.lexeme;
-    cout<<"[";
+    codeWriter.append(arrayStatement->name.lexeme);
+    codeWriter.append("[");
     arrayStatement->size->accept(this);
-    cout<<"]";
+    codeWriter.append("]");
     if(arrayStatement->isInitialized) {
-        cout<<"=";
+        codeWriter.append("=");
         arrayStatement->value->accept(this);
     }
-    cout<<";\n";
+    codeWriter.appendLine(";");
 }
 
 void CodeGenerator::visit(AssignExpression *assign) {
     generateMemoryType(assign->type);
     assign->name->accept(this);
-    cout<<"=";
+    codeWriter.append("=");
     assign->value->accept(this);
-    cout<<";\n";
+    codeWriter.appendLine(";");
 }
 
 void CodeGenerator::visit(ExpressionStatement *expressionStatement) {
@@ -145,32 +149,32 @@ void CodeGenerator::visit(ExpressionStatement *expressionStatement) {
 }
 
 void CodeGenerator::visit(LiteralExpression *literal) {
-    cout<<literal->value;
+    codeWriter.append(literal->value);
 }
 
 void CodeGenerator::visit(CallExpression *callExpression) {
     callExpression->callee->accept(this);
-    cout<<"(";
+    codeWriter.append("(");
     int argsSize = callExpression->arguments.size();
     int argsCounter = 1;
     for(auto arg : callExpression->arguments) {
         arg->accept(this);
         if(argsCounter != argsSize) {
-            cout<<",";
+            codeWriter.append(",");
         }
         argsCounter++;
     }
-    cout<<");\n";
+    codeWriter.appendLine(");");
 }
 
 void CodeGenerator::visit(VariableExpression *varExpression) {
-    cout<<varExpression->name.lexeme;
+    codeWriter.append(varExpression->name.lexeme);
 }
 
 void CodeGenerator::visit(GroupExpression *groupExpression) {
-    cout<<"(";
+    codeWriter.append("(");
     groupExpression->expression->accept(this);
-    cout<<")";
+    codeWriter.append(")");
 }
 
 void CodeGenerator::visit(LogicalExpression *groupExpression) {
@@ -178,15 +182,15 @@ void CodeGenerator::visit(LogicalExpression *groupExpression) {
     Token opt = groupExpression->opt;
     switch(opt.tokenType) {
         case OR : {
-            cout<<" || ";
+            codeWriter.append("||");
             break;
         }
         case XOR: {
-            cout<<" ^ ";
+            codeWriter.append("^");
             break;
         }
         case AND : {
-            cout<<" && ";
+            codeWriter.append("&&");
             break;
         }
     }
@@ -195,14 +199,14 @@ void CodeGenerator::visit(LogicalExpression *groupExpression) {
 
 void CodeGenerator::visit(GetExpression *getExpression) {
     getExpression->object->accept(this);
-    cout<<"."<<getExpression->name.lexeme;
+    codeWriter.append("." + getExpression->name.lexeme);
 }
 
 void CodeGenerator::visit(TernaryExpression *ternaryExpression) {
     ternaryExpression->condition->accept(this);
-    cout<<"?";
+    codeWriter.append("?");
     ternaryExpression->truthExpr->accept(this);
-    cout<<":";
+    codeWriter.append(":");
     ternaryExpression->falseExpr->accept(this);
 }
 
@@ -211,43 +215,43 @@ void CodeGenerator::visit(BinaryExpression *binaryExpression) {
     binaryExpression->left->accept(this);
     switch (optType) {
         case EQUAL_EQUAL: {
-            cout<<"==";
+            codeWriter.append("==");
             break;
         }
         case BANG_EQUAL: {
-            cout<<"!=";
+            codeWriter.append("!=");
             break;
         }
         case GREATER: {
-            cout<<">";
+            codeWriter.append(">");
             break;
         }
         case GREATER_EQUAL: {
-            cout<<">=";
+            codeWriter.append(">=");
             break;
         }
         case LESS: {
-            cout<<"<";
+            codeWriter.append("<");
             break;
         }
         case LESS_EQUAL: {
-            cout<<"<=";
+            codeWriter.append("<=");
             break;
         }
         case PLUS: {
-            cout<<"+";
+            codeWriter.append("+");
             break;
         }
         case MINUS: {
-            cout<<"-";
+            codeWriter.append("-");
             break;
         }
         case STAR: {
-            cout<<"*";
+            codeWriter.append("*");
             break;
         }
         case SLASH: {
-            cout<<"/";
+            codeWriter.append("/");
             break;
         }
     }
@@ -258,19 +262,19 @@ void CodeGenerator::visit(UnaryExpression *unaryExpression) {
     TokenType optType = unaryExpression->opt.tokenType;
     switch(optType) {
         case BANG : {
-            cout<<"!";
+            codeWriter.append("!");
             break;
         }
         case MINUS : {
-            cout<<"-";
+            codeWriter.append("-");
             break;
         }
         case PLUS_PLUS : {
-            cout<<"++";
+            codeWriter.append("++");
             break;
         }
         case MINUS_MINUS: {
-            cout<<"--";
+            codeWriter.append("--");
             break;
         }
     }
@@ -279,34 +283,33 @@ void CodeGenerator::visit(UnaryExpression *unaryExpression) {
 
 void CodeGenerator::visit(ArrayExpression *arrayExpression) {
     arrayExpression->variable->accept(this);
-    cout<<"[";
+    codeWriter.append("[");
     arrayExpression->index->accept(this);
-    cout<<"]";
+    codeWriter.append("]");
 }
 
-
 void CodeGenerator::visit(ArrayValuesExpression *arrayExpression) {
-    cout<<"{";
+    codeWriter.append("{");
     int valuesSize = arrayExpression->values.size();
     int valuesCounter = 1;
     for(auto val : arrayExpression->values) {
         val->accept(this);
         if(valuesCounter != valuesSize) {
-            cout<<",";
+            codeWriter.append(",");
         }
         valuesCounter++;
     }
-    cout<<"}";
+    codeWriter.append("}");
 }
 
 void CodeGenerator::generateMemoryType(MemoryType type) {
     if(type == SINGLE_POINTER) {
-        cout<<"*";
+        codeWriter.append("*");
     }
     else if(type == DOUBLE_POINTER) {
-        cout<<"**";
+        codeWriter.append("**");
     }
     else if(type == ADDRESS_POINTER) {
-        cout<<"&";
+        codeWriter.append("&");
     }
 }

@@ -168,7 +168,7 @@ void DoneLexer::scanPreprocessorLabel() {
     const size_t identifierLength = current - start;
     const std::string label  = source.substr(start, identifierLength);
 
-    current += identifierLength;
+    current += 1;
     start += identifierLength;
 
     if(label == "@LOAD") {
@@ -199,6 +199,8 @@ void DoneLexer::scanPreprocessorLabel() {
             //TODO : errorStar, errorEnd to improve ErrorHandler
         }
     }
+
+
 }
 
 void DoneLexer::scanIdentifier() {

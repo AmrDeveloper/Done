@@ -2,9 +2,10 @@
 #include "include/Preprocessor.h"
 #include <fstream>
 #include <algorithm>
+#include <iostream>
 
 Preprocessor::Preprocessor(std::string &mainFile, std::string & projectPath) {
-    sourcePath = std::move(projectPath);
+    sourcePath = projectPath;
     sourceDepthStack.push(sourcePath + mainFile);
 }
 
@@ -63,6 +64,8 @@ void Preprocessor::scanImportKeyword(std::string &library) {
 
 void Preprocessor::scanIncludeKeyword(std::string &library) {
     library.replace(0, 7 , "");
+    library.erase(remove(library.begin(), library.end(), '\"' ),library.end());
+    library.erase(remove(library.begin(), library.end(), ' ' ),library.end());
     standardLibraries.insert(library);
     generateIgnoreLabel();
 }
