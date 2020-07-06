@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj"
   "CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj"
+  "CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj"
   "CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj"
   "CMakeFiles/DoneLang.dir/DoneParser.cpp.obj"
   "CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj"

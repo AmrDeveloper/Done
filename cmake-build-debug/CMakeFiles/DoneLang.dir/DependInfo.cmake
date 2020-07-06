@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/Software/LowLevel/DoneLang/CodeGenerator.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj"
   "D:/Software/LowLevel/DoneLang/CodeWriter.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj"
+  "D:/Software/LowLevel/DoneLang/DoneCompiler.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj"
   "D:/Software/LowLevel/DoneLang/DoneLexer.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj"
   "D:/Software/LowLevel/DoneLang/DoneParser.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/DoneParser.cpp.obj"
   "D:/Software/LowLevel/DoneLang/ErrorHandler.cpp" "D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir/ErrorHandler.cpp.obj"

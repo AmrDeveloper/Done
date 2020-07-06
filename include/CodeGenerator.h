@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <memory>
+#include <set>
 
 #include "Statement.h"
 #include "EnumStatement.h"
@@ -37,9 +38,15 @@
 
 class CodeGenerator : public StatementVisitor, ExpressionVisitor {
 public:
+    std::set<std::string> standardLibraries;
+
     explicit CodeGenerator(ErrorHandler &errorHandler);
 
     void generateCode(const std::vector<Statement *> &statements);
+
+    void generateCode(const std::vector<Statement *> &statements, std::set<std::string> libs);
+
+    void visit(std::set<std::string> libs);
 
     void visit(EnumStatement *enumStatement) override;
 

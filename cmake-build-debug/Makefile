@@ -176,6 +176,33 @@ CodeWriter.cpp.s:
 	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/CodeWriter.cpp.s
 .PHONY : CodeWriter.cpp.s
 
+DoneCompiler.obj: DoneCompiler.cpp.obj
+
+.PHONY : DoneCompiler.obj
+
+# target to build an object file
+DoneCompiler.cpp.obj:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj
+.PHONY : DoneCompiler.cpp.obj
+
+DoneCompiler.i: DoneCompiler.cpp.i
+
+.PHONY : DoneCompiler.i
+
+# target to preprocess a source file
+DoneCompiler.cpp.i:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/DoneCompiler.cpp.i
+.PHONY : DoneCompiler.cpp.i
+
+DoneCompiler.s: DoneCompiler.cpp.s
+
+.PHONY : DoneCompiler.s
+
+# target to generate assembly for a file
+DoneCompiler.cpp.s:
+	$(MAKE) -f CMakeFiles\DoneLang.dir\build.make CMakeFiles/DoneLang.dir/DoneCompiler.cpp.s
+.PHONY : DoneCompiler.cpp.s
+
 DoneLexer.obj: DoneLexer.cpp.obj
 
 .PHONY : DoneLexer.obj
@@ -353,6 +380,9 @@ help:
 	@echo ... CodeWriter.obj
 	@echo ... CodeWriter.i
 	@echo ... CodeWriter.s
+	@echo ... DoneCompiler.obj
+	@echo ... DoneCompiler.i
+	@echo ... DoneCompiler.s
 	@echo ... DoneLexer.obj
 	@echo ... DoneLexer.i
 	@echo ... DoneLexer.s

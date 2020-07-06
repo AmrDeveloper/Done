@@ -12,6 +12,17 @@ void CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
     }
 }
 
+void CodeGenerator::generateCode(const vector<Statement *> &statements, std::set<std::string> libs) {
+    visit(std::move(libs));
+    generateCode(statements);
+}
+
+void CodeGenerator::visit(std::set<std::string> libs) {
+    for(auto lib : libs) {
+        cout<<lib<<endl;
+    }
+}
+
 void CodeGenerator::visit(EnumStatement* enumStatement) {
     cout<<"typedef enum {";
     int fieldsSize = enumStatement->fields.size();
@@ -299,8 +310,3 @@ void CodeGenerator::generateMemoryType(MemoryType type) {
         cout<<"&";
     }
 }
-
-
-
-
-

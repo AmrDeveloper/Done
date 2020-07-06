@@ -20,7 +20,7 @@ enum TokenType {
     OR, AND, XOR,
 
     //Keywords
-    FUN, VAR, RETURN, IDENTIFIER, IMPORT,
+    FUN, VAR, RETURN, IDENTIFIER,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,
     TERNARY, ELVIS, CONTINUE, BREAK,
 

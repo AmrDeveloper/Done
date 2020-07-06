@@ -37,6 +37,43 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
 CMakeFiles/DoneLang.dir/CodeWriter.cpp.obj
  D:/Software/LowLevel/DoneLang/CodeWriter.cpp
  D:/Software/LowLevel/DoneLang/include/CodeWriter.h
+CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj
+ D:/Software/LowLevel/DoneLang/DoneCompiler.cpp
+ D:/Software/LowLevel/DoneLang/include/ArrayExpression.h
+ D:/Software/LowLevel/DoneLang/include/ArrayStatement.h
+ D:/Software/LowLevel/DoneLang/include/ArrayValuesExpression.h
+ D:/Software/LowLevel/DoneLang/include/AssignExpression.h
+ D:/Software/LowLevel/DoneLang/include/BinaryExpression.h
+ D:/Software/LowLevel/DoneLang/include/BlockStatement.h
+ D:/Software/LowLevel/DoneLang/include/CallExpression.h
+ D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
+ D:/Software/LowLevel/DoneLang/include/CodeWriter.h
+ D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
+ D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+ D:/Software/LowLevel/DoneLang/include/DoneParser.h
+ D:/Software/LowLevel/DoneLang/include/EnumStatement.h
+ D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+ D:/Software/LowLevel/DoneLang/include/Expression.h
+ D:/Software/LowLevel/DoneLang/include/ExpressionStatement.h
+ D:/Software/LowLevel/DoneLang/include/ExpressionVisitor.h
+ D:/Software/LowLevel/DoneLang/include/FunctionStatement.h
+ D:/Software/LowLevel/DoneLang/include/GetExpression.h
+ D:/Software/LowLevel/DoneLang/include/GroupExpression.h
+ D:/Software/LowLevel/DoneLang/include/IfStatement.h
+ D:/Software/LowLevel/DoneLang/include/LiteralExpression.h
+ D:/Software/LowLevel/DoneLang/include/LogicalExpression.h
+ D:/Software/LowLevel/DoneLang/include/Parameter.h
+ D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+ D:/Software/LowLevel/DoneLang/include/Statement.h
+ D:/Software/LowLevel/DoneLang/include/StatementVisitor.h
+ D:/Software/LowLevel/DoneLang/include/StructStatement.h
+ D:/Software/LowLevel/DoneLang/include/TernaryExpression.h
+ D:/Software/LowLevel/DoneLang/include/Token.h
+ D:/Software/LowLevel/DoneLang/include/TokenType.h
+ D:/Software/LowLevel/DoneLang/include/UnaryExpression.h
+ D:/Software/LowLevel/DoneLang/include/VarStatement.h
+ D:/Software/LowLevel/DoneLang/include/VariableExpression.h
+ D:/Software/LowLevel/DoneLang/include/WhileStatement.h
 CMakeFiles/DoneLang.dir/DoneLexer.cpp.obj
  D:/Software/LowLevel/DoneLang/DoneLexer.cpp
  D:/Software/LowLevel/DoneLang/include/DoneLexer.h
@@ -85,38 +122,6 @@ CMakeFiles/DoneLang.dir/Token.cpp.obj
  D:/Software/LowLevel/DoneLang/include/Token.h
  D:/Software/LowLevel/DoneLang/include/TokenType.h
 CMakeFiles/DoneLang.dir/main.cpp.obj
- D:/Software/LowLevel/DoneLang/include/ArrayExpression.h
- D:/Software/LowLevel/DoneLang/include/ArrayStatement.h
- D:/Software/LowLevel/DoneLang/include/ArrayValuesExpression.h
- D:/Software/LowLevel/DoneLang/include/AssignExpression.h
- D:/Software/LowLevel/DoneLang/include/BinaryExpression.h
- D:/Software/LowLevel/DoneLang/include/BlockStatement.h
- D:/Software/LowLevel/DoneLang/include/CallExpression.h
- D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
- D:/Software/LowLevel/DoneLang/include/CodeWriter.h
- D:/Software/LowLevel/DoneLang/include/DoneLexer.h
- D:/Software/LowLevel/DoneLang/include/DoneParser.h
- D:/Software/LowLevel/DoneLang/include/EnumStatement.h
+ D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
  D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
- D:/Software/LowLevel/DoneLang/include/Expression.h
- D:/Software/LowLevel/DoneLang/include/ExpressionStatement.h
- D:/Software/LowLevel/DoneLang/include/ExpressionVisitor.h
- D:/Software/LowLevel/DoneLang/include/FunctionStatement.h
- D:/Software/LowLevel/DoneLang/include/GetExpression.h
- D:/Software/LowLevel/DoneLang/include/GroupExpression.h
- D:/Software/LowLevel/DoneLang/include/IfStatement.h
- D:/Software/LowLevel/DoneLang/include/LiteralExpression.h
- D:/Software/LowLevel/DoneLang/include/LogicalExpression.h
- D:/Software/LowLevel/DoneLang/include/Parameter.h
- D:/Software/LowLevel/DoneLang/include/Preprocessor.h
- D:/Software/LowLevel/DoneLang/include/Statement.h
- D:/Software/LowLevel/DoneLang/include/StatementVisitor.h
- D:/Software/LowLevel/DoneLang/include/StructStatement.h
- D:/Software/LowLevel/DoneLang/include/TernaryExpression.h
- D:/Software/LowLevel/DoneLang/include/Token.h
- D:/Software/LowLevel/DoneLang/include/TokenType.h
- D:/Software/LowLevel/DoneLang/include/UnaryExpression.h
- D:/Software/LowLevel/DoneLang/include/VarStatement.h
- D:/Software/LowLevel/DoneLang/include/VariableExpression.h
- D:/Software/LowLevel/DoneLang/include/WhileStatement.h
  D:/Software/LowLevel/DoneLang/main.cpp

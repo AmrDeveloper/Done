@@ -13,7 +13,7 @@ void Preprocessor::runProcessor() {
         currentFile = popNewSourceFile();
 
         bool isUnique = insertUniqueFile(currentFile);
-        if(isUnique == FALSE) continue;
+        if(isUnique == FALSE_VAL) continue;
         parserFileDependency(currentFile);
     }
 }
@@ -52,7 +52,7 @@ void Preprocessor::scanImportKeyword(std::string &library) {
 
     bool isVisited = insertUniqueFile(libraryPath);
     // Make sure one file can't import other file twice
-    if(isVisited == FALSE) return;
+    if(isVisited == FALSE_VAL) return;
 
     sourceDepthStack.push(libraryPath);
     currentFile = libraryPath;

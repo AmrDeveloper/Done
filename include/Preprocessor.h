@@ -8,8 +8,8 @@
 #define IMPORT "import"
 #define INCLUDE "include"
 
-#define TRUE 1
-#define FALSE 0
+#define TRUE_VAL 1
+#define FALSE_VAL 0
 
 #define LOAD "@LOAD "
 #define END "@END"

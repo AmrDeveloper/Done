@@ -6,9 +6,25 @@
 
 #IncludeRegexTransform: 
 
-D:/Software/LowLevel/DoneLang/CodeGenerator.cpp
+D:/Software/LowLevel/DoneLang/DoneCompiler.cpp
+include/DoneCompiler.h
+D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
+include/Preprocessor.h
+D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+include/DoneLexer.h
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+include/DoneParser.h
+D:/Software/LowLevel/DoneLang/include/DoneParser.h
 include/CodeGenerator.h
 D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
+
+D:/Software/LowLevel/DoneLang/Preprocessor.cpp
+include/Preprocessor.h
+D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+fstream
+-
+algorithm
+-
 
 D:/Software/LowLevel/DoneLang/include/ArrayExpression.h
 Expression.h
@@ -69,6 +85,8 @@ vector
 -
 memory
 -
+set
+-
 Statement.h
 D:/Software/LowLevel/DoneLang/include/Statement.h
 EnumStatement.h
@@ -127,6 +145,40 @@ string
 -
 vector
 -
+
+D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
+string
+-
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+string
+-
+vector
+-
+stack
+-
+unordered_map
+-
+Token.h
+D:/Software/LowLevel/DoneLang/include/Token.h
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+
+D:/Software/LowLevel/DoneLang/include/DoneParser.h
+vector
+-
+memory
+-
+Token.h
+D:/Software/LowLevel/DoneLang/include/Token.h
+Statement.h
+D:/Software/LowLevel/DoneLang/include/Statement.h
+Expression.h
+D:/Software/LowLevel/DoneLang/include/Expression.h
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
 
 D:/Software/LowLevel/DoneLang/include/EnumStatement.h
 vector
@@ -209,6 +261,14 @@ utility
 -
 Token.h
 D:/Software/LowLevel/DoneLang/include/Token.h
+
+D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+set
+-
+stack
+-
+string
+-
 
 D:/Software/LowLevel/DoneLang/include/Statement.h
 StatementVisitor.h
