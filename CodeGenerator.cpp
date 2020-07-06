@@ -127,7 +127,9 @@ void CodeGenerator::visit(ArrayStatement *arrayStatement) {
     generateMemoryType(type);
     codeWriter.append(arrayStatement->name.lexeme);
     codeWriter.append("[");
-    arrayStatement->size->accept(this);
+    if(arrayStatement->size != nullptr) {
+        arrayStatement->size->accept(this);
+    }
     codeWriter.append("]");
     if(arrayStatement->isInitialized) {
         codeWriter.append("=");

@@ -65,9 +65,10 @@ Statement *DoneParser::parseVarDeclaration() {
     Expression *arraySize = nullptr;
     if(matchType(ARRAY_LEFT_BRACKET)) {
         isArrayStatement = true;
-        //TODO : support declare array without size array[]
-        arraySize = parseExpression();
-        consume(ARRAY_RIGHT_BRACKET, "Expect ] after array size");
+        if(!matchType(ARRAY_RIGHT_BRACKET)) {
+            arraySize = parseExpression();
+            consume(ARRAY_RIGHT_BRACKET, "Expect ] after array size");
+        }
         if(matchType(ARRAY_LEFT_BRACKET)) {
             //TODO: 2D array ^_^
         }
