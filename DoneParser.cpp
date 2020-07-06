@@ -65,6 +65,7 @@ Statement *DoneParser::parseVarDeclaration() {
     Expression *arraySize = nullptr;
     if(matchType(ARRAY_LEFT_BRACKET)) {
         isArrayStatement = true;
+        //TODO : support declare array without size array[]
         arraySize = parseExpression();
         consume(ARRAY_RIGHT_BRACKET, "Expect ] after array size");
         if(matchType(ARRAY_LEFT_BRACKET)) {
@@ -278,7 +279,10 @@ Expression *DoneParser::parseEqualityExpression() {
 
 Expression *DoneParser::parseComparisonExpression() {
     Expression* expression = parseAdditionExpression();
-    while (matchType(GREATER) || matchType(GREATER_EQUAL)) {
+    while (matchType(GREATER)
+            || matchType(GREATER_EQUAL)
+            || matchType(LESS)
+            || matchType(LESS_EQUAL)) {
         Token opt = getPreviousToken();
         Expression* right = parseAdditionExpression();
         expression = new BinaryExpression(right, expression, opt);
