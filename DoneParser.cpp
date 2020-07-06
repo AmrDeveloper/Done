@@ -119,7 +119,12 @@ Statement *DoneParser::parseStructDeclaration() {
         MemoryType memoryType = NONE;
         Token varType = consume(IDENTIFIER, "Expect struct var type");
         consume(SEMICOLON, "Expect ; after var declaration");
-        fields.push_back(Parameter(varName, varType, memoryType));
+        bool isArrayType = false;
+        if(matchType(ARRAY_LEFT_BRACKET)) {
+            consume(ARRAY_RIGHT_BRACKET, "Expect ] after array Declaration");
+            isArrayType = true;
+        }
+        fields.push_back(Parameter(varName, varType, memoryType, isArrayType));
     }
     consume(RIGHT_BRACE, "Expect : } after struct name");
     return new StructStatement(name, fields);
@@ -141,7 +146,12 @@ Statement *DoneParser::parseFuncDeclaration() {
         consume(COLON, "Expect : after param name");
         MemoryType memoryType = parseMemoryType();
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName, memoryType));
+        bool isArrayType = false;
+        if(matchType(ARRAY_LEFT_BRACKET)) {
+            consume(ARRAY_RIGHT_BRACKET, "Expect ] after array Declaration");
+            isArrayType = true;
+        }
+        params.push_back(Parameter(paramName, typeName, memoryType, isArrayType));
     }
 
     while (matchType(COMMA)) {
@@ -151,7 +161,12 @@ Statement *DoneParser::parseFuncDeclaration() {
         consume(COLON, "Expect : after param name");
         MemoryType memoryType = parseMemoryType();
         Token typeName = consume(IDENTIFIER, "Expect function name");
-        params.push_back(Parameter(paramName, typeName, memoryType));
+        bool isArrayType = false;
+        if(matchType(ARRAY_LEFT_BRACKET)) {
+            consume(ARRAY_RIGHT_BRACKET, "Expect ] after array Declaration");
+            isArrayType = true;
+        }
+        params.push_back(Parameter(paramName, typeName, memoryType, isArrayType));
     }
 
     consume(RIGHT_PAREN, "Expect : ) after function name");

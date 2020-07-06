@@ -57,7 +57,11 @@ void CodeGenerator::visit(StructStatement *structStatement) {
     for(Parameter field : structStatement->fields) {
         codeWriter.append(field.type.lexeme);
         generateMemoryType(field.memoryType);
-        codeWriter.appendLine(" " + field.name.lexeme + ";");
+        codeWriter.append(" " + field.name.lexeme);
+        if(field.isArrayType) {
+            codeWriter.append("[]");
+        }
+        codeWriter.appendLine(";");
     }
     codeWriter.appendLine("}" + structStatement->name.lexeme + ";");
     //TODO: Generate Struct new function
@@ -76,8 +80,13 @@ void CodeGenerator::visit(FunctionStatement *functionStatement) {
     int paramCounter = 0;
     for(auto param : functionStatement->parameters) {
         paramCounter++;
+        codeWriter.append(param.type.lexeme + " ");
         MemoryType memoryType = param.memoryType;
         generateMemoryType(memoryType);
+        codeWriter.append(param.name.lexeme);
+        if(param.isArrayType) {
+            codeWriter.append("[]");
+        }
         if(paramSize != paramCounter) {
             codeWriter.append(", ");
         }

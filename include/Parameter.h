@@ -11,8 +11,9 @@ public:
     Token name;
     Token type;
     MemoryType memoryType;
-    Parameter(Token n, Token t, MemoryType pointer)
-             : name(std::move(n)), type(std::move(t)), memoryType(pointer){}
+    bool isArrayType;
+    Parameter(Token n, Token t, MemoryType pointer, bool isArray)
+             : name(std::move(n)), type(std::move(t)), memoryType(pointer), isArrayType(isArray){}
 };
 
 #endif
