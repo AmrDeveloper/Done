@@ -284,6 +284,10 @@ void CodeGenerator::visit(BinaryExpression *binaryExpression) {
             codeWriter.append("/");
             break;
         }
+        case PERCENT: {
+            codeWriter.append("%");
+            break;
+        }
     }
     binaryExpression->right->accept(this);
 }

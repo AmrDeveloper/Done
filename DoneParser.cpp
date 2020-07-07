@@ -347,7 +347,9 @@ Expression *DoneParser::parseAdditionExpression() {
 
 Expression *DoneParser::parseMultiplicationExpression() {
     Expression* expression = parseUnaryExpression();
-    while (matchType(STAR) || matchType(SLASH)) {
+    while (matchType(STAR)
+        || matchType(SLASH)
+        || matchType(PERCENT)) {
         Token opt = getPreviousToken();
         Expression* right = parseUnaryExpression();
         expression = new BinaryExpression(right, expression, opt);

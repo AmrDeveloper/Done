@@ -33,11 +33,6 @@ private:
     Statement* parseWhileStatement();
     Statement* parseDoWhileStatement();
 
-    /*
-    Statement* parseForStatement();
-    Statement* parseDoWhileStatement();
-    */
-
     Expression* parseExpression();
     Expression* parseAssignExpression();
     Expression* parsePrimaryExpression();
