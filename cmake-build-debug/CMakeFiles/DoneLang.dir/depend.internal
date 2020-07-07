@@ -22,6 +22,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj
  D:/Software/LowLevel/DoneLang/include/GetExpression.h
  D:/Software/LowLevel/DoneLang/include/GroupExpression.h
  D:/Software/LowLevel/DoneLang/include/IfStatement.h
+ D:/Software/LowLevel/DoneLang/include/LineFunctionStatement.h
  D:/Software/LowLevel/DoneLang/include/LiteralExpression.h
  D:/Software/LowLevel/DoneLang/include/LogicalExpression.h
  D:/Software/LowLevel/DoneLang/include/Parameter.h
@@ -62,6 +63,7 @@ CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj
  D:/Software/LowLevel/DoneLang/include/GetExpression.h
  D:/Software/LowLevel/DoneLang/include/GroupExpression.h
  D:/Software/LowLevel/DoneLang/include/IfStatement.h
+ D:/Software/LowLevel/DoneLang/include/LineFunctionStatement.h
  D:/Software/LowLevel/DoneLang/include/LiteralExpression.h
  D:/Software/LowLevel/DoneLang/include/LogicalExpression.h
  D:/Software/LowLevel/DoneLang/include/Parameter.h
@@ -102,6 +104,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj
  D:/Software/LowLevel/DoneLang/include/GetExpression.h
  D:/Software/LowLevel/DoneLang/include/GroupExpression.h
  D:/Software/LowLevel/DoneLang/include/IfStatement.h
+ D:/Software/LowLevel/DoneLang/include/LineFunctionStatement.h
  D:/Software/LowLevel/DoneLang/include/LiteralExpression.h
  D:/Software/LowLevel/DoneLang/include/LogicalExpression.h
  D:/Software/LowLevel/DoneLang/include/Parameter.h

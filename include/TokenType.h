@@ -22,7 +22,7 @@ enum TokenType {
     //Keywords
     FUN, VAR, CONST, RETURN, IDENTIFIER,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,
-    TERNARY, ELVIS, CONTINUE, BREAK,
+    TERNARY, ELVIS, CONTINUE, BREAK, LAMBDA,
 
     //Math Operations
     MINUS, PLUS, SLASH, STAR, PERCENT,

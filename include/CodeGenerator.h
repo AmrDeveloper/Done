@@ -16,6 +16,7 @@
 #include "ExpressionStatement.h"
 #include "BlockStatement.h"
 #include "FunctionStatement.h"
+#include "LineFunctionStatement.h"
 #include "IfStatement.h"
 #include "WhileStatement.h"
 #include "DoWhileStatement.h"
@@ -60,6 +61,8 @@ public:
     void visit(BlockStatement *blockStatement) override;
 
     void visit(FunctionStatement *funStatement) override;
+
+    void visit(LineFunctionStatement *funStatement) override;
 
     void visit(IfStatement *ifStatement) override;
 

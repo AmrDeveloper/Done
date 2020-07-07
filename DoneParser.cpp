@@ -5,6 +5,7 @@
 #include "include/StructStatement.h"
 #include "include/ExpressionStatement.h"
 #include "include/FunctionStatement.h"
+#include "include/LineFunctionStatement.h"
 #include "include/IfStatement.h"
 #include "include/WhileStatement.h"
 #include "include/DoWhileStatement.h"
@@ -155,7 +156,7 @@ Statement *DoneParser::parseFuncDeclaration() {
 
     if (matchType(IDENTIFIER)) {
         pointPreviousToken();
-        Token paramName = consume(IDENTIFIER, "Expect function name");
+        Token paramName = consume(IDENTIFIER, "Expect parameter name");
         consume(COLON, "Expect : after param name");
         MemoryType memoryType = parseMemoryType();
         Token typeName = consume(IDENTIFIER, "Expect function name");
@@ -185,6 +186,20 @@ Statement *DoneParser::parseFuncDeclaration() {
     consume(RIGHT_PAREN, "Expect : ) after function name");
     consume(COLON, "Expect : after function Params");
     Token returnType = consume(IDENTIFIER, "Expect return type");
+
+    if(matchType(LAMBDA)) {
+        Expression *returnValue = nullptr;
+        Statement *statement = nullptr;
+        if(matchType(RETURN)) {
+            returnValue = parseExpression();
+            consume(SEMICOLON, "Expect ; after single line function declaration");
+        }
+        else{
+            statement = parseStatement();
+        }
+        return new LineFunctionStatement(name, returnType, params, statement, returnValue);
+    }
+
     consume(LEFT_BRACE, "Expect : { after struct name");
 
     std::vector<Statement *> body;

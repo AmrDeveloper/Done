@@ -86,7 +86,7 @@ void DoneLexer::scanAndAddToken() {
             break;
         case '-':
             addToken(matchAndAdvance('-') ? TokenType::MINUS_MINUS
-                                          : TokenType::MINUS);
+                            : matchAndAdvance('>')? LAMBDA : TokenType::MINUS);
             break;
         case '+':
             addToken(matchAndAdvance('+') ? TokenType::PLUS_PLUS

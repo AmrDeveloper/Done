@@ -84,11 +84,11 @@ void CodeGenerator::visit(BlockStatement *blockStatement) {
     codeWriter.appendLine("}");
 }
 
-void CodeGenerator::visit(FunctionStatement *functionStatement) {
-    codeWriter.append(functionStatement->returnType.lexeme + " "  + functionStatement->name.lexeme + " (");
-    int paramSize = functionStatement->parameters.size();
+void CodeGenerator::visit(FunctionStatement *funStatement) {
+    codeWriter.append(funStatement->returnType.lexeme + " "  + funStatement->name.lexeme + " (");
+    int paramSize = funStatement->parameters.size();
     int paramCounter = 0;
-    for(auto param : functionStatement->parameters) {
+    for(auto param : funStatement->parameters) {
         paramCounter++;
         codeWriter.append(param.type.lexeme + " ");
         MemoryType memoryType = param.memoryType;
@@ -104,13 +104,44 @@ void CodeGenerator::visit(FunctionStatement *functionStatement) {
 
     codeWriter.appendLine(") {");
 
-    for(auto statement : functionStatement->body) {
+    for(auto statement : funStatement->body) {
         statement->accept(this);
     }
 
-    if(functionStatement->returnType.lexeme != "void") {
+    if(funStatement->returnType.lexeme != "void") {
         codeWriter.append("return ");
-        functionStatement->returnValue->accept(this);
+        funStatement->returnValue->accept(this);
+        codeWriter.appendLine(";");
+    }
+    codeWriter.appendLine("}");
+}
+
+void CodeGenerator::visit(LineFunctionStatement *funStatement) {
+    codeWriter.append(funStatement->returnType.lexeme + " "  + funStatement->name.lexeme + " (");
+    int paramSize = funStatement->parameters.size();
+    int paramCounter = 0;
+    for(auto param : funStatement->parameters) {
+        paramCounter++;
+        codeWriter.append(param.type.lexeme + " ");
+        MemoryType memoryType = param.memoryType;
+        generateMemoryType(memoryType);
+        codeWriter.append(param.name.lexeme);
+        if(param.isArrayType) {
+            codeWriter.append("[]");
+        }
+        if(paramSize != paramCounter) {
+            codeWriter.append(", ");
+        }
+    }
+
+    codeWriter.appendLine(") {");
+
+    if(funStatement->body != nullptr) {
+        funStatement->body->accept(this);
+    }
+    else{
+        codeWriter.append("return ");
+        funStatement->returnValue->accept(this);
         codeWriter.appendLine(";");
     }
     codeWriter.appendLine("}");

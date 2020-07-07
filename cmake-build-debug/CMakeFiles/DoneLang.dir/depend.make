@@ -21,6 +21,7 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/FunctionStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/GetExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/IfStatement.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/LineFunctionStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/LiteralExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Parameter.h
@@ -61,6 +62,7 @@ CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/FunctionStatement.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/GetExpression.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/IfStatement.h
+CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/LineFunctionStatement.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/LiteralExpression.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/Parameter.h
@@ -101,6 +103,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/FunctionStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/GetExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/GroupExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/IfStatement.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/LineFunctionStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/LiteralExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/LogicalExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Parameter.h

@@ -169,6 +169,9 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/IfStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/LineFunctionStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/LiteralExpression.h">
 			<Option target="DoneLang"/>
 		</Unit>

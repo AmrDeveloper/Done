@@ -7,6 +7,7 @@ class StructStatement;
 class ExpressionStatement;
 class BlockStatement;
 class FunctionStatement;
+class LineFunctionStatement;
 class IfStatement;
 class WhileStatement;
 class DoWhileStatement;
@@ -23,6 +24,8 @@ public:
     virtual void visit(BlockStatement *statement) {};
 
     virtual void visit(FunctionStatement *statement) {};
+
+    virtual void visit(LineFunctionStatement *statement) {};
 
     virtual void visit(ExpressionStatement *statement) {};
 
