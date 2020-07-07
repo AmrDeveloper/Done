@@ -30,6 +30,7 @@ private:
     Statement* parseFuncDeclaration();
     Statement* parseIfStatement();
     Statement* parseWhileStatement();
+    Statement* parseBlockStatement();
     /*
     Statement* parseBlockStatement();
     Statement* parseForStatement();

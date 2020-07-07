@@ -86,6 +86,7 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ArrayStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ArrayValuesExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/AssignExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/BinaryExpression.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/BlockStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/DoneParser.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/EnumStatement.h

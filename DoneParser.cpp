@@ -8,6 +8,7 @@
 #include "include/IfStatement.h"
 #include "include/WhileStatement.h"
 #include "include/ArrayStatement.h"
+#include "include/BlockStatement.h"
 #include "include/Parameter.h"
 
 #include "include/LiteralExpression.h"
@@ -42,8 +43,8 @@ Statement *DoneParser::parseStatement() {
     if (matchType(IF)) return parseIfStatement();
     //if(matchType(FOR)) return parseForStatement();
     //if(matchType(DO)) return parseDoWhileStatement();
-    if(matchType(WHILE)) return parseWhileStatement();
-    //if(matchType(LEFT_BRACE)) return parseBlockStatement();
+    if (matchType(WHILE)) return parseWhileStatement();
+    if (matchType(LEFT_BRACE)) return parseBlockStatement();
     return parseExpressionStatement();
 }
 
@@ -129,6 +130,14 @@ Statement *DoneParser::parseStructDeclaration() {
     }
     consume(RIGHT_BRACE, "Expect : } after struct name");
     return new StructStatement(name, fields);
+}
+
+Statement *DoneParser::parseBlockStatement() {
+    std::vector<Statement*> statements;
+    while(!matchType(RIGHT_BRACE)) {
+        statements.push_back(parseDeclaration());
+    }
+    return new BlockStatement(statements);
 }
 
 Statement *DoneParser::parseExpressionStatement() {

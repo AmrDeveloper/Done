@@ -39,7 +39,6 @@
 class CodeGenerator : public StatementVisitor, ExpressionVisitor {
 public:
     CodeWriter codeWriter;
-    std::set<std::string> standardLibraries;
 
     explicit CodeGenerator(ErrorHandler &errorHandler);
 

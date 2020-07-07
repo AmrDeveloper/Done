@@ -77,9 +77,11 @@ void CodeGenerator::visit(StructStatement *structStatement) {
 }
 
 void CodeGenerator::visit(BlockStatement *blockStatement) {
+    codeWriter.appendLine("{");
     for(auto statement : blockStatement->statements) {
         statement->accept(this);
     }
+    codeWriter.appendLine("}");
 }
 
 void CodeGenerator::visit(FunctionStatement *functionStatement) {

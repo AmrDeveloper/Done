@@ -5,6 +5,7 @@ int main() {
     std::string projectPath = "../examples/";
 
     DoneCompiler doneCompiler;
+    doneCompiler.setOutputCFileName("Enume.c");
     doneCompiler.compile(mainFile, projectPath);
     return EXIT_SUCCESS;
 }
