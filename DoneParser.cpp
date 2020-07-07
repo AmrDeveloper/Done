@@ -142,7 +142,9 @@ Statement *DoneParser::parseBlockStatement() {
 }
 
 Statement *DoneParser::parseExpressionStatement() {
-    return new ExpressionStatement(parseExpression());
+    Expression* expression = parseExpression();
+    consume(SEMICOLON, "Expect ; after Expression");
+    return new ExpressionStatement(expression);
 }
 
 Statement *DoneParser::parseFuncDeclaration() {
@@ -397,7 +399,6 @@ Expression *DoneParser::parseFunctionCallExpression(Expression* callee) {
          }while (matchType(COMMA));
      }
      consume(RIGHT_PAREN, "Expect ) after function call");
-     consume(SEMICOLON, "Expect ; after Assign Expression");
      return new CallExpression(callee, arguments);
 }
 
@@ -432,7 +433,6 @@ Expression *DoneParser::parsePrimaryExpression() {
             consume(ARRAY_RIGHT_BRACKET, "Expect ] after array position");
             return new ArrayExpression(variable, index);
         }
-
         return new VariableExpression(getPreviousToken(), memoryType);
     }
     if (matchType(LEFT_PAREN)) {
@@ -443,7 +443,7 @@ Expression *DoneParser::parsePrimaryExpression() {
     if (matchType(LEFT_BRACE)) {
         return parseArrayValuesExpression();
     }
-    std::cout<<"Invalid Token "<<getCurrentToken().lexeme;
+    synchronize();
     return nullptr;
 }
 
@@ -507,11 +507,13 @@ void DoneParser::pointPreviousToken() {
 Token DoneParser::consume(TokenType type, const char *message) {
     if(checkType(type)) return advance();
     reportParserError(message);
+    synchronize();
 }
 
 void DoneParser::reportParserError(const std::string& message) {
-   std::cout<<message;
-   exit(EXIT_FAILURE);
+    Token token = getCurrentToken();
+    errorHandler.addError(Error(token, message));
+    synchronize();
 }
 
 bool DoneParser::isAtEnd() {
@@ -524,4 +526,24 @@ Token DoneParser::getNextTokenBy(int offset) {
 
 Token DoneParser::getPreviousTokenBy(int offset) {
     return tokens[currentTokenIndex - offset];
+}
+
+void DoneParser::synchronize() {
+    advance();
+
+    while (!isAtEnd()) {
+        if (getPreviousToken().tokenType == SEMICOLON) return;
+        switch (getNextToken().tokenType) {
+            case FUN:
+            case VAR:
+            case CONST:
+            case FOR:
+            case IF:
+            case DO:
+            case WHILE:
+            case RETURN:
+                return;
+        }
+        advance();
+    }
 }

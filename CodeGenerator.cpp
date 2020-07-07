@@ -174,6 +174,7 @@ void CodeGenerator::visit(AssignExpression *assign) {
 
 void CodeGenerator::visit(ExpressionStatement *expressionStatement) {
     expressionStatement->expression->accept(this);
+    codeWriter.appendLine(";");
 }
 
 void CodeGenerator::visit(LiteralExpression *literal) {
@@ -192,7 +193,7 @@ void CodeGenerator::visit(CallExpression *callExpression) {
         }
         argsCounter++;
     }
-    codeWriter.appendLine(");");
+    codeWriter.append(")");
 }
 
 void CodeGenerator::visit(VariableExpression *varExpression) {

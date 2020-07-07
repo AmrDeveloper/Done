@@ -11,6 +11,23 @@ Error::Error(std::string aFile, int aLine, int aStart, int aEnd,
     position = std::move(aPosition);
 }
 
+Error::Error(int aLine, int aStart, int aEnd, std::string aMessage) {
+    fileName = "";
+    line = aLine;
+    start = aStart;
+    end = aEnd;
+    message = std::move(aMessage);
+    position = "";
+}
+
+Error::Error(Token& token, std::string aMessage) {
+    fileName = "";
+    line = token.line;
+    start = token.start;
+    end = token.end;
+    message = std::move(aMessage);
+    position = "";
+}
 
 void Error::printInfo() const {
     std::cerr<<generateReport()<<std::endl;
@@ -20,7 +37,17 @@ std::string Error::generateReport() const {
     std::string lineInfo = "[" + std::to_string(line) +
                            ":" + std::to_string(start) +
                            ":" + std::to_string(end) + "]";
-    std::string messageInfo = position + " -> " + message;
+    std::string messageInfo;
+    if(position.empty()) {
+        messageInfo = " -> " + message;
+    }else{
+        messageInfo = position + " -> " + message;
+    }
+
+    if(fileName.empty()) {
+        return lineInfo.append(messageInfo);
+    }
+
     return fileName + "\t" + lineInfo.append(messageInfo);
 }
 

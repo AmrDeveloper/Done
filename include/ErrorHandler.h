@@ -5,9 +5,13 @@
 #include <string>
 #include <vector>
 
+#include "Token.h"
+
 class Error {
 public:
    Error(std::string file, int line, int start, int end, std::string message, std::string position);
+   Error(int line, int start, int end, std::string message);
+   Error(Token &token, std::string message);
    int line;
    int start;
    int end;

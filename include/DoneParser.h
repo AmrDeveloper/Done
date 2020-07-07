@@ -50,6 +50,7 @@ private:
     Expression* parseUnaryExpression();
     Expression* parseArrayValuesExpression();
 
+    void synchronize();
     bool matchType(TokenType types);
     bool checkType(TokenType type);
     Token advance();
