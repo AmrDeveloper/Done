@@ -16,10 +16,9 @@ public:
     Token returnType;
     std::vector<Parameter> parameters;
     std::vector<Statement*> body;
-    Expression* returnValue;
-    FunctionStatement(Token n, Token t, std::vector<Parameter> params, std::vector<Statement*> body, Expression* returnValue) :
+    FunctionStatement(Token n, Token t, std::vector<Parameter> params, std::vector<Statement*> body) :
                         name(std::move(n)), returnType(std::move(t)),
-                        parameters(std::move(params)), body(std::move(body)), returnValue(returnValue){}
+                        parameters(std::move(params)), body(std::move(body)){}
     void accept(StatementVisitor *visitor) {
         visitor->visit(this);
     }

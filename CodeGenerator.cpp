@@ -108,11 +108,6 @@ void CodeGenerator::visit(FunctionStatement *funStatement) {
         statement->accept(this);
     }
 
-    if(funStatement->returnType.lexeme != "void") {
-        codeWriter.append("return ");
-        funStatement->returnValue->accept(this);
-        codeWriter.appendLine(";");
-    }
     codeWriter.appendLine("}");
 }
 

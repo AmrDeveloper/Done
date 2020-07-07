@@ -167,7 +167,7 @@ Statement *DoneParser::parseFuncDeclaration() {
             consume(ARRAY_RIGHT_BRACKET, "Expect ] after array Declaration");
             isArrayType = true;
         }
-        params.push_back(Parameter(paramName, typeName, memoryType, isArrayType));
+        params.emplace_back(paramName, typeName, memoryType, isArrayType);
     }
 
     while (matchType(COMMA)) {
@@ -182,7 +182,7 @@ Statement *DoneParser::parseFuncDeclaration() {
             consume(ARRAY_RIGHT_BRACKET, "Expect ] after array Declaration");
             isArrayType = true;
         }
-        params.push_back(Parameter(paramName, typeName, memoryType, isArrayType));
+        params.emplace_back(paramName, typeName, memoryType, isArrayType);
     }
 
     consume(RIGHT_PAREN, "Expect : ) after function name");
@@ -197,14 +197,8 @@ Statement *DoneParser::parseFuncDeclaration() {
     consume(LEFT_BRACE, "Expect : { after struct name");
 
     std::vector<Statement *> body;
-    Expression *returnValue = nullptr;
     while (!matchType(RIGHT_BRACE)) {
-        if (returnType.tokenType != VOID && matchType(RETURN)) {
-            returnValue = parseExpression();
-            consume(SEMICOLON, "Expect ; after return name");
-            break;
-        }
-        else if(matchType(VAR)) {
+        if(matchType(VAR)) {
             body.push_back(parseVarDeclaration(false));
         }
         else if (matchType(CONST)) {
@@ -214,8 +208,8 @@ Statement *DoneParser::parseFuncDeclaration() {
             body.push_back(parseStatement());
         }
     }
-    consume(RIGHT_BRACE, "Expect } after return name");
-    return new FunctionStatement(name, returnType, params, body, returnValue);
+
+    return new FunctionStatement(name, returnType, params, body);
 }
 
 Statement *DoneParser::parseIfStatement() {
