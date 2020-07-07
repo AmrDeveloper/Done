@@ -16,10 +16,9 @@ public:
     Token returnType;
     std::vector<Parameter> parameters;
     Statement* body;
-    Expression* returnValue;
-    LineFunctionStatement(Token n, Token t, std::vector<Parameter> params, Statement* body, Expression* returnValue) :
+    LineFunctionStatement(Token n, Token t, std::vector<Parameter> params, Statement* body) :
             name(std::move(n)), returnType(std::move(t)),
-            parameters(std::move(params)), body(std::move(body)), returnValue(returnValue){}
+            parameters(std::move(params)), body(body) {}
     void accept(StatementVisitor *visitor) {
         visitor->visit(this);
     }

@@ -21,6 +21,7 @@
 #include "WhileStatement.h"
 #include "DoWhileStatement.h"
 #include "ArrayStatement.h"
+#include "ReturnStatement.h"
 
 #include "LiteralExpression.h"
 #include "AssignExpression.h"
@@ -71,6 +72,8 @@ public:
     void visit(DoWhileStatement *dowhileStatement) override;
 
     void visit(ArrayStatement *arrayStatement) override;
+
+    void visit(ReturnStatement *returnStatement) override;
 
     void visit(AssignExpression *assignExpression) override;
 

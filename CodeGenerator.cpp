@@ -135,15 +135,7 @@ void CodeGenerator::visit(LineFunctionStatement *funStatement) {
     }
 
     codeWriter.appendLine(") {");
-
-    if(funStatement->body != nullptr) {
-        funStatement->body->accept(this);
-    }
-    else{
-        codeWriter.append("return ");
-        funStatement->returnValue->accept(this);
-        codeWriter.appendLine(";");
-    }
+    funStatement->body->accept(this);
     codeWriter.appendLine("}");
 }
 
@@ -191,6 +183,14 @@ void CodeGenerator::visit(ArrayStatement *arrayStatement) {
     if(arrayStatement->isInitialized) {
         codeWriter.append("=");
         arrayStatement->value->accept(this);
+    }
+    codeWriter.appendLine(";");
+}
+
+void CodeGenerator::visit(ReturnStatement *returnStatement) {
+    codeWriter.append("return ");
+    if(returnStatement->expression != nullptr){
+        returnStatement->expression->accept(this);
     }
     codeWriter.appendLine(";");
 }

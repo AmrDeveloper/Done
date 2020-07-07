@@ -12,6 +12,7 @@ class IfStatement;
 class WhileStatement;
 class DoWhileStatement;
 class ArrayStatement;
+class ReturnStatement;
 
 class StatementVisitor{
 public:
@@ -36,6 +37,8 @@ public:
     virtual void visit(DoWhileStatement *statement) {};
 
     virtual void visit(ArrayStatement *statement) {};
+
+    virtual void visit(ReturnStatement *statement) {};
 };
 
 #endif

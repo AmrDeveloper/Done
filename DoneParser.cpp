@@ -11,6 +11,7 @@
 #include "include/DoWhileStatement.h"
 #include "include/ArrayStatement.h"
 #include "include/BlockStatement.h"
+#include "include/ReturnStatement.h"
 #include "include/Parameter.h"
 
 #include "include/LiteralExpression.h"
@@ -46,6 +47,7 @@ Statement *DoneParser::parseStatement() {
     //if(matchType(FOR)) return parseForStatement();
     if (matchType(DO)) return parseDoWhileStatement();
     if (matchType(WHILE)) return parseWhileStatement();
+    if (matchType(RETURN)) return parseReturnStatement();
     if (matchType(LEFT_BRACE)) return parseBlockStatement();
     return parseExpressionStatement();
 }
@@ -188,16 +190,8 @@ Statement *DoneParser::parseFuncDeclaration() {
     Token returnType = consume(IDENTIFIER, "Expect return type");
 
     if(matchType(LAMBDA)) {
-        Expression *returnValue = nullptr;
-        Statement *statement = nullptr;
-        if(matchType(RETURN)) {
-            returnValue = parseExpression();
-            consume(SEMICOLON, "Expect ; after single line function declaration");
-        }
-        else{
-            statement = parseStatement();
-        }
-        return new LineFunctionStatement(name, returnType, params, statement, returnValue);
+        Statement* statement = parseStatement();
+        return new LineFunctionStatement(name, returnType, params, statement);
     }
 
     consume(LEFT_BRACE, "Expect : { after struct name");
@@ -262,6 +256,15 @@ Statement *DoneParser::parseDoWhileStatement() {
     consume(RIGHT_PAREN, "Expect : ) after while condition");
     consume(SEMICOLON, "Expect : ; after while condition");
     return new DoWhileStatement(condition, body);
+}
+
+Statement *DoneParser::parseReturnStatement() {
+    if(matchType(SEMICOLON)) {
+        return new ReturnStatement(nullptr);
+    }
+    Expression* expression = parseExpression();
+    consume(SEMICOLON, "Expect ; after return statement");
+    return new ReturnStatement(expression);
 }
 
 Expression *DoneParser::parseExpression() {

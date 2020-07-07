@@ -32,6 +32,7 @@ private:
     Statement* parseBlockStatement();
     Statement* parseWhileStatement();
     Statement* parseDoWhileStatement();
+    Statement* parseReturnStatement();
 
     Expression* parseExpression();
     Expression* parseAssignExpression();
