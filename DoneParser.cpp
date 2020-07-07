@@ -7,6 +7,7 @@
 #include "include/FunctionStatement.h"
 #include "include/IfStatement.h"
 #include "include/WhileStatement.h"
+#include "include/DoWhileStatement.h"
 #include "include/ArrayStatement.h"
 #include "include/BlockStatement.h"
 #include "include/Parameter.h"
@@ -42,7 +43,7 @@ std::vector<Statement*> DoneParser::parseSourceCode() {
 Statement *DoneParser::parseStatement() {
     if (matchType(IF)) return parseIfStatement();
     //if(matchType(FOR)) return parseForStatement();
-    //if(matchType(DO)) return parseDoWhileStatement();
+    if (matchType(DO)) return parseDoWhileStatement();
     if (matchType(WHILE)) return parseWhileStatement();
     if (matchType(LEFT_BRACE)) return parseBlockStatement();
     return parseExpressionStatement();
@@ -232,6 +233,20 @@ Statement *DoneParser::parseWhileStatement() {
     return new WhileStatement(condition, body);
 }
 
+Statement *DoneParser::parseDoWhileStatement() {
+    consume(LEFT_BRACE, "Expect : { after to start while body");
+    std::vector<Statement *> body;
+    while (!matchType(RIGHT_BRACE)) {
+        body.push_back(parseDeclaration());
+    }
+    consume(WHILE, "Expect : while keyword after do block");
+    consume(LEFT_PAREN, "Expect : ( after while keyword");
+    Expression *condition = parseExpression();
+    consume(RIGHT_PAREN, "Expect : ) after while condition");
+    consume(SEMICOLON, "Expect : ; after while condition");
+    return new DoWhileStatement(condition, body);
+}
+
 Expression *DoneParser::parseExpression() {
     return parseAssignExpression();
 }
@@ -395,9 +410,9 @@ Expression *DoneParser::parseArrayValuesExpression() {
 }
 
 Expression *DoneParser::parsePrimaryExpression() {
-    if (matchType(TRUE)) return new LiteralExpression("1");
-    if (matchType(FALSE)) return new LiteralExpression("0");
-    if (matchType(NIL)) return new LiteralExpression("null");
+    if (matchType(TRUE)) return new LiteralExpression("true");
+    if (matchType(FALSE)) return new LiteralExpression("false");
+    if (matchType(NIL)) return new LiteralExpression("NULL");
     if (matchType(NUMBER)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(STRING)) return new LiteralExpression(getPreviousToken().literal);
     if (matchType(CHAR)) return new LiteralExpression(getPreviousToken().literal);
@@ -438,7 +453,7 @@ MemoryType DoneParser::parseMemoryType() {
     return type;
 }
 
-MemoryType DoneParser::parseMemoryType(Token token) {
+MemoryType DoneParser::parseMemoryType(Token& token) {
     if (token.tokenType == STAR) return SINGLE_POINTER;
     if (token.tokenType == STAR_STAR) return DOUBLE_POINTER;
     if (token.tokenType == ADDRESS) return ADDRESS_POINTER;

@@ -18,6 +18,7 @@
 #include "FunctionStatement.h"
 #include "IfStatement.h"
 #include "WhileStatement.h"
+#include "DoWhileStatement.h"
 #include "ArrayStatement.h"
 
 #include "LiteralExpression.h"
@@ -63,6 +64,8 @@ public:
     void visit(IfStatement *ifStatement) override;
 
     void visit(WhileStatement *whileStatement) override;
+
+    void visit(DoWhileStatement *dowhileStatement) override;
 
     void visit(ArrayStatement *arrayStatement) override;
 

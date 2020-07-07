@@ -136,6 +136,17 @@ void CodeGenerator::visit(WhileStatement *whileStatement) {
     codeWriter.appendLine("}");
 }
 
+void CodeGenerator::visit(DoWhileStatement *doWhileStatement) {
+    codeWriter.appendLine("do (");
+    for(auto statement : doWhileStatement->body) {
+        statement->accept(this);
+    }
+    codeWriter.append("}");
+    codeWriter.append("while(");
+    doWhileStatement->condition->accept(this);
+    codeWriter.appendLine(");");
+}
+
 void CodeGenerator::visit(ArrayStatement *arrayStatement) {
     codeWriter.append(arrayStatement->type.lexeme + " ");
     MemoryType type = arrayStatement->memoryType;

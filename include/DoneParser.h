@@ -29,18 +29,17 @@ private:
     Statement* parseExpressionStatement();
     Statement* parseFuncDeclaration();
     Statement* parseIfStatement();
+    Statement* parseBlockStatement();
     Statement* parseWhileStatement();
-    Statement* parseBlockStatement();
+    Statement* parseDoWhileStatement();
+
     /*
-    Statement* parseBlockStatement();
     Statement* parseForStatement();
     Statement* parseDoWhileStatement();
     */
 
     Expression* parseExpression();
     Expression* parseAssignExpression();
-    //Expression parseNewExpression();
-    //Expression parseFreeExpression();
     Expression* parsePrimaryExpression();
     Expression* parseCallExpression();
     Expression* parseFunctionCallExpression(Expression* callee);
@@ -67,7 +66,7 @@ private:
     Token getNextTokenBy(int offset);
     Token getPreviousTokenBy(int offset);
     MemoryType parseMemoryType();
-    MemoryType parseMemoryType(Token token);
+    MemoryType parseMemoryType(Token& token);
     Token consume(TokenType type, const char *message);
     void reportParserError(const std::string& message);
     bool isAtEnd();

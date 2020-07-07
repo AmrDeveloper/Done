@@ -9,6 +9,7 @@ class BlockStatement;
 class FunctionStatement;
 class IfStatement;
 class WhileStatement;
+class DoWhileStatement;
 class ArrayStatement;
 
 class StatementVisitor{
@@ -28,6 +29,8 @@ public:
     virtual void visit(IfStatement *statement) {};
 
     virtual void visit(WhileStatement *statement) {};
+
+    virtual void visit(DoWhileStatement *statement) {};
 
     virtual void visit(ArrayStatement *statement) {};
 };
