@@ -46,6 +46,9 @@ void CodeGenerator::visit(EnumStatement* enumStatement) {
 }
 
 void CodeGenerator::visit(VarStatement *varStatement) {
+    if(varStatement->isConst) {
+        codeWriter.append("const ");
+    }
     codeWriter.append(varStatement->type.lexeme + " ");
     MemoryType type = varStatement->memoryType;
     generateMemoryType(type);

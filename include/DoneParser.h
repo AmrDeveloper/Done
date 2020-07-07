@@ -24,7 +24,7 @@ private:
     Statement* parseStatement();
     Statement* parseDeclaration();
     Statement* parseEnumerationDeclaration();
-    Statement* parseVarDeclaration();
+    Statement* parseVarDeclaration(bool isConst);
     Statement* parseStructDeclaration();
     Statement* parseExpressionStatement();
     Statement* parseFuncDeclaration();

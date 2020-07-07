@@ -49,13 +49,14 @@ Statement *DoneParser::parseStatement() {
 
 Statement *DoneParser::parseDeclaration() {
     if (matchType(FUN)) return parseFuncDeclaration();
-    if (matchType(VAR)) return parseVarDeclaration();
+    if (matchType(VAR)) return parseVarDeclaration(false);
+    if (matchType(CONST)) return parseVarDeclaration(true);
     if (matchType(ENUM)) return parseEnumerationDeclaration();
     if (matchType(STRUCT)) return parseStructDeclaration();
     return parseStatement();
 }
 
-Statement *DoneParser::parseVarDeclaration() {
+Statement *DoneParser::parseVarDeclaration(bool isConst) {
     Token name = consume(IDENTIFIER, "Expect var name");
     consume(COLON, "Expect : after var name");
     MemoryType memoryType = parseMemoryType();
@@ -86,7 +87,7 @@ Statement *DoneParser::parseVarDeclaration() {
     if(isArrayStatement) {
         return new ArrayStatement(name, type, arraySize, memoryType, isInitialized, value);
     }
-    return new VarStatement(name, type, memoryType, isInitialized, value);
+    return new VarStatement(name, type, memoryType, isInitialized, value, isConst);
 }
 
 Statement *DoneParser::parseEnumerationDeclaration() {
@@ -183,7 +184,10 @@ Statement *DoneParser::parseFuncDeclaration() {
             break;
         }
         else if(matchType(VAR)) {
-            body.push_back(parseVarDeclaration());
+            body.push_back(parseVarDeclaration(false));
+        }
+        else if (matchType(CONST)) {
+            body.push_back(parseVarDeclaration(true));
         }
         else{
             body.push_back(parseStatement());

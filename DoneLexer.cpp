@@ -19,8 +19,9 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["continue"]  = TokenType::CONTINUE;
     reservedKeywords["break"]     = TokenType::BREAK;
 
-    reservedKeywords["var"]       = TokenType::VAR;
     reservedKeywords["fun"]       = TokenType::FUN;
+    reservedKeywords["var"]       = TokenType::VAR;
+    reservedKeywords["const"]     = TokenType::CONST;
     reservedKeywords["return"]    = TokenType::RETURN;
 
     reservedKeywords["null"]      = TokenType::NIL;
