@@ -34,6 +34,10 @@ void DoneCompiler::compile(std::string mainFile, std::string& projectPath) {
     codeGenerator.generateCode(statements, standardLibs);
     auto cSourceCode = codeGenerator.codeWriter.getSource();
 
+    for(auto statement : statements) {
+        delete statement;
+    }
+
     std::ofstream file(projectPath + outputCFileName);
     file << cSourceCode;
     file.close();
