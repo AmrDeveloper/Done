@@ -10,6 +10,26 @@ D:/Software/LowLevel/DoneLang/CodeGenerator.cpp
 include/CodeGenerator.h
 D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
 
+D:/Software/LowLevel/DoneLang/DoneCompiler.cpp
+fstream
+-
+include/DoneCompiler.h
+D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
+include/Preprocessor.h
+D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+include/DoneLexer.h
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+include/DoneParser.h
+D:/Software/LowLevel/DoneLang/include/DoneParser.h
+include/CodeGenerator.h
+D:/Software/LowLevel/DoneLang/include/CodeGenerator.h
+
+D:/Software/LowLevel/DoneLang/DoneLexer.cpp
+include/DoneLexer.h
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+iostream
+-
+
 D:/Software/LowLevel/DoneLang/DoneParser.cpp
 include/DoneParser.h
 D:/Software/LowLevel/DoneLang/include/DoneParser.h
@@ -65,6 +85,16 @@ include/ArrayValuesExpression.h
 D:/Software/LowLevel/DoneLang/include/ArrayValuesExpression.h
 iostream
 -
+
+D:/Software/LowLevel/DoneLang/ErrorHandler.cpp
+include/ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+iostream
+-
+
+D:/Software/LowLevel/DoneLang/Token.cpp
+include/Token.h
+D:/Software/LowLevel/DoneLang/include/Token.h
 
 D:/Software/LowLevel/DoneLang/include/ArrayExpression.h
 Expression.h
@@ -202,6 +232,26 @@ utility
 vector
 -
 
+D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
+string
+-
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+
+D:/Software/LowLevel/DoneLang/include/DoneLexer.h
+string
+-
+vector
+-
+stack
+-
+unordered_map
+-
+Token.h
+D:/Software/LowLevel/DoneLang/include/Token.h
+ErrorHandler.h
+D:/Software/LowLevel/DoneLang/include/ErrorHandler.h
+
 D:/Software/LowLevel/DoneLang/include/DoneParser.h
 vector
 -
@@ -314,6 +364,14 @@ utility
 Token.h
 D:/Software/LowLevel/DoneLang/include/Token.h
 
+D:/Software/LowLevel/DoneLang/include/Preprocessor.h
+set
+-
+stack
+-
+string
+-
+
 D:/Software/LowLevel/DoneLang/include/ReturnStatement.h
 Expression.h
 D:/Software/LowLevel/DoneLang/include/Expression.h
@@ -387,4 +445,8 @@ utility
 -
 vector
 -
+
+D:/Software/LowLevel/DoneLang/main.cpp
+include/DoneCompiler.h
+D:/Software/LowLevel/DoneLang/include/DoneCompiler.h
 

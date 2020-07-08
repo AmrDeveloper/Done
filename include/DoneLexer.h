@@ -31,6 +31,7 @@ private:
     void scanOneCharacter();
     void scanString();
     void scanNumber();
+    void scanHexadecimalNumber();
     void scanIdentifier();
     void scanPreprocessorLabel();
     void addToken(TokenType tokenType);
@@ -39,6 +40,7 @@ private:
     char getCurrentChar();
     char getNextChar();
     static bool isDigit(char c);
+    static bool isHexDigit(char c);
     static bool isAlpha(char c);
     static bool isAlphaNumeric(char c);
     void reportLexerError(std::string message);

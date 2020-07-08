@@ -150,6 +150,11 @@ void DoneLexer::scanAndAddToken() {
         case '@' :
             scanPreprocessorLabel();
             break;
+        case '0' :
+            if(matchAndAdvance('x')) {
+                scanHexadecimalNumber();
+                break;
+            }
         default: {
             if (isDigit(c)) {
                 scanNumber();
@@ -232,6 +237,16 @@ void DoneLexer::scanNumber() {
     const size_t numberLength       = current - start;
     const std::string numberLiteral = source.substr(start, numberLength);
     addToken(TokenType::NUMBER, numberLiteral);
+}
+
+void DoneLexer::scanHexadecimalNumber() {
+   while(isHexDigit(getCurrentChar())) {
+       advanceAndGetChar();
+   }
+
+   const size_t numberLength = current - start;
+   const std::string numberLiteral = source.substr(start, numberLength);
+   addToken(TokenType::NUMBER, numberLiteral);
 }
 
 void DoneLexer::scanOneCharacter() {
@@ -317,6 +332,13 @@ bool DoneLexer::isDigit(char c) {
     return c >= '0' && c <= '9';
 }
 
+bool DoneLexer::isHexDigit(char c) {
+    if(isDigit(c)) return true;
+    else if(c >= 'a' && c <= 'f') return true;
+    else if(c >= 'A' && c <= 'F') return true;
+    return false;
+}
+
 bool DoneLexer::isAlpha(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
 }
@@ -328,3 +350,5 @@ bool DoneLexer::isAlphaNumeric(char c) {
 bool DoneLexer::isAtEnd() {
     return current >= source.size();
 }
+
+
