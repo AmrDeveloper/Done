@@ -1,6 +1,7 @@
 #include "include/DoneLexer.h"
 
 #include <iostream>
+#include <algorithm>
 
 DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
 : errorHandler(aErrorHandler){
@@ -224,8 +225,10 @@ void DoneLexer::scanIdentifier() {
 }
 
 void DoneLexer::scanNumber() {
-    while (isDigit(getCurrentChar())) {
+    char c = getCurrentChar();
+    while (isDigit(c) || c == '_') {
         advanceAndGetChar();
+        c = getCurrentChar();
     }
 
     if (getCurrentChar() == '.' && isDigit(getNextChar())) {
@@ -234,18 +237,23 @@ void DoneLexer::scanNumber() {
             advanceAndGetChar();
         }
     }
+
     const size_t numberLength       = current - start;
-    const std::string numberLiteral = source.substr(start, numberLength);
+    std::string numberLiteral = source.substr(start, numberLength);
+    numberLiteral.erase(std::remove(numberLiteral.begin(), numberLiteral.end(), '_'), numberLiteral.end());
     addToken(TokenType::NUMBER, numberLiteral);
 }
 
 void DoneLexer::scanHexadecimalNumber() {
-   while(isHexDigit(getCurrentChar())) {
-       advanceAndGetChar();
-   }
+    char c = getCurrentChar();
+    while (isHexDigit(c) || c == '_') {
+        advanceAndGetChar();
+        c = getCurrentChar();
+    }
 
    const size_t numberLength = current - start;
-   const std::string numberLiteral = source.substr(start, numberLength);
+   std::string numberLiteral = source.substr(start, numberLength);
+   numberLiteral.erase(std::remove(numberLiteral.begin(), numberLiteral.end(), '_'), numberLiteral.end());
    addToken(TokenType::NUMBER, numberLiteral);
 }
 
