@@ -7,6 +7,8 @@
 #include "include/FunctionStatement.h"
 #include "include/LineFunctionStatement.h"
 #include "include/IfStatement.h"
+#include "include/ElseIfStatement.h"
+#include "include/ElseStatement.h"
 #include "include/WhileStatement.h"
 #include "include/DoWhileStatement.h"
 #include "include/ArrayStatement.h"
@@ -222,7 +224,38 @@ Statement *DoneParser::parseIfStatement() {
     while (!matchType(RIGHT_BRACE)) {
         body.push_back(parseDeclaration());
     }
-    return new IfStatement(condition, body);
+
+    //Else if Statements if exists
+    std::vector<ElseIfStatement*> elseIfStatements;
+    while (matchType(ELSE_IF)) {
+        consume(LEFT_PAREN, "Expect : ( after else if keyword");
+        Expression *elseIfCondition = parseExpression();
+        consume(RIGHT_PAREN, "Expect : ) after else if condition");
+        consume(LEFT_BRACE, "Expect : { after to start else if body");
+
+        std::vector<Statement *> elseIfBody;
+        while (!matchType(RIGHT_BRACE)) {
+            elseIfBody.push_back(parseDeclaration());
+        }
+
+        elseIfStatements.push_back(new ElseIfStatement(elseIfCondition, elseIfBody));
+
+    }
+
+    //Else Statement if exists
+    ElseStatement* elseStatement = nullptr;
+    if(matchType(ELSE)) {
+        consume(LEFT_BRACE, "Expect : { after to start if body");
+
+        std::vector<Statement *> elseBody;
+        while (!matchType(RIGHT_BRACE)) {
+            elseBody.push_back(parseDeclaration());
+        }
+
+        elseStatement = new ElseStatement(elseBody);
+    }
+
+    return new IfStatement(condition, body, elseIfStatements, elseStatement);
 }
 
 Statement *DoneParser::parseWhileStatement() {

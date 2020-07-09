@@ -12,6 +12,8 @@ CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/CodeGenerator.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/CodeWriter.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/DoWhileStatement.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/ElseIfStatement.h
+CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/ElseStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/EnumStatement.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/ErrorHandler.h
 CMakeFiles/DoneLang.dir/CodeGenerator.cpp.obj: ../include/Expression.h
@@ -54,6 +56,8 @@ CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/DoWhileStatement.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/DoneCompiler.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/DoneLexer.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/DoneParser.h
+CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/ElseIfStatement.h
+CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/ElseStatement.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/EnumStatement.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/ErrorHandler.h
 CMakeFiles/DoneLang.dir/DoneCompiler.cpp.obj: ../include/Expression.h
@@ -96,6 +100,8 @@ CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/BlockStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/CallExpression.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/DoWhileStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/DoneParser.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ElseIfStatement.h
+CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ElseStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/EnumStatement.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/ErrorHandler.h
 CMakeFiles/DoneLang.dir/DoneParser.cpp.obj: ../include/Expression.h

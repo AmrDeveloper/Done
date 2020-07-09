@@ -26,7 +26,7 @@ void CodeGenerator::visit(const std::set<std::string>& libs) {
     }
 
     if(libs.find("stdbool") == libs.end()) {
-        codeWriter.appendLine("#include<stdbool>");
+        codeWriter.appendLine("#include<stdbool.h>");
     }
 
     codeWriter.appendLine("#define string char*");
@@ -139,6 +139,32 @@ void CodeGenerator::visit(IfStatement *ifStatement) {
     ifStatement->condition->accept(this);
     codeWriter.appendLine("){");
     for(auto statement : ifStatement->body) {
+        statement->accept(this);
+    }
+    codeWriter.appendLine("}");
+
+    for(auto statement : ifStatement->elseIfStatements) {
+        statement->accept(this);
+    }
+
+    if(ifStatement->elseStatement != nullptr) {
+        ifStatement->elseStatement->accept(this);
+    }
+}
+
+void CodeGenerator::visit(ElseIfStatement *elseIfStatement) {
+    codeWriter.append("else if(");
+    elseIfStatement->condition->accept(this);
+    codeWriter.appendLine("){");
+    for(auto statement : elseIfStatement->body) {
+        statement->accept(this);
+    }
+    codeWriter.appendLine("}");
+}
+
+void CodeGenerator::visit(ElseStatement *elseStatement) {
+    codeWriter.appendLine("else{");
+    for(auto statement : elseStatement->body) {
         statement->accept(this);
     }
     codeWriter.appendLine("}");

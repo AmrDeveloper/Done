@@ -12,6 +12,8 @@
 #define GetCurrentDir getcwd
 #endif
 
+#define COMPILE_DEBUG_MODE
+
 std::string getCurrentDirectoryPath() {
     char cCurrentPath[FILENAME_MAX];
 
@@ -27,6 +29,14 @@ std::string getCurrentDirectoryPath() {
 }
 
 int main(int argc, char* argv[]) {
+#ifdef COMPILE_DEBUG_MODE
+    DoneCompiler doneCompiler;
+    std::string mainFile = "Enume.done";
+    std::string projectPath = "../examples/";
+    doneCompiler.compile(mainFile, projectPath);
+    //doneCompiler.generateExecutable();
+    exit(EXIT_SUCCESS);
+#endif
     if(argc < 2) {
         std::cout<<"Must include at last main file name";
         return EXIT_FAILURE;
@@ -55,6 +65,8 @@ int main(int argc, char* argv[]) {
         }
 
         doneCompiler.compile(mainFile, projectPath);
+        doneCompiler.generateExecutable();
+        //doneCompiler.runExecutable();
     }
     return EXIT_SUCCESS;
 }

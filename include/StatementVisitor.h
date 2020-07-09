@@ -9,6 +9,8 @@ class BlockStatement;
 class FunctionStatement;
 class LineFunctionStatement;
 class IfStatement;
+class ElseIfStatement;
+class ElseStatement;
 class WhileStatement;
 class DoWhileStatement;
 class ArrayStatement;
@@ -31,6 +33,10 @@ public:
     virtual void visit(ExpressionStatement *statement) {};
 
     virtual void visit(IfStatement *statement) {};
+
+    virtual void visit(ElseIfStatement *statement) {};
+
+    virtual void visit(ElseStatement *statement) {};
 
     virtual void visit(WhileStatement *statement) {};
 

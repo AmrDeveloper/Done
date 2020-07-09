@@ -15,6 +15,8 @@ public:
     std::string executableFileName = EXECUTABLE_SOURCE_FILE_NAME;
 
     void compile(std::string mainFile, std::string &projectPath);
+    void generateExecutable();
+    void runExecutable();
     void setOutputCFileName(std::string fileName);
     void setExecutableFileName(std::string fileName);
 };

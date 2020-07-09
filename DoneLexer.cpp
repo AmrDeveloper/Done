@@ -11,8 +11,8 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     source = aSource;
 
     reservedKeywords["if"]        = TokenType::IF;
+    reservedKeywords["elsif"]     = TokenType::ELSE_IF;
     reservedKeywords["else"]      = TokenType::ELSE;
-    reservedKeywords["else if"]   = TokenType::ELSE_IF;
 
     reservedKeywords["for"]       = TokenType::FOR;
     reservedKeywords["do"]        = TokenType::DO;

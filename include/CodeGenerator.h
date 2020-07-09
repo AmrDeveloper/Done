@@ -18,6 +18,8 @@
 #include "FunctionStatement.h"
 #include "LineFunctionStatement.h"
 #include "IfStatement.h"
+#include "ElseIfStatement.h"
+#include "ElseStatement.h"
 #include "WhileStatement.h"
 #include "DoWhileStatement.h"
 #include "ArrayStatement.h"
@@ -66,6 +68,10 @@ public:
     void visit(LineFunctionStatement *funStatement) override;
 
     void visit(IfStatement *ifStatement) override;
+
+    void visit(ElseIfStatement *ifStatement) override;
+
+    void visit(ElseStatement *ifStatement) override;
 
     void visit(WhileStatement *whileStatement) override;
 

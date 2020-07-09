@@ -142,6 +142,12 @@
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/DoneParser.h">
 			<Option target="DoneLang"/>
 		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ElseIfStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
+		<Unit filename="D:/Software/LowLevel/DoneLang/include/ElseStatement.h">
+			<Option target="DoneLang"/>
+		</Unit>
 		<Unit filename="D:/Software/LowLevel/DoneLang/include/EnumStatement.h">
 			<Option target="DoneLang"/>
 		</Unit>

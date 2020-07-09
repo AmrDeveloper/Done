@@ -38,9 +38,29 @@ void DoneCompiler::compile(std::string mainFile, std::string& projectPath) {
         delete statement;
     }
 
-    std::ofstream file(projectPath + outputCFileName);
+    std::string cSourcefilePath = projectPath + outputCFileName;
+
+    std::ofstream file(cSourcefilePath);
     file << cSourceCode;
     file.close();
+}
+
+void DoneCompiler::generateExecutable() {
+    std::string gccCompileCommand;
+    gccCompileCommand.append("gcc -o ");
+    gccCompileCommand.append(executableFileName);
+    gccCompileCommand.append(" ");
+    gccCompileCommand.append(outputCFileName);
+
+    system(gccCompileCommand.c_str());
+}
+
+void DoneCompiler::runExecutable() {
+    std::string gccCompileCommand;
+    //TODO : Issue while passing dot to system
+    gccCompileCommand.append("./");
+    gccCompileCommand.append(executableFileName);
+    system(gccCompileCommand.c_str());
 }
 
 void DoneCompiler::setOutputCFileName(std::string fileName) {
