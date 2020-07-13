@@ -2,7 +2,8 @@
 Toy Compiler to generate C Code and executable and has preprocessor to handle multi-files
 
 Done support most of C Features like struct, enum, pointer, address and can use any C library
-and also have some new features from other langauges like single line function and Elvis operator
+and also have some new features from other languages like single line function and Elvis operator 
+and can spreate number with _ for example 1_000_000
 
 Simple code Example
 
