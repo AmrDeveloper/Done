@@ -67,7 +67,7 @@ Statement *DoneParser::parseVarDeclaration(bool isConst) {
     Token name = consume(IDENTIFIER, "Expect var name");
     consume(COLON, "Expect : after var name");
     MemoryType memoryType = parseMemoryType();
-    Token type = consume(IDENTIFIER, "Expect Type type");
+    Token type = consume(IDENTIFIER, "Expect Variable type");
     bool isInitialized = false;
     bool isArrayStatement = false;
     Expression *arraySize = nullptr;
@@ -83,7 +83,6 @@ Statement *DoneParser::parseVarDeclaration(bool isConst) {
     }
     Expression *value = nullptr;
     if (matchType(EQUAL)) {
-
         value = parseExpression();
         isInitialized = true;
         consume(SEMICOLON, "Expect ; after init type");
@@ -239,7 +238,6 @@ Statement *DoneParser::parseIfStatement() {
         }
 
         elseIfStatements.push_back(new ElseIfStatement(elseIfCondition, elseIfBody));
-
     }
 
     //Else Statement if exists
@@ -559,6 +557,8 @@ void DoneParser::reportParserError(const std::string& message) {
     Token token = getCurrentToken();
     errorHandler.addError(Error(token, message));
     synchronize();
+    errorHandler.report();
+    exit(EXIT_FAILURE);
 }
 
 bool DoneParser::isAtEnd() {

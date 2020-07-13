@@ -23,11 +23,6 @@ void DoneCompiler::compile(std::string mainFile, std::string& projectPath) {
     DoneParser doneParser(tokens, errorHandler);
     std::vector<Statement *> statements = doneParser.parseSourceCode();
 
-    if (errorHandler.hasError) {
-        errorHandler.report();
-        exit(EXIT_FAILURE);
-    }
-
     std::set<std::string> standardLibs = preprocessor.getStandardLibraries();
 
     CodeGenerator codeGenerator(errorHandler);
