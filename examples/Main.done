@@ -1,0 +1,15 @@
+import "Utils.done"
+
+include "stdio.h"
+
+fun main() : int {
+    printf("Enter your number : ");
+    var number : int;
+    scanf("%d", &number);
+    if(isEvent(number)) {
+       printf("Even Number");
+    }else{
+       printf("Odd Number");
+    }
+    return 0;
+}

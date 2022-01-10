@@ -1,0 +1,2 @@
+fun isOdd(x : int) : bool -> return x%2 == 0;
+fun isEvent(x : int) : bool -> return x%2 != 0;

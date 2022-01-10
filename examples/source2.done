@@ -1,8 +1,0 @@
-include "stdio.h"
-
-fun main () : int {
-    var x : int;
-    scanf("%d", &x);
-    printf("%d\n", x);
-    return 0;
-}
