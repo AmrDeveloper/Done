@@ -1,0 +1,6 @@
+enum Numbers {
+   ONE,
+   TWO,
+   THREE,
+   FOUR
+}
