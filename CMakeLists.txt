@@ -2,5 +2,19 @@ cmake_minimum_required(VERSION 3.16)
 project(DoneLang)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-add_executable(DoneLang main.cpp include/TokenType.h include/CodeWriter.h CodeWriter.cpp include/DoneLexer.h include/Token.h Token.cpp DoneLexer.cpp include/ErrorHandler.h ErrorHandler.cpp include/DoneParser.h DoneParser.cpp include/Preprocessor.h Preprocessor.cpp include/ExpressionVisitor.h include/Expression.h include/Statement.h include/StatementVisitor.h include/EnumStatement.h include/CodeGenerator.h CodeGenerator.cpp include/VarStatement.h include/AssignExpression.h include/LiteralExpression.h include/StructStatement.h include/ExpressionStatement.h include/BlockStatement.h include/FunctionStatement.h include/Parameter.h include/IfStatement.h include/CallExpression.h include/VariableExpression.h include/GroupExpression.h include/LogicalExpression.h include/GetExpression.h include/TernaryExpression.h include/BinaryExpression.h include/UnaryExpression.h include/WhileStatement.h include/ArrayExpression.h include/ArrayStatement.h include/ArrayValuesExpression.h include/DoneCompiler.h DoneCompiler.cpp include/LineFunctionStatement.h include/ReturnStatement.h include/ElseIfStatement.h include/ElseStatement.h)
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/src
+)
+
+file(GLOB source_files CONFIGURE_DEPENDS
+    "${PROJECT_SOURCE_DIR}/src/*.cpp"
+    "${PROJECT_SOURCE_DIR}/include/*.h"
+)
+
+add_executable(DoneLang ${source_files})
+set_target_properties(DoneLang PROPERTIES OUTPUT_NAME "donec")
