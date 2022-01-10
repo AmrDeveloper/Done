@@ -1,4 +1,4 @@
-#include "include/CodeWriter.h"
+#include "../include/CodeWriter.h"
 
 void CodeWriter::append(const std::string &line) {
     codeVector.push_back(line);

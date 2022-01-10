@@ -1,4 +1,4 @@
-#include "include/DoneLexer.h"
+#include "../include/DoneLexer.h"
 
 #include <iostream>
 #include <algorithm>

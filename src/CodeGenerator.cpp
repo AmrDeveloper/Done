@@ -1,4 +1,4 @@
-#include "include/CodeGenerator.h"
+#include "../include/CodeGenerator.h"
 
 using namespace std;
 

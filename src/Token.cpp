@@ -1,4 +1,4 @@
-#include "include/Token.h"
+#include "../include/Token.h"
 
 Token::Token(TokenType type, const std::string &aLexeme,
         const std::string &aLiteral, int aLine, int aStart, int aEnd) {

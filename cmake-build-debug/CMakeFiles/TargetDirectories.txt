@@ -1,3 +1,0 @@
-D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/DoneLang.dir
-D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Software/LowLevel/DoneLang/cmake-build-debug/CMakeFiles/rebuild_cache.dir

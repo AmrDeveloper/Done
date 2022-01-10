@@ -1,4 +1,4 @@
-#include "include/ErrorHandler.h"
+#include "../include/ErrorHandler.h"
 #include <iostream>
 
 Error::Error(std::string aFile, int aLine, int aStart, int aEnd,

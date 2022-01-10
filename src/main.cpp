@@ -1,4 +1,5 @@
-#include "include/DoneCompiler.h"
+#include "../include/DoneCompiler.h"
+
 #include <iostream>
 #include <algorithm>
 
@@ -31,7 +32,7 @@ std::string getCurrentDirectoryPath() {
 int main(int argc, char* argv[]) {
 #ifdef COMPILE_DEBUG_MODE
     DoneCompiler doneCompiler;
-    std::string mainFile = "Enume.done";
+    std::string mainFile = "Numbers.done";
     std::string projectPath = "../examples/";
     doneCompiler.compile(mainFile, projectPath);
     //doneCompiler.generateExecutable();

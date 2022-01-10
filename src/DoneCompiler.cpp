@@ -1,10 +1,10 @@
 #include <fstream>
 
-#include "include/DoneCompiler.h"
-#include "include/Preprocessor.h"
-#include "include/DoneLexer.h"
-#include "include/DoneParser.h"
-#include "include/CodeGenerator.h"
+#include "../include/DoneCompiler.h"
+#include "../include/Preprocessor.h"
+#include "../include/DoneLexer.h"
+#include "../include/DoneParser.h"
+#include "../include/CodeGenerator.h"
 
 void DoneCompiler::compile(std::string mainFile, std::string& projectPath) {
     Preprocessor preprocessor(mainFile, projectPath);
