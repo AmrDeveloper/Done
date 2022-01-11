@@ -6,7 +6,7 @@
 
 Preprocessor::Preprocessor(std::string &mainFile, std::string & projectPath) {
     sourcePath = projectPath;
-    sourceDepthStack.push(sourcePath + mainFile);
+    sourceDepthStack.push(sourcePath + "/" + mainFile);
 }
 
 void Preprocessor::runProcessor() {
