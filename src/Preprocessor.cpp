@@ -49,7 +49,7 @@ void Preprocessor::scanImportKeyword(std::string &library) {
     library.erase(remove(library.begin(), library.end(), '\"' ),library.end());
     library.erase(remove(library.begin(), library.end(), ' ' ),library.end());
 
-    std::string libraryPath = sourcePath + library;
+    std::string libraryPath = sourcePath + "/" + library;
 
     bool isVisited = insertUniqueFile(libraryPath);
     // Make sure one file can't import other file twice

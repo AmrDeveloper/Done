@@ -13,20 +13,25 @@ CompilerOptions* parseCompilerArguments(int argc, char** argv) {
         if (strcmp(argv[i], COMPILER_NAME_FLAG) == 0 && i < argc - 1) {
             compilerOptions->compilerName = argv[i + 1];
             i = i + 2;
+            continue;
         }
 
         if (strcmp(argv[i], OPTIMIZATION_FLAG) == 0 && i < argc - 1) {
             compilerOptions->optimizationLevel = argv[i + 1];
             i = i + 2;
+            continue;
         }
 
         if (strcmp(argv[i], GENERATED_FILE_NAME_FLAG) == 0 && i < argc - 1) {
             compilerOptions->generatedFileName = argv[i + 1];
             i = i + 2;
+            continue;
         }
+
         if (strcmp(argv[i], EXECUTABLE_NAME_FLAG) == 0 && i < argc - 1) {
             compilerOptions->executableFileName = argv[i + 1];
             i = i + 2;
+            continue;
         }
     }
 

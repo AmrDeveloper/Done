@@ -1,6 +1,7 @@
 #include <fstream>
 
 #include "../include/DoneCompiler.h"
+#include "../include/FileManager.h"
 #include "../include/ErrorHandler.h"
 #include "../include/Preprocessor.h"
 #include "../include/DoneLexer.h"
@@ -27,6 +28,7 @@ void DoneCompiler::compile(CompilerOptions* compilerOptions) {
 
     CodeGenerator codeGenerator(errorHandler);
     codeGenerator.generateCode(statements, standardLibs);
+    
     auto cSourceCode = codeGenerator.codeWriter.getSource();
 
     for(auto statement : statements) {
@@ -34,8 +36,5 @@ void DoneCompiler::compile(CompilerOptions* compilerOptions) {
     }
 
     std::string cSourcefilePath = compilerOptions->mainSourceFilePath + "/" + compilerOptions->generatedFileName;
-
-    std::ofstream file(cSourcefilePath);
-    file << cSourceCode;
-    file.close();
+    writeFileContent(cSourcefilePath, cSourceCode);
 }
