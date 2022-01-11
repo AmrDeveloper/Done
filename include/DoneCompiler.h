@@ -8,7 +8,10 @@
 
 class DoneCompiler {
 public:
-    void compile(CompilerOptions* compilerOptions);
+    DoneCompiler(CompilerOptions* compilerOptions);
+    void compile();
+private:
+    CompilerOptions* compilerOptions;
 };
 
 #endif

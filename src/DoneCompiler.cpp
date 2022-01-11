@@ -8,9 +8,16 @@
 #include "../include/DoneParser.h"
 #include "../include/CodeGenerator.h"
 
-void DoneCompiler::compile(CompilerOptions* compilerOptions) {
+
+DoneCompiler::DoneCompiler(CompilerOptions* compilerOptions)
+: compilerOptions(compilerOptions) {
+
+}
+
+void DoneCompiler::compile() {
     Preprocessor preprocessor(compilerOptions->mainSourceFileName, compilerOptions->mainSourceFilePath);
     preprocessor.runProcessor();
+
     std::string preProcessedCode = preprocessor.getGeneratedCode();
 
     ErrorHandler errorHandler;

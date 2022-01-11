@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
     parseCompilerFlags(argv[1]);
 
     auto* compilerOptions = parseCompilerOptions(argc, argv);
-    auto doneCompiler = DoneCompiler();
-    doneCompiler.compile(compilerOptions);
+    auto doneCompiler = DoneCompiler(compilerOptions);
+    doneCompiler.compile();
 
     delete compilerOptions;
     return EXIT_SUCCESS;
