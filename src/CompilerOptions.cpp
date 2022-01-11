@@ -3,7 +3,7 @@
 #include "../include/CompilerOptions.h"
 #include "../include/FileManager.h"
 
-CompilerOptions* parseCompilerArguments(int argc, char** argv) {
+CompilerOptions* parseCompilerOptions(int argc, char** argv) {
     CompilerOptions* compilerOptions = new CompilerOptions;
     compilerOptions->mainSourceFileName = getFileName(argv[1]);
     compilerOptions->mainSourceFilePath = getFileParentPath(argv[1]);

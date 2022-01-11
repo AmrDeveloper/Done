@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 
     parseCompilerFlags(argv[1]);
 
-    auto* compilerOptions = parseCompilerArguments(argc, argv);
+    auto* compilerOptions = parseCompilerOptions(argc, argv);
     auto doneCompiler = DoneCompiler();
     doneCompiler.compile(compilerOptions);
 

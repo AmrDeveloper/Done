@@ -20,7 +20,7 @@ struct CompilerOptions {
     std::string executableFileName      = "main";
 };
 
-CompilerOptions* parseCompilerArguments(int argc, char** argv);
+CompilerOptions* parseCompilerOptions(int argc, char** argv);
 
 void parseCompilerFlags(char* flag);
 
