@@ -10,6 +10,7 @@ class DoneCompiler {
 public:
     DoneCompiler(CompilerOptions* compilerOptions);
     void compile();
+    void generateExecutable();
 private:
     CompilerOptions* compilerOptions;
 };

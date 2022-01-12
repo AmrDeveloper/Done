@@ -33,6 +33,11 @@ CompilerOptions* parseCompilerOptions(int argc, char** argv) {
             i = i + 2;
             continue;
         }
+
+        if (strcmp(argv[i], GENERATE_EXECUTABLE_FLAG) == 0) {
+            compilerOptions->generateExecutable = true;
+            continue;
+        }
     }
 
     return compilerOptions;

@@ -1,4 +1,6 @@
 #include <fstream>
+#include <sstream>
+#include <filesystem>
 
 #include "../include/DoneCompiler.h"
 #include "../include/CompilerContext.h"
@@ -8,10 +10,7 @@
 #include "../include/DoneParser.h"
 #include "../include/CodeGenerator.h"
 
-DoneCompiler::DoneCompiler(CompilerOptions* compilerOptions)
-: compilerOptions(compilerOptions) {
-
-}
+DoneCompiler::DoneCompiler(CompilerOptions* compilerOptions) : compilerOptions(compilerOptions) {}
 
 void DoneCompiler::compile() {
     auto* compilerContext = new CompilerContext();
@@ -25,10 +24,26 @@ void DoneCompiler::compile() {
     CodeGenerator codeGenerator(compilerContext);
     auto cSourceCode = codeGenerator.generateCode(statements);
     
-    for(auto statement : statements) {
-        delete statement;
-    }
+    for(auto statement : statements) delete statement;
 
     std::string cSourcefilePath = compilerOptions->mainSourceFilePath + "/" + compilerOptions->generatedFileName;
     writeFileContent(cSourcefilePath, cSourceCode);
+
+    if (compilerOptions->generateExecutable) generateExecutable();
+}
+
+void DoneCompiler::generateExecutable() {
+    std::filesystem::current_path(compilerOptions->mainSourceFilePath);
+
+    std::stringstream stream;
+    stream << compilerOptions->compilerName;
+    stream << " ";
+    stream << compilerOptions->mainSourceFilePath << "/" << compilerOptions->generatedFileName;
+    stream << " ";
+    stream << "-o " << compilerOptions->executableFileName;
+    stream << " ";
+    stream << "-" << compilerOptions->optimizationLevel;
+
+    std::string compileCommand = stream.str();
+    std::system(compileCommand.data());
 }
