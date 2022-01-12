@@ -3,20 +3,12 @@
 #define DONELANG_EXPRESSION_H
 
 #include "ExpressionVisitor.h"
-
-enum MemoryType {
-   SINGLE_POINTER,
-   DOUBLE_POINTER,
-   ADDRESS_POINTER,
-   NONE
-};
+#include "MemoryType.h"
 
 class Expression {
 
 public:
-    virtual void accept(class ExpressionVisitor* visitor) {
-        std::cout<<"Hello from Expression";
-    }
+    virtual void accept(class ExpressionVisitor* visitor) {}
 };
 
 #endif

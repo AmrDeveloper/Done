@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "Token.h"
+#include "MemoryType.h"
 
 class Parameter {
 public:

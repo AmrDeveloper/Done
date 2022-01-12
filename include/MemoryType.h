@@ -1,0 +1,11 @@
+#ifndef DONELANG_MEMORYTYPE_H
+#define DONELANG_MEMORYTYPE_H
+
+enum MemoryType {
+   SINGLE_POINTER,
+   DOUBLE_POINTER,
+   ADDRESS_POINTER,
+   NONE
+};
+
+#endif

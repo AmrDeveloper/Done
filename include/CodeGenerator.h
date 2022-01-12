@@ -8,24 +8,9 @@
 
 #include "CompilerContext.h"
 
-#include "Statement.h"
-#include "EnumStatement.h"
-#include "VarStatement.h"
-#include "StatementVisitor.h"
 #include "ExpressionVisitor.h"
 
-#include "StructStatement.h"
-#include "ExpressionStatement.h"
-#include "BlockStatement.h"
-#include "FunctionStatement.h"
-#include "LineFunctionStatement.h"
-#include "IfStatement.h"
-#include "ElseIfStatement.h"
-#include "ElseStatement.h"
-#include "WhileStatement.h"
-#include "DoWhileStatement.h"
-#include "ArrayStatement.h"
-#include "ReturnStatement.h"
+#include "Statements.h"
 
 #include "LiteralExpression.h"
 #include "AssignExpression.h"
