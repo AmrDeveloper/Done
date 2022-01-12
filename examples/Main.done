@@ -1,6 +1,12 @@
-import "Utils"
+import {
+   "Numbers"
+   "Utils"
+}
 
-include "stdio"
+include {
+   "stdio"
+   "math"
+}
 
 fun main() : int {
     printf("Enter your number : ");
