@@ -1,0 +1,14 @@
+include "stdio"
+
+fun main() : int {
+    printf("Enter your number : ");
+    var number : int;
+    scanf("%d", &number);
+    if (number > 100) {
+        printf("Bigger than 100");
+    } elif (number > 50) {
+        printf("Bigger than 50");
+    } else {
+        printf("Less than 50");
+    }
+}

@@ -14,7 +14,7 @@ DoneLexer::DoneLexer(const std::string& aSource, ErrorHandler& aErrorHandler)
     reservedKeywords["include"]   = TokenType::INCLUDE;
 
     reservedKeywords["if"]        = TokenType::IF;
-    reservedKeywords["elsif"]     = TokenType::ELSE_IF;
+    reservedKeywords["elif"]      = TokenType::ELSE_IF;
     reservedKeywords["else"]      = TokenType::ELSE;
 
     reservedKeywords["for"]       = TokenType::FOR;
