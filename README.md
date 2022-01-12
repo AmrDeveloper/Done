@@ -72,6 +72,11 @@ To enable generating executable
 -x
 ```
 
+To generate and run executable
+```
+-r
+```
+
 To print the donec version
 ```
 -v

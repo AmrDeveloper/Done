@@ -11,6 +11,7 @@ public:
     DoneCompiler(CompilerOptions* compilerOptions);
     void compile();
     void generateExecutable();
+    void runExecutable();
 private:
     CompilerOptions* compilerOptions;
 };

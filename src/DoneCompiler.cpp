@@ -30,6 +30,7 @@ void DoneCompiler::compile() {
     writeFileContent(cSourcefilePath, cSourceCode);
 
     if (compilerOptions->generateExecutable) generateExecutable();
+    if (compilerOptions->runExecutable) runExecutable();
 }
 
 void DoneCompiler::generateExecutable() {
@@ -46,4 +47,13 @@ void DoneCompiler::generateExecutable() {
 
     std::string compileCommand = stream.str();
     std::system(compileCommand.data());
+}
+
+void DoneCompiler::runExecutable() {
+    std::stringstream runExecutableCommand;
+    runExecutableCommand << "./";
+    runExecutableCommand << compilerOptions->executableFileName;
+
+    std::string command = runExecutableCommand.str();
+    std::system(command.data());
 }
