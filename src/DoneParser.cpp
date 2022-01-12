@@ -1,23 +1,11 @@
+#include <iostream>
+
 #include "../include/DoneParser.h"
 #include "../include/FileManager.h"
 
 #include "../include/Statements.h"
+#include "../include/Expressions.h"
 #include "../include/Parameter.h"
-
-#include "../include/LiteralExpression.h"
-#include "../include/AssignExpression.h"
-#include "../include/CallExpression.h"
-#include "../include/VariableExpression.h"
-#include "../include/GroupExpression.h"
-#include "../include/LogicalExpression.h"
-#include "../include/GetExpression.h"
-#include "../include/TernaryExpression.h"
-#include "../include/BinaryExpression.h"
-#include "../include/UnaryExpression.h"
-#include "../include/ArrayExpression.h"
-#include "../include/ArrayValuesExpression.h"
-
-#include <iostream>
 
 DoneParser::DoneParser(CompilerContext* context, DoneLexer* lexer)
         : context(context), lexer(lexer) {

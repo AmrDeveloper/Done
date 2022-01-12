@@ -8,22 +8,8 @@
 
 #include "CompilerContext.h"
 
-#include "ExpressionVisitor.h"
-
 #include "Statements.h"
-
-#include "LiteralExpression.h"
-#include "AssignExpression.h"
-#include "CallExpression.h"
-#include "VariableExpression.h"
-#include "GroupExpression.h"
-#include "LogicalExpression.h"
-#include "GetExpression.h"
-#include "TernaryExpression.h"
-#include "BinaryExpression.h"
-#include "UnaryExpression.h"
-#include "ArrayExpression.h"
-#include "ArrayValuesExpression.h"
+#include "Expressions.h"
 
 #include "ErrorHandler.h"
 #include "CodeWriter.h"
