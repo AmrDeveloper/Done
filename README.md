@@ -16,10 +16,10 @@ fun isEvent(x : int) : bool -> return x%2 != 0;
 Main.done
 ```
 // Import File written in Done Language
-import "Utils.done"
+import "Utils"
 
 // Include C Standard Libraries
-include "stdio.h"
+include "stdio"
 
 fun main() : int {
     printf("Enter your number : ");
