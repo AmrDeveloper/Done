@@ -151,9 +151,6 @@ void DoneLexer::scanAndAddToken() {
         case '"':
             scanString();
             break;
-        case '@' :
-            scanPreprocessorLabel();
-            break;
         case '0' :
             if(matchAndAdvance('x')) {
                 scanHexadecimalNumber();
@@ -171,46 +168,6 @@ void DoneLexer::scanAndAddToken() {
             }
         }
     }
-}
-
-void DoneLexer::scanPreprocessorLabel() {
-    while (isAlphaNumeric(getCurrentChar())) advanceAndGetChar();
-    const size_t identifierLength = current - start;
-    const std::string label  = source.substr(start, identifierLength);
-
-    current += 1;
-    start += identifierLength;
-
-    if(label == "@LOAD") {
-        while (getCurrentChar() != '\n' && !isAtEnd()) {
-            advanceAndGetChar();
-        }
-        const size_t stringSize = current - start;
-        const std::string stringLiteral = source.substr(start + 1, stringSize - 1);
-
-        currentFile = stringLiteral;
-        dependencyFilesStack.push(currentFile);
-        return;
-    }
-
-    if(label == "@IGNORE") {
-        line = line + 1;
-        return;
-    }
-
-    if (label == "@END") {
-        int filesSize = dependencyFilesStack.size();
-
-        if (filesSize >= 2) {
-            dependencyFilesStack.pop();
-            currentFile = dependencyFilesStack.top();
-            line = 1;
-            //TODO : create two variables to handle error start and end
-            //TODO : errorStar, errorEnd to improve ErrorHandler
-        }
-    }
-
-
 }
 
 void DoneLexer::scanIdentifier() {
