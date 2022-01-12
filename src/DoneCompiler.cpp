@@ -1,13 +1,12 @@
 #include <fstream>
 
 #include "../include/DoneCompiler.h"
+#include "../include/CompilerContext.h"
 #include "../include/FileManager.h"
 #include "../include/ErrorHandler.h"
-#include "../include/Preprocessor.h"
 #include "../include/DoneLexer.h"
 #include "../include/DoneParser.h"
 #include "../include/CodeGenerator.h"
-
 
 DoneCompiler::DoneCompiler(CompilerOptions* compilerOptions)
 : compilerOptions(compilerOptions) {
@@ -15,29 +14,17 @@ DoneCompiler::DoneCompiler(CompilerOptions* compilerOptions)
 }
 
 void DoneCompiler::compile() {
-    Preprocessor preprocessor(compilerOptions->mainSourceFileName, compilerOptions->mainSourceFilePath);
-    preprocessor.runProcessor();
+    auto* compilerContext = new CompilerContext();
+    compilerContext->projectPath = compilerOptions->mainSourceFilePath;
 
-    std::string preProcessedCode = preprocessor.getGeneratedCode();
-
-    ErrorHandler errorHandler;
-    DoneLexer doneLexer(preProcessedCode, errorHandler);
-    std::vector<Token> tokens = doneLexer.scanSourceCode();
-
-    if (errorHandler.hasError) {
-        errorHandler.report();
-        exit(EXIT_FAILURE);
-    }
-
-    DoneParser doneParser(tokens, errorHandler);
+    std::string sourceCode = readFileContent(compilerOptions->compilationPath);
+    auto* doneLexer = new DoneLexer (sourceCode, compilerContext->errorHandler);
+    DoneParser doneParser(compilerContext, doneLexer);
     std::vector<Statement *> statements = doneParser.parseSourceCode();
-    std::set<std::string> standardLibs = preprocessor.getStandardLibraries();
 
-    CodeGenerator codeGenerator(errorHandler);
-    codeGenerator.generateCode(statements, standardLibs);
+    CodeGenerator codeGenerator(compilerContext);
+    auto cSourceCode = codeGenerator.generateCode(statements);
     
-    auto cSourceCode = codeGenerator.codeWriter.getSource();
-
     for(auto statement : statements) {
         delete statement;
     }

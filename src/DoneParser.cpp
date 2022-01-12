@@ -1,4 +1,5 @@
 #include "../include/DoneParser.h"
+#include "../include/FileManager.h"
 
 #include "../include/EnumStatement.h"
 #include "../include/VarStatement.h"
@@ -31,22 +32,59 @@
 
 #include <iostream>
 
-DoneParser::DoneParser(std::vector<Token> tokens, ErrorHandler &errorHandler)
-        : tokens(std::move(tokens)), errorHandler(errorHandler) {
+DoneParser::DoneParser(CompilerContext* context, DoneLexer* lexer)
+        : context(context), lexer(lexer) {
     currentTokenIndex = 0;
+    tokens = lexer->scanSourceCode();
 }
 
 std::vector<Statement*> DoneParser::parseSourceCode() {
     std::vector<Statement*> statements;
     while (!isAtEnd()) {
+        if (matchType(INCLUDE)) {
+            parseIncludeStatement();
+            continue;
+        }
+
+        if (matchType(IMPORT)) {
+            Token name = consume(STRING, "Expect done source file path to import");
+            std::string sourceFileName = name.lexeme.substr(1, name.lexeme.length() - 2);
+            if (context->scannedFiles.count(sourceFileName) == 0) {
+                context->scannedFiles.insert(sourceFileName);
+                std::vector<Statement *> subStatements = parseImportStatement(sourceFileName);
+                statements.insert(statements.end(), subStatements.begin(), subStatements.end());
+            } else {
+                std::cerr << "This source file is already imported" << std::endl;
+            }
+            continue;
+        }
+
         statements.push_back(parseDeclaration());
     }
     return statements;
 }
 
+std::vector<Statement*> DoneParser::parseImportStatement(std::string sourceFileName) {
+    std::string sourceFilePath = context->projectPath + "/" + sourceFileName + ".done";
+    std::string sourceCode = readFileContent(sourceFilePath);
+    DoneLexer sourceLexer = DoneLexer(sourceCode, context->errorHandler);
+    DoneParser sourceParser = DoneParser(context, &sourceLexer);
+    return sourceParser.parseSourceCode();
+}
+
+void DoneParser::parseIncludeStatement() {
+    Token name = consume(STRING, "Expect library name to include");
+    std::string moduleName = name.lexeme;
+    std::string libraryName = moduleName.substr(1, moduleName.length() - 2);
+    if (context->cStdLibraries.count(moduleName) == 0) {
+        context->cStdLibraries.insert(libraryName);
+    } else {
+        std::cerr << "This module is already imported" << std::endl;
+    }
+}
+
 Statement *DoneParser::parseStatement() {
     if (matchType(IF)) return parseIfStatement();
-    //if(matchType(FOR)) return parseForStatement();
     if (matchType(DO)) return parseDoWhileStatement();
     if (matchType(WHILE)) return parseWhileStatement();
     if (matchType(RETURN)) return parseReturnStatement();
@@ -555,9 +593,9 @@ Token DoneParser::consume(TokenType type, const char *message) {
 
 void DoneParser::reportParserError(const std::string& message) {
     Token token = getCurrentToken();
-    errorHandler.addError(Error(token, message));
+    context->errorHandler.addError(Error(token, message));
     synchronize();
-    errorHandler.report();
+    context->errorHandler.report();
     exit(EXIT_FAILURE);
 }
 

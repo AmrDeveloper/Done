@@ -8,18 +8,24 @@
 #include "Statement.h"
 #include "Expression.h"
 #include "ErrorHandler.h"
+#include "CompilerContext.h"
+#include "DoneLexer.h"
 
 #define MAX_NUM_OF_ARGUMENTS 127
 
 class DoneParser {
 public:
-    DoneParser(std::vector<Token> tokens, ErrorHandler &errorHandler);
+    DoneParser(CompilerContext* context, DoneLexer* lexer);
     std::vector<Statement*> parseSourceCode();
 
 private:
     int currentTokenIndex;
     std::vector<Token> tokens;
-    ErrorHandler& errorHandler;
+    CompilerContext* context;
+    DoneLexer* lexer;
+
+    std::vector<Statement*> parseImportStatement(std::string);
+    void parseIncludeStatement();
 
     Statement* parseStatement();
     Statement* parseDeclaration();

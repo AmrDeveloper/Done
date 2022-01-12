@@ -20,6 +20,7 @@ enum TokenType {
     OR, AND, XOR,
 
     //Keywords
+    IMPORT, INCLUDE,
     FUN, VAR, CONST, RETURN, IDENTIFIER,
     IF, ELSE, ELSE_IF, FOR, DO, WHILE,
     TERNARY, ELVIS, CONTINUE, BREAK, LAMBDA,

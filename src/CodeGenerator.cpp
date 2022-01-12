@@ -2,27 +2,22 @@
 
 using namespace std;
 
-CodeGenerator::CodeGenerator(ErrorHandler &errorHandler)
-        : errorHandler(errorHandler){
+CodeGenerator::CodeGenerator(CompilerContext* context)
+: context(context) {
 
 }
 
-void CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
+std::string CodeGenerator::generateCode(const std::vector<Statement*>& statements) {
+    generateSourceCodeHeaders(context->cStdLibraries);
     for(auto statement : statements) {
         statement->accept(this);
     }
+    return codeWriter.getSource();
 }
 
-void CodeGenerator::generateCode(const vector<Statement *> &statements,
-                                 const std::set<std::string>& libs) {
-    visit(libs);
-    generateCode(statements);
-}
-
-void CodeGenerator::visit(const std::set<std::string>& libs) {
-    for(auto library : libs) {
+void CodeGenerator::generateSourceCodeHeaders(const std::set<std::string>& libs) {
+    for(auto library : context->cStdLibraries) {
         codeWriter.appendLine("#include<" + library + ">");
-        //TODO : need to support 3D party Libraries and Done Libraries
     }
 
     if(libs.find("stdbool") == libs.end()) {

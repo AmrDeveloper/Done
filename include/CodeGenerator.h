@@ -6,6 +6,8 @@
 #include <memory>
 #include <set>
 
+#include "CompilerContext.h"
+
 #include "Statement.h"
 #include "EnumStatement.h"
 #include "VarStatement.h"
@@ -43,15 +45,11 @@
 
 class CodeGenerator : public StatementVisitor, ExpressionVisitor {
 public:
-    CodeWriter codeWriter;
+    explicit CodeGenerator(CompilerContext* context);
 
-    explicit CodeGenerator(ErrorHandler &errorHandler);
+    std::string generateCode(const std::vector<Statement *> &statements);
 
-    void generateCode(const std::vector<Statement *> &statements);
-
-    void generateCode(const std::vector<Statement *> &statements, const std::set<std::string>& libs);
-
-    void visit(const std::set<std::string>& libs);
+    void generateSourceCodeHeaders(const std::set<std::string>& libs);
 
     void visit(EnumStatement *enumStatement) override;
 
@@ -107,7 +105,8 @@ public:
 
     void generateMemoryType(MemoryType type);
 private:
-    ErrorHandler &errorHandler;
+    CodeWriter codeWriter;
+    CompilerContext* context;
 };
 
 #endif
