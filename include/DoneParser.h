@@ -24,6 +24,7 @@ private:
     CompilerContext* context;
     DoneLexer* lexer;
 
+    void parseImportStatements(std::vector<Statement*>&);
     void parseImportStatement(std::vector<Statement*>&);
     void parseIncludeStatements();
     void parseIncludeStatement();

@@ -162,7 +162,7 @@ void DoneLexer::scanAndAddToken() {
             } else if (isAlpha(c)) {
                 scanIdentifier();
             } else {
-                std::string errorMessage = "Unexpected character.";
+                std::string errorMessage = "Unexpected character. " + c;
                 reportLexerError(errorMessage);
                 break;
             }

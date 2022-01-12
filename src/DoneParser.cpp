@@ -22,13 +22,29 @@ std::vector<Statement*> DoneParser::parseSourceCode() {
         }
 
         if (matchType(IMPORT)) {
-            parseImportStatement(statements);
+            parseImportStatements(statements);
             continue;
         }
 
         statements.push_back(parseDeclaration());
     }
     return statements;
+}
+
+void DoneParser::parseImportStatements(std::vector<Statement*>& statements) {
+    if (checkType(STRING)) {
+        parseImportStatement(statements);
+        return;
+    }
+
+    if (matchType(LEFT_BRACE)) {
+        while (!matchType(RIGHT_BRACE)){
+           parseImportStatement(statements);
+        }
+        return;
+    }
+
+    std::cerr << "Expect string or { after import keyword." << std::endl;
 }
 
 void DoneParser::parseImportStatement(std::vector<Statement*>& statements) {
@@ -48,15 +64,20 @@ void DoneParser::parseImportStatement(std::vector<Statement*>& statements) {
 }
 
 void DoneParser::parseIncludeStatements() {
-    if (matchType(STRING)) {
+    if (checkType(STRING)) {
         parseIncludeStatement();
-    } else if (matchType(LEFT_BRACE)) {
+        return;
+    } 
+    
+    
+    if (matchType(LEFT_BRACE)) {
         while(!matchType(RIGHT_BRACE)) {
             parseIncludeStatement();
         }
-    } else {
-        std::cerr << "Expect string or { after include keyword." << std::endl;
+        return;
     }
+
+    std::cerr << "Expect string or { after include keyword." << std::endl;
 }
 
 void DoneParser::parseIncludeStatement() {
