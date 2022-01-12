@@ -17,20 +17,12 @@ std::vector<Statement*> DoneParser::parseSourceCode() {
     std::vector<Statement*> statements;
     while (!isAtEnd()) {
         if (matchType(INCLUDE)) {
-            parseIncludeStatement();
+            parseIncludeStatements();
             continue;
         }
 
         if (matchType(IMPORT)) {
-            Token name = consume(STRING, "Expect done source file path to import");
-            std::string sourceFileName = name.lexeme.substr(1, name.lexeme.length() - 2);
-            if (context->scannedFiles.count(sourceFileName) == 0) {
-                context->scannedFiles.insert(sourceFileName);
-                std::vector<Statement *> subStatements = parseImportStatement(sourceFileName);
-                statements.insert(statements.end(), subStatements.begin(), subStatements.end());
-            } else {
-                std::cerr << "This source file is already imported" << std::endl;
-            }
+            parseImportStatement(statements);
             continue;
         }
 
@@ -39,12 +31,32 @@ std::vector<Statement*> DoneParser::parseSourceCode() {
     return statements;
 }
 
-std::vector<Statement*> DoneParser::parseImportStatement(std::string sourceFileName) {
-    std::string sourceFilePath = context->projectPath + "/" + sourceFileName + ".done";
-    std::string sourceCode = readFileContent(sourceFilePath);
-    DoneLexer sourceLexer = DoneLexer(sourceCode, context->errorHandler);
-    DoneParser sourceParser = DoneParser(context, &sourceLexer);
-    return sourceParser.parseSourceCode();
+void DoneParser::parseImportStatement(std::vector<Statement*>& statements) {
+    Token name = consume(STRING, "Expect done source file path to import");
+    std::string sourceFileName = name.lexeme.substr(1, name.lexeme.length() - 2);
+    if (context->scannedFiles.count(sourceFileName) == 0) {
+        context->scannedFiles.insert(sourceFileName);
+        std::string sourceFilePath = context->projectPath + "/" + sourceFileName + ".done";
+        std::string sourceCode = readFileContent(sourceFilePath);
+        DoneLexer sourceLexer = DoneLexer(sourceCode, context->errorHandler);
+        DoneParser sourceParser = DoneParser(context, &sourceLexer);
+        std::vector<Statement *> subStatements = sourceParser.parseSourceCode();
+        statements.insert(statements.end(), subStatements.begin(), subStatements.end());
+    } else {
+        std::cerr << "This source file is already imported" << std::endl;
+    }
+}
+
+void DoneParser::parseIncludeStatements() {
+    if (matchType(STRING)) {
+        parseIncludeStatement();
+    } else if (matchType(LEFT_BRACE)) {
+        while(!matchType(RIGHT_BRACE)) {
+            parseIncludeStatement();
+        }
+    } else {
+        std::cerr << "Expect string or { after include keyword." << std::endl;
+    }
 }
 
 void DoneParser::parseIncludeStatement() {
@@ -53,7 +65,7 @@ void DoneParser::parseIncludeStatement() {
     std::string libraryName = moduleName.substr(1, moduleName.length() - 2) + ".h";
     if (context->cStdLibraries.count(moduleName) == 0) {
         context->cStdLibraries.insert(libraryName);
-    } else {
+     } else {
         std::cerr << "This module is already imported" << std::endl;
     }
 }
