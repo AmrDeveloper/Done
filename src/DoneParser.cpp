@@ -75,7 +75,7 @@ std::vector<Statement*> DoneParser::parseImportStatement(std::string sourceFileN
 void DoneParser::parseIncludeStatement() {
     Token name = consume(STRING, "Expect library name to include");
     std::string moduleName = name.lexeme;
-    std::string libraryName = moduleName.substr(1, moduleName.length() - 2);
+    std::string libraryName = moduleName.substr(1, moduleName.length() - 2) + ".h";
     if (context->cStdLibraries.count(moduleName) == 0) {
         context->cStdLibraries.insert(libraryName);
     } else {

@@ -1,6 +1,6 @@
 import "Utils"
 
-include "stdio.h"
+include "stdio"
 
 fun main() : int {
     printf("Enter your number : ");
