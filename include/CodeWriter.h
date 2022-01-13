@@ -7,15 +7,14 @@
 class CodeWriter {
 
 private:
-    std::vector<std::string> codeVector;
+  std::vector<std::string> codeVector;
 
 public:
-    void append(const std::string&);
-    void appendLine(const std::string&);
-    std::string getSource();
-    void clear();
-    int size();
+  void append(const std::string &);
+  void appendLine(const std::string &);
+  std::string getSource();
+  void clear();
+  int size();
 };
 
 #endif
-

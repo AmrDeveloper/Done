@@ -8,12 +8,13 @@
 
 class DoneCompiler {
 public:
-    DoneCompiler(CompilerOptions* compilerOptions);
-    void compile();
-    void generateExecutable();
-    void runExecutable();
+  DoneCompiler(CompilerOptions *compilerOptions);
+  void compile();
+  void generateExecutable();
+  void runExecutable();
+
 private:
-    CompilerOptions* compilerOptions;
+  CompilerOptions *compilerOptions;
 };
 
 #endif

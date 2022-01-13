@@ -4,17 +4,18 @@
 
 #include <utility>
 
-#include "Token.h"
 #include "MemoryType.h"
+#include "Token.h"
 
 class Parameter {
 public:
-    Token name;
-    Token type;
-    MemoryType memoryType;
-    bool isArrayType;
-    Parameter(Token n, Token t, MemoryType pointer, bool isArray)
-             : name(std::move(n)), type(std::move(t)), memoryType(pointer), isArrayType(isArray){}
+  Token name;
+  Token type;
+  MemoryType memoryType;
+  bool isArrayType;
+  Parameter(Token n, Token t, MemoryType pointer, bool isArray)
+      : name(std::move(n)), type(std::move(t)), memoryType(pointer),
+        isArrayType(isArray) {}
 };
 
 #endif

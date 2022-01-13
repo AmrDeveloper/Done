@@ -2,4 +2,4 @@
 .vscode/
 testing/
 build/
-cmake-build-debug/
+/cmake-build-build/

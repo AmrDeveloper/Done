@@ -1,0 +1,7 @@
+BasedOnStyle: Mozilla
+IndentWidth: 4
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
+Cpp11BracedListStyle: true

@@ -1,5 +1,5 @@
 # Done
-Toy Compiler to generate C Code and executable and has preprocessor to handle multi-files
+Toy Compiler Project that generate C code
 
 Done support most of C Features like struct, enum, pointer, address and can use any C library
 and also have some new features from other languages like single line function and Elvis operator 
@@ -16,10 +16,14 @@ fun isEvent(x : int) : bool -> return x%2 != 0;
 Main.done
 ```
 // Import File written in Done Language
-import "Utils"
+import {
+   "Utils"
+}
 
 // Include C Standard Libraries
-include "stdio"
+include {
+   "stdio"
+}
 
 fun main() : int {
     printf("Enter your number : ");
